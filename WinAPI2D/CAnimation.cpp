@@ -93,10 +93,10 @@ void CAnimation::Render()
 	// 프레임 이미지 그리기
 	RENDER->FrameImage(
 		m_pImage,
-		pos.x - frame.slice.x * 0.5f,
-		pos.y - frame.slice.y * 0.5f,
-		pos.x + frame.slice.x * 0.5f,
-		pos.y + frame.slice.y * 0.5f,
+		pos.x - frame.slice.x  ,
+		pos.y - frame.slice.y  ,
+		pos.x + frame.slice.x * 1.0f,
+		pos.y + frame.slice.y * 1.0f,
 		frame.lt.x,
 		frame.lt.y,
 		frame.lt.x + frame.slice.x,
