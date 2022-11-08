@@ -17,22 +17,26 @@ private:
 	CImage* m_pIdleImage;
 	CImage* m_pDuckImage;
 	CImage* m_pMoveImage;
+	CImage* m_pLookUpImage;
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImage;
 	CImage* m_pDuckAttackImage;
 	// ㄴ 캐릭터 공격 이미지
 	CImage* m_pJumpImage;
+	CImage* m_pBackFlipImage;
 	// ㄴ캐릭터 점프 이미지
 
 	// 캐릭터 반전 이미지
 	CImage* m_pIdleImageR;
 	CImage* m_pDuckImageR;
 	CImage* m_pMoveImageR;
+	CImage* m_pLookUpImageR;
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImageR;
 	CImage* m_pDuckAttackImageR;
 	// ㄴ 캐릭터 공격 이미지
 	CImage* m_pJumpImageR;
+	CImage* m_pBackFlipImageR;
 	// ㄴ캐릭터 점프 이미지
 	//============================
 
@@ -44,9 +48,13 @@ private:
 	bool m_bReverse;
 	bool m_bAttack;
 	bool m_bJump;
+	bool m_bBackFlip;
+	bool m_bLookup;
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
+	float m_fDuckTime = 0;
+
 	float m_fSpeed = 200.0f;
 
 private:
