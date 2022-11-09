@@ -133,19 +133,23 @@ void CPlayer::Update()
 	if (BUTTONDOWN('X'))
 	{
 		m_bJump = true;
-		if (m_bIsMove)
+	}
+
+	if (m_bIsMove)
+	{
+		if (m_bJump)
 		{
-			if (!m_bReverse)
+			if (m_bReverse)
 			{
-				m_vecPos.x += m_fSpeed * DT;
-				m_bIsMove = true;
-				m_vecMoveDir.x = +1;
+				m_vecPos.x -= m_fSpeed * DT;
+				m_vecMoveDir.x = -1;
+				m_bReverse = true;
 			}
 			else
 			{
-				m_vecPos.x -= m_fSpeed * DT;
-				m_bIsMove = true;
-				m_vecMoveDir.x = -1;
+				m_vecPos.x += m_fSpeed * DT;
+				m_vecMoveDir.x = +1;
+				m_bReverse = false;
 			}
 		}
 	}
@@ -175,7 +179,7 @@ void CPlayer::Update()
 		m_vecMoveDir.y = 0;
 	}
 
-	if (!m_bDuck && !m_bAttack && !m_bJump)
+	if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
 	{
 		if (BUTTONSTAY(VK_LEFT))
 		{
@@ -238,7 +242,6 @@ void CPlayer::Update()
 		m_fDuckTime = 0;
 	}
 
-	
 	if (m_bAttack)
 	{
 		m_fAttackTime += DT;

@@ -165,6 +165,9 @@
     <ClCompile Include="CUIManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="CStage01Map.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="CUIManager.h">
       <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Map.h">
+      <Filter>GameObject\Stage01</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
