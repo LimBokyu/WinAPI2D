@@ -5,6 +5,7 @@ class CStage01Map : public CGameObject
 
 private:
 	CImage* m_Map;
+	CImage* m_MiddleMap;
 
 public:
 	CStage01Map();
