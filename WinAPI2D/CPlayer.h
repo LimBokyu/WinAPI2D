@@ -50,6 +50,8 @@ private:
 	bool m_bJump;
 	bool m_bBackFlip;
 	bool m_bLookup;
+	bool m_bAttackinBackFlip;
+
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;

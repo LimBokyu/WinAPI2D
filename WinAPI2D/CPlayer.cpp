@@ -52,6 +52,7 @@ CPlayer::CPlayer()
 	m_bJump = false;
 	m_bBackFlip = false;
 	m_bLookup = false;
+	m_bAttackinBackFlip = false;
 }
 
 CPlayer::~CPlayer()
@@ -234,6 +235,7 @@ void CPlayer::Update()
 			m_fJumpTime = 0;
 			m_bJump = false;
 			m_bBackFlip = false;
+			m_bAttackinBackFlip = false;
 		}
 	}
 
@@ -312,7 +314,19 @@ void CPlayer::AnimatorUpdate()
 
 	if (m_bBackFlip)
 	{
-		str = L"PlayerBackFlip";
+		if (m_bAttack)
+		{
+			m_bAttackinBackFlip = true;
+			str = L"PlayerJumpDown";
+		}
+		else if(!m_bAttackinBackFlip)
+		{
+			str = L"PlayerBackFlip";
+		}
+		else
+		{
+			str = L"PlayerJumpDown";
+		}
 	}
 	
 	if (m_bAttack)
