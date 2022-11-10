@@ -43,7 +43,6 @@ CPlayer::CPlayer()
 	m_pLookUpImageR = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, -1);
 
 	m_bIsMove = false;
 	m_bDuck = false;
@@ -125,6 +124,11 @@ void CPlayer::Update()
 	m_bDuck = false;
 	m_bLookup = false;
 
+	if (m_vecPos.x >= WINSIZEX/2)
+	{
+		CAMERA->SetTargetPos(m_vecPos, 0);
+	}
+
 	if (BUTTONDOWN('Z'))
 	{
 		//CreateMissile();
@@ -185,16 +189,22 @@ void CPlayer::Update()
 		if (BUTTONSTAY(VK_LEFT))
 		{
 			m_vecPos.x -= m_fSpeed * DT;
-			m_bIsMove = true;
-			m_vecMoveDir.x = -1;
 			m_bReverse = true;
+			m_bIsMove = true;
+			if (!m_bAttack)
+			{
+				m_vecMoveDir.x = -1;
+			}
 		}
 		else if (BUTTONSTAY(VK_RIGHT))
 		{
 			m_vecPos.x += m_fSpeed * DT;
 			m_bIsMove = true;
-			m_vecMoveDir.x = +1;
 			m_bReverse = false;
+			if (!m_bAttack)
+			{
+				m_vecMoveDir.x = +1;
+			}
 		}
 		else
 		{

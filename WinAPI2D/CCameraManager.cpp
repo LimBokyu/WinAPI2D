@@ -38,7 +38,8 @@ CGameObject* CCameraManager::GetTargetObj()
 
 void CCameraManager::SetTargetPos(Vector targetPos, float timeToTarget)
 {
-	m_vecTargetPos = targetPos;
+	m_vecTargetPos.x = targetPos.x;
+	m_vecTargetPos.y = WINSIZEY / 2;
 	m_fTimeToTarget = timeToTarget;
 }
 

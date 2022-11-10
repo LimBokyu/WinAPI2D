@@ -44,6 +44,7 @@ void CStage01Map::Render()
 
 void CStage01Map::Update()
 {
+	
 }
 
 void CStage01Map::Release()
