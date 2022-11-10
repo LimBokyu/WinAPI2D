@@ -35,12 +35,8 @@ void CSceneStage01::Init()
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 
-	//m_Map = RESOURCE->LoadImg(L"stage01", L"Image\\Stage_01.png");
 	
 	Map = new CStage01Map();
-
-	//CStage01Map* stage01 = new CStage01Map;
-
 	AddGameObject(Map);
 
 	SOUND->Play(BGM, 0.5f, true);

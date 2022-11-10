@@ -283,9 +283,6 @@ void CPlayer::Release()
 
 void CPlayer::AnimatorUpdate()
 {
-	//if (m_vecMoveDir.Length() > 0)
-	//	m_vecLookDir = m_vecMoveDir;
-
 	wstring str = L"Player";
 
 	if (m_bJump)
