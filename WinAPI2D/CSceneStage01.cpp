@@ -30,7 +30,7 @@ CSceneStage01::~CSceneStage01()
 void CSceneStage01::Init()
 {
 	pPlayer = new CPlayer();
-	pPlayer->SetPos(150, 498);
+	pPlayer->SetPos(150, 380);
 	AddGameObject(pPlayer);
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");

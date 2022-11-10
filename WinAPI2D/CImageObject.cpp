@@ -39,9 +39,9 @@ void CImageObject::Render()
 		RENDER->Image(
 			m_pImage,
 			0,
-			0,
-			(float)m_pImage->GetWidth(),
-			(float)m_pImage->GetHeight()
+			WINSIZEY,
+			(float)m_pImage->GetWidth()*2,
+			WINSIZEY - ((float)m_pImage->GetHeight()*2)
 		);
 	}
 }

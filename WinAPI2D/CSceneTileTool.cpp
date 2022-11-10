@@ -255,6 +255,7 @@ void CSceneTileTool::SaveMapData()
 void CSceneTileTool::LoadMap(const wstring& strPath)
 {
 	CImage* pImage = RESOURCE->LoadImgWithPath(strPath, strPath);
+
 	m_pImageObj->SetImage(pImage);
 }
 
@@ -311,7 +312,14 @@ void CSceneTileTool::Enter()
 	CreateTiles(10, 10, true);
 
 	m_pImageObj = new CImageObject;
+
+	//CImage* map = RESOURCE->LoadImg(L"map", L"Image\\Stage_01.png");
+
+	//m_pImageObj->SetImage(map);
+	//m_pImageObj
 	AddGameObject(m_pImageObj);
+	//RENDER->Image(map, 0, WINSIZEY, 1024 * 2, 480 - (168 * 2));
+	//m_pImageObj->SetPos(0, 600);
 
 	CTilePanel* pTilePanel = new CTilePanel;
 	pTilePanel->SetScale(Vector(400.f, 600.f));

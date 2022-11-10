@@ -56,7 +56,7 @@ private:
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
 
-	float m_fSpeed = 200.0f;
+	float m_fSpeed = 150.0f;
 
 private:
 	void Init() override;
