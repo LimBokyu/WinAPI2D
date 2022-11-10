@@ -38,7 +38,7 @@ void CStage01Map::Init()
 
 void CStage01Map::Render()
 {
-	RENDER->Image(m_Map, 0, 600, 1024 * 2, 600-(168 * 2));
+	RENDER->Image(m_Map, 0, 600, 1024 * 2, 600 - (168 * 2));
 	RENDER->Image(m_MiddleMap, 0, 600 - (168 * 2), 554 * 2, (600 - (168 * 2)) - (53 * 2));
 }
 

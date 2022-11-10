@@ -146,7 +146,10 @@ void CPlayer::Update()
 		{
 			if (m_bReverse)
 			{
-				m_vecPos.x -= m_fSpeed * DT;
+				if (m_vecPos.x > 30)
+				{
+					m_vecPos.x -= m_fSpeed * DT;
+				}
 				m_vecMoveDir.x = -1;
 				m_bReverse = true;
 			}
@@ -188,7 +191,10 @@ void CPlayer::Update()
 	{
 		if (BUTTONSTAY(VK_LEFT))
 		{
-			m_vecPos.x -= m_fSpeed * DT;
+			if (m_vecPos.x > 30)
+			{
+				m_vecPos.x -= m_fSpeed * DT;
+			}
 			m_bReverse = true;
 			m_bIsMove = true;
 			if (!m_bAttack)
