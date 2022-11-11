@@ -16,7 +16,7 @@
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
-	m_vecScale = Vector(100, 100);
+	m_vecScale = Vector(46, 91);
 	m_layer = Layer::Player;
 	m_strName = L"플레이어";
 
@@ -115,7 +115,7 @@ void CPlayer::Init()
 	m_pAnimator->Play(L"PlayerIdle", false);
 	AddComponent(m_pAnimator);
 
-	AddCollider(ColliderType::Rect, Vector(90, 90), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
 }
 
 void CPlayer::Update()
@@ -375,10 +375,15 @@ void CPlayer::CreateMissile()
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
+
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
+	if (pOtherCollider->GetObjName() == L"Tile")
+	{
+		
+	}
 }
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)

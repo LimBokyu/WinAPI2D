@@ -71,3 +71,5 @@ private:
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 };
+
+#define PLAYER CPlayer::GetInstance()

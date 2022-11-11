@@ -37,7 +37,7 @@ void CTilePanel::CreateTilePalette()
 	int marginX = ((int)m_vecScale.x % CTile::TILESIZE) / 2;
 	int marginY = ((int)m_vecScale.y % CTile::TILESIZE) / 2;
 
-	for (UINT y = 0; y < m_uiPaletteY; y++)
+	/*for (UINT y = 0; y < m_uiPaletteY; y++)
 	{
 		for (UINT x = 0; x < m_uiPaletteX; x++)
 		{
@@ -48,7 +48,7 @@ void CTilePanel::CreateTilePalette()
 			AddChildUI(pTileButton);
 			m_vecTileButton.push_back(pTileButton);
 		}
-	}
+	}*/
 }
 
 void CTilePanel::CreatePageButton()

@@ -114,9 +114,6 @@
     <ClCompile Include="CSceneTileTool.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CSceneStage01.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="CCameraController.cpp">
       <Filter>GameObject\Common</Filter>
     </ClCompile>
@@ -166,6 +163,9 @@
       <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CStage01Map.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneStage01.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,9 +248,6 @@
     <ClInclude Include="CSceneTileTool.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CSceneStage01.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="CCameraController.h">
       <Filter>GameObject\Common</Filter>
     </ClInclude>
@@ -300,6 +297,9 @@
       <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CStage01Map.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneStage01.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
   </ItemGroup>
