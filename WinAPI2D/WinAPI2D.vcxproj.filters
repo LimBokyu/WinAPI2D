@@ -168,6 +168,12 @@
     <ClCompile Include="CSceneStage01.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
+    <ClCompile Include="CStage01Effect.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Effect2.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -300,6 +306,12 @@
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
     <ClInclude Include="CSceneStage01.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Effect.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Effect2.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
   </ItemGroup>

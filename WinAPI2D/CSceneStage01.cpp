@@ -15,6 +15,8 @@
 #include "CButton.h"
 #include "CPanel.h"
 #include "CStage01Map.h"
+#include "CStage01Effect.h"
+#include "CStage01Effect2.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -47,6 +49,15 @@ void CSceneStage01::Init()
 	
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
+
+	CStage01Effect* pEffect = new CStage01Effect();
+	pEffect->SetPos(1050,350);
+	AddGameObject(pEffect);
+
+	CStage01Effect2* pEffect2 = new CStage01Effect2();
+	pEffect2->SetPos(1200, 70);
+	AddGameObject(pEffect2);
+
 }
 
 void CSceneStage01::Enter()
