@@ -159,6 +159,7 @@
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CStage01Effect.cpp" />
     <ClCompile Include="CStage01Effect2.cpp" />
+    <ClCompile Include="CStage01Effect3.cpp" />
     <ClCompile Include="CStage01Map.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileButton.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CStage01Effect.h" />
     <ClInclude Include="CStage01Effect2.h" />
+    <ClInclude Include="CStage01Effect3.h" />
     <ClInclude Include="CStage01Map.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileButton.h" />

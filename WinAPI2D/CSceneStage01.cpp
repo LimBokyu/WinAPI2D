@@ -17,6 +17,7 @@
 #include "CStage01Map.h"
 #include "CStage01Effect.h"
 #include "CStage01Effect2.h"
+#include "CStage01Effect3.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -57,6 +58,10 @@ void CSceneStage01::Init()
 	CStage01Effect2* pEffect2 = new CStage01Effect2();
 	pEffect2->SetPos(1200, 70);
 	AddGameObject(pEffect2);
+
+	CStage01Effect3* pEffect3 = new CStage01Effect3();
+	pEffect3->SetPos(464, 131);
+	AddGameObject(pEffect3);
 
 }
 
