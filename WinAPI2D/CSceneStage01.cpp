@@ -18,6 +18,7 @@
 #include "CStage01Effect.h"
 #include "CStage01Effect2.h"
 #include "CStage01Effect3.h"
+#include "CLifeBar.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -35,6 +36,9 @@ void CSceneStage01::Init()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(150, 376);
 	AddGameObject(pPlayer);
+
+	CLifeBar* Lifebar = new CLifeBar();
+	AddGameObject(Lifebar);
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 

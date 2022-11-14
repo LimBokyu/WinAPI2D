@@ -515,21 +515,6 @@ void CRenderManager::Image(CImage* pImg, float startX, float startY, float endX,
 	m_pRenderTarget->DrawBitmap(pImg->GetImage(), imgRect);
 }
 
-void CRenderManager::FrameImage(CImage* pImg, float dstX, float dstY, float dstW, float dstH, float srcX, float srcY, float srcW, float srcH, float alpha)
-{
-	Vector dstStart = CAMERA->WorldToScreenPoint(Vector(dstX, dstY));
-	dstX = dstStart.x;
-	dstY = dstStart.y;
-	Vector dstEnd = CAMERA->WorldToScreenPoint(Vector(dstW, dstH));
-	dstW = dstEnd.x;
-	dstH = dstEnd.y;
-
-	D2D1_RECT_F imgRect = { dstX, dstY, dstW, dstH };
-	D2D1_RECT_F srcRect = { srcX, srcY, srcW, srcH };
-
-	m_pRenderTarget->DrawBitmap(pImg->GetImage(), imgRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, srcRect);
-}
-
 IWICImagingFactory* CRenderManager::GetImageFactory()
 {
 	return m_pImageFactory;

@@ -46,8 +46,9 @@ enum class Layer
 	NearMap,
 	Tile,
 	Player,
-	Missile,
 	Monster,
+	Missile,
+	Interface,
 
 	Ui,
 	Size,

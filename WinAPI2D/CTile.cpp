@@ -30,9 +30,9 @@ CTile::~CTile()
 
 void CTile::Init()
 {
-	m_pImage = RESOURCE->LoadImg(L"Tile", L"Image\\Tile.png");
+	/*m_pImage = RESOURCE->LoadImg(L"Tile", L"Image\\Tile.png");
 	m_uiImageXCount = m_pImage->GetWidth() / TILESIZE;
-	m_uiImageYCount = m_pImage->GetHeight() / TILESIZE;
+	m_uiImageYCount = m_pImage->GetHeight() / TILESIZE;*/
 }
 
 void CTile::Update()
