@@ -13,6 +13,10 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pImage;
+	CImage* m_MiddleMap;
+
+	Vector startLook;
+	Vector curLook;
 
 public:
 	void Init() override;

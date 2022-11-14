@@ -26,7 +26,7 @@ private:
 	CImage* m_pBackFlipImage;
 	// ㄴ캐릭터 점프 이미지
 
-	// 캐릭터 반전 이미지
+	// ----캐릭터 반전 이미지-------
 	CImage* m_pIdleImageR;
 	CImage* m_pDuckImageR;
 	CImage* m_pMoveImageR;
@@ -71,5 +71,3 @@ private:
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 };
-
-#define PLAYER CPlayer::GetInstance()

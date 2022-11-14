@@ -60,6 +60,9 @@ CPlayer::~CPlayer()
 
 void CPlayer::Init()
 {
+
+#pragma region 캐릭터 이미지 로드
+
 	// 캐릭터가 오른쪽을 보고있는 이미지 파일 로드
 	m_pIdleImage = RESOURCE->LoadImg(L"PlayerIdle", L"Image\\PlayerIdle.png");
 	m_pDuckImage = RESOURCE->LoadImg(L"PlayerDuck", L"Image\\PlayerDuck.png");
@@ -84,7 +87,10 @@ void CPlayer::Init()
 
 	m_pBackFlipImageR = RESOURCE->LoadImg(L"PlayerBackFlipR", L"Image\\PlayerBackFlipR.png");
 
+#pragma endregion
 	
+#pragma region 캐릭터 애니메이션 생성
+
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"PlayerIdle", m_pIdleImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.2f, 3);
 	m_pAnimator->CreateAnimation(L"PlayerDuck", m_pDuckImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.05f, 3, false);
@@ -112,6 +118,8 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"PlayerAttackR", m_pAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttackR", m_pDuckAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 
+#pragma endregion
+
 	m_pAnimator->Play(L"PlayerIdle", false);
 	AddComponent(m_pAnimator);
 
@@ -124,14 +132,8 @@ void CPlayer::Update()
 	m_bDuck = false;
 	m_bLookup = false;
 
-	if (m_vecPos.x >= WINSIZEX/2)
-	{
-		CAMERA->SetTargetPos(m_vecPos, 0);
-	}
-
 	if (BUTTONDOWN('Z'))
 	{
-		//CreateMissile();
 		m_bAttack = true;
 	}
 
@@ -155,7 +157,10 @@ void CPlayer::Update()
 			}
 			else
 			{
-				m_vecPos.x += m_fSpeed * DT;
+				if (m_vecPos.x < (1024 * 2) - 30)
+				{
+					m_vecPos.x += m_fSpeed * DT;
+				}
 				m_vecMoveDir.x = +1;
 				m_bReverse = false;
 			}
@@ -204,7 +209,11 @@ void CPlayer::Update()
 		}
 		else if (BUTTONSTAY(VK_RIGHT))
 		{
-			m_vecPos.x += m_fSpeed * DT;
+
+			if (m_vecPos.x < (1024 * 2) - 30)
+			{
+				m_vecPos.x += m_fSpeed * DT;
+			}
 			m_bIsMove = true;
 			m_bReverse = false;
 			if (!m_bAttack)

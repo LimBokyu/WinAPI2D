@@ -19,12 +19,7 @@
 CStage01Map::CStage01Map()
 {
 	m_layer = Layer::NearMap;
-
-	//m_vecPos = Vector();
-
 	m_Map = nullptr;
-	m_MiddleMap = nullptr;
-
 	m_strName = L"Stage_01 Map";
 }
 
@@ -35,18 +30,15 @@ CStage01Map::~CStage01Map()
 void CStage01Map::Init()
 {
 	m_Map = RESOURCE->LoadImg(L"stage01_map1", L"Image\\Stage_01.png");
-	m_MiddleMap = RESOURCE->LoadImg(L"stage01_map2", L"Image\\Stage_01M.png");
 }
 
 void CStage01Map::Render()
 {
 	RENDER->Image(m_Map, 0, 480, 1024 * 2, 480 - (168 * 2));
-	RENDER->Image(m_MiddleMap, 0, 480 - (168 * 2), m_MiddleMap->GetWidth() * 2, (WINSIZEY - (168 * 2)) - (m_MiddleMap->GetHeight() * 2));
 }
 
 void CStage01Map::Update()
 {
-	
 }
 
 void CStage01Map::Release()

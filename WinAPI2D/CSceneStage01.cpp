@@ -38,7 +38,6 @@ void CSceneStage01::Init()
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 
-	
 	Map = new CStage01Map();
 	AddGameObject(Map);
 
@@ -51,6 +50,8 @@ void CSceneStage01::Init()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
+#pragma region ¸Ê ÀÌÆåÆ® ¹× ¾Ö´Ï¸ÞÀÌ¼Ç
+
 	CStage01Effect* pEffect = new CStage01Effect();
 	pEffect->SetPos(1050,350);
 	AddGameObject(pEffect);
@@ -60,8 +61,11 @@ void CSceneStage01::Init()
 	AddGameObject(pEffect2);
 
 	CStage01Effect3* pEffect3 = new CStage01Effect3();
-	pEffect3->SetPos(464, 131);
+	pEffect3->SetPos(0, 0);
 	AddGameObject(pEffect3);
+
+#pragma endregion
+
 
 }
 
@@ -77,6 +81,23 @@ void CSceneStage01::Update()
 	{
 		CAMERA->FadeOut(0.25f);
 		DELAYCHANGESCENE(GroupScene::Title, 0.25f);
+	}
+
+	if (pPlayer->GetPos().x >= WINSIZEX * 0.5f)
+	{
+		CAMERA->SetTargetObj(pPlayer);
+	}
+
+	if (pPlayer->GetPos().x < WINSIZEX * 0.5f)
+	{
+		CAMERA->SetTargetObj(nullptr);
+		CAMERA->SetTargetPos(Vector(WINSIZEX * 0.5f, WINSIZEY * 0.5f), 0);
+	}
+
+	if (pPlayer->GetPos().x > (1024 * 2) - (WINSIZEX * 0.5f))
+	{
+		CAMERA->SetTargetObj(nullptr);
+		CAMERA->SetTargetPos(Vector((1024*2) - (WINSIZEX * 0.5f), WINSIZEY * 0.5f), 0);
 	}
 }
 
