@@ -18,10 +18,7 @@ CPlayer::CPlayer()
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(46, 91);
 	m_layer = Layer::Player;
-	pItem = PlayerITEM::None;
 	m_strName = L"플레이어";
-
-#pragma region 이미지용 포인터 초기화
 
 	m_pIdleImage = nullptr;
 	m_pDuckImage = nullptr;
@@ -45,22 +42,6 @@ CPlayer::CPlayer()
 	m_pLookUpImage = nullptr;
 	m_pLookUpImageR = nullptr;
 
-	m_pSubWeaponImage = nullptr;
-	m_pSubWeaponImageR = nullptr;
-
-	m_pStairDown = nullptr;
-	m_pStairUp = nullptr;
-	m_pStairDownR = nullptr;
-	m_pStairUpR = nullptr;
-
-	m_pStairDownAttack = nullptr;
-	m_pStairDownAttackR = nullptr;
-
-	m_pStairUpAttack = nullptr;
-	m_pStairUpAttackR = nullptr;
-
-#pragma endregion
-
 	m_vecMoveDir = Vector(0, 0);
 
 	m_bIsMove = false;
@@ -71,8 +52,6 @@ CPlayer::CPlayer()
 	m_bBackFlip = false;
 	m_bLookup = false;
 	m_bAttackinBackFlip = false;
-	m_bOnStair = false;
-
 }
 
 CPlayer::~CPlayer()
@@ -93,7 +72,6 @@ void CPlayer::Init()
 
 	m_pAttackImage = RESOURCE->LoadImg(L"PlayerAttack", L"Image\\PlayerAttack.png");
 	m_pDuckAttackImage = RESOURCE->LoadImg(L"PlayerDuckAttack", L"Image\\PlayerDuckAttack.png");
-	m_pSubWeaponImage = RESOURCE->LoadImg(L"PlayerSubWeapon", L"Image\\PlayerSubWeapon.png");
 
 	m_pBackFlipImage = RESOURCE->LoadImg(L"PlayerBackFlip", L"Image\\PlayerBackFlip.png");
 
@@ -106,7 +84,6 @@ void CPlayer::Init()
 
 	m_pAttackImageR = RESOURCE->LoadImg(L"PlayerAttackR", L"Image\\PlayerAttackR.png");
 	m_pDuckAttackImageR = RESOURCE->LoadImg(L"PlayerDuckAttackR", L"Image\\PlayerDuckAttackR.png");
-	m_pSubWeaponImageR = RESOURCE->LoadImg(L"PlayerSubWeaponR", L"Image\\PlayerSubWeaponR.png");
 
 	m_pBackFlipImageR = RESOURCE->LoadImg(L"PlayerBackFlipR", L"Image\\PlayerBackFlipR.png");
 
@@ -127,9 +104,7 @@ void CPlayer::Init()
 
 	m_pAnimator->CreateAnimation(L"PlayerAttack", m_pAttackImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttack",m_pDuckAttackImage,Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
-	m_pAnimator->CreateAnimation(L"PlayerSubWeapon",m_pSubWeaponImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 
-	// ============ 반대방향 애니메이션 ================
 	m_pAnimator->CreateAnimation(L"PlayerIdleR", m_pIdleImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.2f, 3);
 	m_pAnimator->CreateAnimation(L"PlayerDuckR", m_pDuckImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.05f, 3, false);
 	m_pAnimator->CreateAnimation(L"PlayerMoveR", m_pMoveImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.09f, 8);
@@ -142,7 +117,6 @@ void CPlayer::Init()
 
 	m_pAnimator->CreateAnimation(L"PlayerAttackR", m_pAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttackR", m_pDuckAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
-	m_pAnimator->CreateAnimation(L"PlayerSubWeaponR", m_pSubWeaponImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 
 #pragma endregion
 
@@ -355,6 +329,7 @@ void CPlayer::AnimatorUpdate()
 			else
 			{
 				str += L"Idle";
+
 			}
 		}
 	}
@@ -381,10 +356,6 @@ void CPlayer::AnimatorUpdate()
 		if (m_bDuck)
 		{
 			str = L"PlayerDuckAttack";
-		}
-		else if (m_bLookup)
-		{
-			str = L"PlayerSubWeapon";
 		}
 		else
 		{

@@ -52,12 +52,6 @@
     <Filter Include="Engine\Manager">
       <UniqueIdentifier>{24d3ca0d-39bc-4412-bf69-8323d7f60745}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\StageObject">
-      <UniqueIdentifier>{5a84e62f-8b34-4b9a-a995-127b5eb79d57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\PlayerInterface">
-      <UniqueIdentifier>{631e75d6-c492-4878-bfd5-b9bde82058d8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -182,9 +176,6 @@
     </ClCompile>
     <ClCompile Include="CStage01Effect3.cpp">
       <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CLifeBar.cpp">
-      <Filter>GameObject\PlayerInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,9 +319,6 @@
     </ClInclude>
     <ClInclude Include="CStage01Effect3.h">
       <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CLifeBar.h">
-      <Filter>GameObject\PlayerInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
