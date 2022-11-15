@@ -37,7 +37,6 @@ void CStage01Effect2::Init()
 
 	m_pAnimator->Play(L"stage01_Effect2", false);
 	AddComponent(m_pAnimator);
-
 }
 
 void CStage01Effect2::Update()

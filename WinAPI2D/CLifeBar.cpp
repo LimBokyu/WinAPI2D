@@ -15,14 +15,16 @@
 
 CLifeBar::CLifeBar()
 {
-	pPlayer = new CPlayer();
+	pPlayer = nullptr;
 	m_pLifeBar = nullptr;
 	m_pLifeBarGauge = nullptr;
-	m_pHeart = nullptr;
-	m_pAnimator = nullptr;
 
 	m_pItemDagger = nullptr;
 	m_pItemAxe = nullptr;
+	m_pItemBible = nullptr;
+	m_pItemHollyWater = nullptr;
+	m_pItemCross = nullptr;
+	m_pItemClock = nullptr;
 
 	m_layer = Layer::Interface;
 	curLookAt = Vector(WINSIZEX/2,WINSIZEY/2);
@@ -34,34 +36,21 @@ CLifeBar::~CLifeBar()
 
 void CLifeBar::Init()
 {
-	m_pAnimator = new CAnimator();
-
 	m_pLifeBar = RESOURCE->LoadImg(L"LifeBar", L"Image\\LifeBar.png");
 	m_pLifeBarGauge = RESOURCE->LoadImg(L"LifeBarGauge", L"Image\\LifeBarFull.png");
-	m_pHeart = RESOURCE->LoadImg(L"LifeBarHeart", L"Image\\LifeBarHeart.png");
+
 	m_pItemDagger = RESOURCE->LoadImg(L"Dagger", L"Image\\ItemDagger.png");
 	m_pItemAxe = RESOURCE->LoadImg(L"Axe", L"Image\\ItemAxe.png");
-
-	m_pAnimator->CreateAnimation(L"Heart:Zero",  m_pHeart,	 Vector(0, 0),	 Vector(6, 6),  Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:One",   m_pHeart,	 Vector(9, 0),	 Vector(15, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Two",   m_pHeart,	 Vector(18, 0),	 Vector(24, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Three", m_pHeart,	 Vector(27, 0),	 Vector(33, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Four",  m_pHeart,	 Vector(36, 0),	 Vector(42, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Five",  m_pHeart,	 Vector(45, 0),	 Vector(51, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Six",   m_pHeart,	 Vector(54, 0),	 Vector(60, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Seven", m_pHeart,	 Vector(63, 0),	 Vector(69, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Eight", m_pHeart,	 Vector(72, 0),	 Vector(78, 6), Vector(0, 9), 0.05f, 4);
-	m_pAnimator->CreateAnimation(L"Heart:Nine",  m_pHeart,	 Vector(81, 0),	 Vector(87, 6), Vector(0, 9), 0.05f, 4);
-
-	//m_pAnimator->Play(L"Heart:Zero");
+	m_pItemBible = RESOURCE->LoadImg(L"Bible", L"Image\\ItemBible.png");
+	m_pItemClock = RESOURCE->LoadImg(L"Clock", L"Image\\ItemClock.png");
+	m_pItemCross = RESOURCE->LoadImg(L"Cross", L"Image\\ItemCross.png");
+	m_pItemHollyWater = RESOURCE->LoadImg(L"HollyWater", L"Image\\ItemHollyWater.png");
+	
 }
 
 void CLifeBar::Update()
 {
 	curLookAt = CAMERA->GetLookAt();
-
-	UpdateAnimation();
-	
 }
 
 void CLifeBar::Render()
@@ -87,14 +76,9 @@ void CLifeBar::Release()
 
 }
 
-void CLifeBar::New()
+void CLifeBar::SetPlayer(CPlayer* player)
 {
-
-}
-
-void CLifeBar::Score()
-{
-
+	pPlayer = player;
 }
 
 void CLifeBar::UpdateAnimation()
@@ -107,24 +91,53 @@ void CLifeBar::ItemUpdate()
 	switch (pPlayer->GetItem())
 	{
 	case PlayerITEM::None:
-
 		break;
+
 	case PlayerITEM::Dagger:
 		RENDER->Image(m_pItemDagger,
 			curLookAt.x - FirstLookAt.x + 36,
-			curLookAt.y - FirstLookAt.y + 41,
+			curLookAt.y - FirstLookAt.y + 42,
 			curLookAt.x - FirstLookAt.x + m_pItemDagger->GetWidth() * 2 + 36,
-			curLookAt.y - FirstLookAt.y + m_pItemDagger->GetHeight() * 2 + 41);
+			curLookAt.y - FirstLookAt.y + m_pItemDagger->GetHeight() * 2 + 42);
 		break;
+
 	case PlayerITEM::Axe:
-
+		RENDER->Image(m_pItemAxe,
+		curLookAt.x - FirstLookAt.x + 36,
+		curLookAt.y - FirstLookAt.y + 42,
+		curLookAt.x - FirstLookAt.x + m_pItemAxe->GetWidth() * 2 + 36,
+		curLookAt.y - FirstLookAt.y + m_pItemAxe->GetHeight() * 2 + 42);
 		break;
-	case PlayerITEM::HolyWater:
 
+	case PlayerITEM::HolyWater:
+		RENDER->Image(m_pItemHollyWater,
+			curLookAt.x - FirstLookAt.x + 36,
+			curLookAt.y - FirstLookAt.y + 42,
+			curLookAt.x - FirstLookAt.x + m_pItemHollyWater->GetWidth() * 2 + 36,
+			curLookAt.y - FirstLookAt.y + m_pItemHollyWater->GetHeight() * 2 + 42);
 		break;
 
 	case PlayerITEM::Cross:
+		RENDER->Image(m_pItemCross,
+			curLookAt.x - FirstLookAt.x + 36,
+			curLookAt.y - FirstLookAt.y + 42,
+			curLookAt.x - FirstLookAt.x + m_pItemCross->GetWidth() * 2 + 36,
+			curLookAt.y - FirstLookAt.y + m_pItemCross->GetHeight() * 2 + 42);
+		break;
+	case PlayerITEM::Clock:
+		RENDER->Image(m_pItemClock,
+			curLookAt.x - FirstLookAt.x + 36,
+			curLookAt.y - FirstLookAt.y + 42,
+			curLookAt.x - FirstLookAt.x + m_pItemClock->GetWidth() * 2 + 36,
+			curLookAt.y - FirstLookAt.y + m_pItemClock->GetHeight() * 2 + 42);
 
+	case PlayerITEM::Bible:
+		RENDER->Image(m_pItemBible,
+			curLookAt.x - FirstLookAt.x + 36,
+			curLookAt.y - FirstLookAt.y + 42,
+			curLookAt.x - FirstLookAt.x + m_pItemBible->GetWidth() * 2 + 36,
+			curLookAt.y - FirstLookAt.y + m_pItemBible->GetHeight() * 2 + 42);
+	case PlayerITEM::Size:
 		break;
 	}
 }

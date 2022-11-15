@@ -23,7 +23,7 @@ CPlayer::CPlayer()
 
 	m_fLife = 94;
 	m_fScore = 0;
-	m_Heart = 0;
+	m_Heart = 10;
 
 #pragma region 이미지용 포인터 초기화
 
@@ -131,7 +131,7 @@ void CPlayer::Init()
 
 	m_pAnimator->CreateAnimation(L"PlayerAttack", m_pAttackImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttack",m_pDuckAttackImage,Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
-	m_pAnimator->CreateAnimation(L"PlayerSubWeapon",m_pSubWeaponImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
+	m_pAnimator->CreateAnimation(L"PlayerSubWeapon",m_pSubWeaponImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.04f, 6, false);
 
 	// ============ 반대방향 애니메이션 ================
 	m_pAnimator->CreateAnimation(L"PlayerIdleR", m_pIdleImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.2f, 3);
@@ -146,7 +146,7 @@ void CPlayer::Init()
 
 	m_pAnimator->CreateAnimation(L"PlayerAttackR", m_pAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttackR", m_pDuckAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
-	m_pAnimator->CreateAnimation(L"PlayerSubWeaponR", m_pSubWeaponImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
+	m_pAnimator->CreateAnimation(L"PlayerSubWeaponR", m_pSubWeaponImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.04f, 6, false);
 
 #pragma endregion
 
@@ -161,6 +161,16 @@ void CPlayer::Update()
 	m_bIsMove = false;
 	m_bDuck = false;
 	m_bLookup = false;
+
+	if (m_Heart == 0)
+	{
+		Logger::Debug(L"하트를 다씀");
+	}
+
+	if (BUTTONDOWN('Q'))
+	{
+		pItem = PlayerITEM::Dagger;
+	}
 
 	if (BUTTONDOWN('Z'))
 	{
@@ -200,6 +210,10 @@ void CPlayer::Update()
 	if (BUTTONSTAY(VK_UP))
 	{
 		m_bLookup = true;
+		if (BUTTONDOWN('Z'))
+		{
+			SetHeart(GetHeart() - 1);
+		}
 	}
 	else if (BUTTONSTAY(VK_DOWN))
 	{
@@ -440,4 +454,14 @@ PlayerITEM CPlayer::GetItem()
 void CPlayer::SetItem(PlayerITEM item)
 {
 	pItem = item;
+}
+
+int CPlayer::GetHeart()
+{
+	return m_Heart;
+}
+
+void CPlayer::SetHeart(int heart)
+{
+	m_Heart = heart;
 }

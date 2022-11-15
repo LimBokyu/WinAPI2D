@@ -17,16 +17,15 @@ private:
 	CImage* m_pLifeBarGauge;
 	CImage* m_pItemDagger;
 	CImage* m_pItemAxe;
-	CImage* m_pHeart;
-
+	CImage* m_pItemHollyWater;
+	CImage* m_pItemCross;
+	CImage* m_pItemClock;
+	CImage* m_pItemBible;
 
 	Vector curLookAt;
 	Vector FirstLookAt;
 
 	CPlayer* pPlayer;
-	CAnimator* m_pAnimator;
-
-	int Heart = 0;
 	
 public:
 	void Init() override;
@@ -34,8 +33,7 @@ public:
 	void Render() override;
 	void Release() override;
 
-	void New();
-	void Score();
+	void SetPlayer(CPlayer* player);
 	void UpdateAnimation();
 	void ItemUpdate();
 };

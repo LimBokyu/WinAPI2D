@@ -4,13 +4,18 @@
 class CImage;
 class CAnimator;
 
-enum class PlayerITEM
+enum struct PlayerITEM
 {
 	None,
 	Dagger,
 	Axe,
 	HolyWater,
-	Cross
+	Cross,
+	Clock,
+	Bible,
+
+
+	Size
 };
 
 class CPlayer : public CGameObject
@@ -71,6 +76,7 @@ private:
 	bool m_bLookup;
 	bool m_bAttackinBackFlip;
 	bool m_bOnStair;
+	bool m_bCommandBlock;
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
@@ -101,4 +107,7 @@ public:
 
 	PlayerITEM GetItem();
 	void SetItem(PlayerITEM item);
+
+	int GetHeart();
+	void SetHeart(int heart);
 };
