@@ -6,6 +6,7 @@ class CAnimator;
 
 class CPlayer : public CGameObject
 {
+	friend class CLifeBar;
 public:
 	CPlayer();
 	virtual ~CPlayer();
@@ -51,12 +52,16 @@ private:
 	bool m_bLookup;
 	bool m_bAttackinBackFlip;
 
-
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
 
 	float m_fSpeed = 150.0f;
+
+	float m_fScore;
+	float m_fLife;
+
+	unsigned int m_Heart;
 
 private:
 	void Init() override;
@@ -70,4 +75,10 @@ private:
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
+
+public:
+	PlayerITEM pItem;
+
+	PlayerITEM GetItem();
+	void SetItem(PlayerITEM item);
 };
