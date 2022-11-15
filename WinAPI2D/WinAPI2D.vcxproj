@@ -143,6 +143,7 @@
     <ClCompile Include="CImageObject.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CLifeBar.cpp" />
+    <ClCompile Include="CLifeBarScore.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CPanel.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="CImageObject.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CLifeBar.h" />
+    <ClInclude Include="CLifeBarScore.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CPanel.h" />

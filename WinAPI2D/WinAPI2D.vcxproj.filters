@@ -186,6 +186,9 @@
     <ClCompile Include="CLifeBar.cpp">
       <Filter>GameObject\PlayerInterface</Filter>
     </ClCompile>
+    <ClCompile Include="CLifeBarScore.cpp">
+      <Filter>GameObject\PlayerInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -330,6 +333,9 @@
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
     <ClInclude Include="CLifeBar.h">
+      <Filter>GameObject\PlayerInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="CLifeBarScore.h">
       <Filter>GameObject\PlayerInterface</Filter>
     </ClInclude>
   </ItemGroup>

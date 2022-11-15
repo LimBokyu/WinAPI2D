@@ -21,6 +21,10 @@ CPlayer::CPlayer()
 	pItem = PlayerITEM::None;
 	m_strName = L"플레이어";
 
+	m_fLife = 94;
+	m_fScore = 0;
+	m_Heart = 0;
+
 #pragma region 이미지용 포인터 초기화
 
 	m_pIdleImage = nullptr;
@@ -426,4 +430,14 @@ void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
 {
+}
+
+PlayerITEM CPlayer::GetItem()
+{
+	return pItem;
+}
+
+void CPlayer::SetItem(PlayerITEM item)
+{
+	pItem = item;
 }

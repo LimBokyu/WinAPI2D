@@ -15,13 +15,13 @@ enum class PlayerITEM
 
 class CPlayer : public CGameObject
 {
+	friend class CLifeBar;
 public:
 	CPlayer();
 	virtual ~CPlayer();
 
 private:
 	CAnimator* m_pAnimator;
-	PlayerITEM pItem;
 
 	// ======캐릭터 이미지=========
 	CImage* m_pIdleImage;
@@ -72,12 +72,16 @@ private:
 	bool m_bAttackinBackFlip;
 	bool m_bOnStair;
 
-
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
 
 	float m_fSpeed = 150.0f;
+
+	float m_fScore;
+	float m_fLife;
+
+	unsigned int m_Heart;
 
 private:
 	void Init() override;
@@ -88,10 +92,13 @@ private:
 	void AnimatorUpdate();
 	void CreateMissile();
 
-	void SetItem(PlayerITEM item);
-	PlayerITEM GetItem();
-
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
+
+public:
+	PlayerITEM pItem;
+
+	PlayerITEM GetItem();
+	void SetItem(PlayerITEM item);
 };
