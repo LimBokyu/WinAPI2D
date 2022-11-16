@@ -30,7 +30,7 @@ CStage01Effect2::~CStage01Effect2()
 
 void CStage01Effect2::Init()
 {
-	m_pImage = RESOURCE->LoadImg(L"stage01_Effect2", L"Image\\Stage_01Effect02.png");
+	m_pImage = RESOURCE->LoadImg(L"stage01_Effect2", L"Image\\Stage\\Stage_01Effect02.png");
 
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"stage01_Effect2", m_pImage, Vector(0.f, 0.f), Vector(1200.f, 100.f), Vector(0.f, 100.f), 0.09f, 4);

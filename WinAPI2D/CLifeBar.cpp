@@ -36,15 +36,15 @@ CLifeBar::~CLifeBar()
 
 void CLifeBar::Init()
 {
-	m_pLifeBar = RESOURCE->LoadImg(L"LifeBar", L"Image\\LifeBar.png");
-	m_pLifeBarGauge = RESOURCE->LoadImg(L"LifeBarGauge", L"Image\\LifeBarFull.png");
+	m_pLifeBar			= RESOURCE->LoadImg(L"LifeBar", L"Image\\LifeBar.png");
+	m_pLifeBarGauge		= RESOURCE->LoadImg(L"LifeBarGauge", L"Image\\LifeBarFull.png");
 
-	m_pItemDagger = RESOURCE->LoadImg(L"Dagger", L"Image\\ItemDagger.png");
-	m_pItemAxe = RESOURCE->LoadImg(L"Axe", L"Image\\ItemAxe.png");
-	m_pItemBible = RESOURCE->LoadImg(L"Bible", L"Image\\ItemBible.png");
-	m_pItemClock = RESOURCE->LoadImg(L"Clock", L"Image\\ItemClock.png");
-	m_pItemCross = RESOURCE->LoadImg(L"Cross", L"Image\\ItemCross.png");
-	m_pItemHollyWater = RESOURCE->LoadImg(L"HollyWater", L"Image\\ItemHollyWater.png");
+	m_pItemDagger		= RESOURCE->LoadImg(L"Dagger",		L"Image\\Item\\ItemDagger.png");
+	m_pItemAxe			= RESOURCE->LoadImg(L"Axe",			L"Image\\Item\\ItemAxe.png");
+	m_pItemBible		= RESOURCE->LoadImg(L"Bible",		L"Image\\Item\\ItemBible.png");
+	m_pItemClock		= RESOURCE->LoadImg(L"Clock",		L"Image\\Item\\ItemClock.png");
+	m_pItemCross		= RESOURCE->LoadImg(L"Cross",		L"Image\\Item\\ItemCross.png");
+	m_pItemHollyWater	= RESOURCE->LoadImg(L"HollyWater",  L"Image\\Item\\ItemHollyWater.png");
 	
 }
 

@@ -158,6 +158,7 @@
     <ClCompile Include="CSceneStage01.cpp" />
     <ClCompile Include="CSceneTileTool.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />
+    <ClCompile Include="CScoreBoardNum.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CStage01Effect.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="CSceneStage01.h" />
     <ClInclude Include="CSceneTileTool.h" />
     <ClInclude Include="CSceneTitle.h" />
+    <ClInclude Include="CScoreBoardNum.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CStage01Effect.h" />

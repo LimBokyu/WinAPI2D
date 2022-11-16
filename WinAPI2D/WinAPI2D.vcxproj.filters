@@ -58,6 +58,9 @@
     <Filter Include="GameObject\PlayerInterface">
       <UniqueIdentifier>{631e75d6-c492-4878-bfd5-b9bde82058d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\PlayerScoreBoard">
+      <UniqueIdentifier>{c8e87e4b-351f-48bf-8386-ff7ff6dd5dc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -168,29 +171,32 @@
     <ClCompile Include="CUIManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CStage01Map.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CSceneStage01.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CStage01Effect.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CStage01Effect2.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CStage01Effect3.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
     <ClCompile Include="CLifeBar.cpp">
       <Filter>GameObject\PlayerInterface</Filter>
     </ClCompile>
-    <ClCompile Include="CLifeBarScore.cpp">
-      <Filter>GameObject\PlayerInterface</Filter>
-    </ClCompile>
     <ClCompile Include="CLifeBarHeart.cpp">
       <Filter>GameObject\PlayerInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="CScoreBoardNum.cpp">
+      <Filter>GameObject\PlayerScoreBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CLifeBarScore.cpp">
+      <Filter>GameObject\PlayerScoreBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Effect.cpp">
+      <Filter>GameObject\StageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Effect2.cpp">
+      <Filter>GameObject\StageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Effect3.cpp">
+      <Filter>GameObject\StageObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Map.cpp">
+      <Filter>GameObject\StageObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,29 +326,32 @@
     <ClInclude Include="CUIManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CStage01Map.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CSceneStage01.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CStage01Effect.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CStage01Effect2.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CStage01Effect3.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
     <ClInclude Include="CLifeBar.h">
       <Filter>GameObject\PlayerInterface</Filter>
     </ClInclude>
-    <ClInclude Include="CLifeBarScore.h">
-      <Filter>GameObject\PlayerInterface</Filter>
-    </ClInclude>
     <ClInclude Include="CLifeBarHeart.h">
       <Filter>GameObject\PlayerInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="CScoreBoardNum.h">
+      <Filter>GameObject\PlayerScoreBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CLifeBarScore.h">
+      <Filter>GameObject\PlayerScoreBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Map.h">
+      <Filter>GameObject\StageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Effect.h">
+      <Filter>GameObject\StageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Effect2.h">
+      <Filter>GameObject\StageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Effect3.h">
+      <Filter>GameObject\StageObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,29 +5,33 @@ class CAnimator;
 class CImage;
 class CPlayer;
 
-enum struct Type
-{
-	One,
-	Ten
-};
-
-class CLifeBarHeart : public CGameObject
+class CScoreBoardNum : public CGameObject
 {
 public:
-	CLifeBarHeart();
-	virtual ~CLifeBarHeart();
-
+	CScoreBoardNum();
+	virtual ~CScoreBoardNum();
 private:
-	CImage* m_pHeart;
 	CAnimator* m_pAnimator;
-
 	CPlayer* pPlayer;
-	Type type;
 
 	Vector m_StartLookAt;
 	Vector m_curLookAt;
 
-	int Heart;
+	CImage* m_pNumIdle;
+	CImage* m_pNumOut;
+	CImage* m_pNumIn;
+
+	bool m_bScoreBoard;
+	bool m_bChangeBoard;
+
+	int m_Credit;
+	int m_Rest;
+
+	int m_NumScale = 0;
+	int m_TenScale = 0;
+	int m_OutputNum = 0;
+
+	float m_fTimer = 0;
 
 public:
 
@@ -37,8 +41,8 @@ public:
 	void Release() override;
 
 	void SetPlayer(CPlayer* player);
-
+	void SetScale(int scale);
+	void ChangeBoard();
 	void UpdateAnimation();
-	void OneOrTen(bool one = true);
 };
 

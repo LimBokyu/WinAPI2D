@@ -20,6 +20,8 @@
 #include "CStage01Effect3.h"
 #include "CLifeBar.h"
 #include "CLifeBarHeart.h"
+#include "CLifeBarScore.h"
+#include "CScoreBoardNum.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -43,14 +45,22 @@ void CSceneStage01::Init()
 	AddGameObject(Lifebar);
 
 	CLifeBarHeart* Heart = new CLifeBarHeart();
-	Heart->GetPlayer(pPlayer);
+	Heart->SetPlayer(pPlayer);
 	Heart->OneOrTen(true);
 	AddGameObject(Heart);
 
 	CLifeBarHeart* Heart10 = new CLifeBarHeart();
-	Heart10->GetPlayer(pPlayer);
+	Heart10->SetPlayer(pPlayer);
 	Heart10->OneOrTen(false);
 	AddGameObject(Heart10);
+
+	CLifeBarScore* ScoreBoard = new CLifeBarScore();
+	ScoreBoard->SetPlayer(pPlayer);
+	AddGameObject(ScoreBoard);
+
+	CScoreBoardNum* Num = new CScoreBoardNum();
+	Num->SetPlayer(pPlayer);
+	AddGameObject(Num);
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 

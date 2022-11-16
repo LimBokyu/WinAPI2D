@@ -29,7 +29,7 @@ CStage01Map::~CStage01Map()
 
 void CStage01Map::Init()
 {
-	m_Map = RESOURCE->LoadImg(L"stage01_map1", L"Image\\Stage_01.png");
+	m_Map = RESOURCE->LoadImg(L"stage01_map1", L"Image\\Stage\\Stage_01.png");
 }
 
 void CStage01Map::Render()

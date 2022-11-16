@@ -88,6 +88,8 @@ private:
 	float m_fLife;
 
 	unsigned int m_Heart;
+	unsigned int m_Credit;
+	unsigned int m_Rest = 3;
 
 private:
 	void Init() override;
@@ -110,4 +112,7 @@ public:
 
 	int GetHeart();
 	void SetHeart(int heart);
+
+	int GetCredit();
+	int GetRest();
 };

@@ -25,6 +25,8 @@ CPlayer::CPlayer()
 	m_fScore = 0;
 	m_Heart = 10;
 
+	m_Credit = 0;
+
 #pragma region 이미지용 포인터 초기화
 
 	m_pIdleImage = nullptr;
@@ -89,30 +91,30 @@ void CPlayer::Init()
 #pragma region 캐릭터 이미지 로드
 
 	// 캐릭터가 오른쪽을 보고있는 이미지 파일 로드
-	m_pIdleImage = RESOURCE->LoadImg(L"PlayerIdle", L"Image\\PlayerIdle.png");
-	m_pDuckImage = RESOURCE->LoadImg(L"PlayerDuck", L"Image\\PlayerDuck.png");
-	m_pMoveImage = RESOURCE->LoadImg(L"PlayerMove", L"Image\\PlayerMove.png");
-	m_pJumpImage = RESOURCE->LoadImg(L"PlayerJump", L"Image\\PlayerJump.png");
-	m_pLookUpImage = RESOURCE->LoadImg(L"PlayerUp", L"Image\\PlayerUp.png");
+	m_pIdleImage	= RESOURCE->LoadImg(L"PlayerIdle",	 L"Image\\Player\\PlayerIdle.png");
+	m_pDuckImage	= RESOURCE->LoadImg(L"PlayerDuck",	 L"Image\\Player\\PlayerDuck.png");
+	m_pMoveImage	= RESOURCE->LoadImg(L"PlayerMove",	 L"Image\\Player\\PlayerMove.png");
+	m_pJumpImage	= RESOURCE->LoadImg(L"PlayerJump",	 L"Image\\Player\\PlayerJump.png");
+	m_pLookUpImage	= RESOURCE->LoadImg(L"PlayerUp",	 L"Image\\Player\\PlayerUp.png");
 
-	m_pAttackImage = RESOURCE->LoadImg(L"PlayerAttack", L"Image\\PlayerAttack.png");
-	m_pDuckAttackImage = RESOURCE->LoadImg(L"PlayerDuckAttack", L"Image\\PlayerDuckAttack.png");
-	m_pSubWeaponImage = RESOURCE->LoadImg(L"PlayerSubWeapon", L"Image\\PlayerSubWeapon.png");
+	m_pAttackImage		 = RESOURCE->LoadImg(L"PlayerAttack",		 L"Image\\Player\\PlayerAttack.png");
+	m_pDuckAttackImage	 = RESOURCE->LoadImg(L"PlayerDuckAttack",	 L"Image\\Player\\PlayerDuckAttack.png");
+	m_pSubWeaponImage	 = RESOURCE->LoadImg(L"PlayerSubWeapon",	 L"Image\\Player\\PlayerSubWeapon.png");
 
-	m_pBackFlipImage = RESOURCE->LoadImg(L"PlayerBackFlip", L"Image\\PlayerBackFlip.png");
+	m_pBackFlipImage	 = RESOURCE->LoadImg(L"PlayerBackFlip",		 L"Image\\Player\\PlayerBackFlip.png");
 
 	// 캐릭터가 왼쪽을 보고있는 이미지 파일 로드
-	m_pIdleImageR = RESOURCE->LoadImg(L"PlayerIdleR", L"Image\\PlayerIdleR.png");
-	m_pDuckImageR = RESOURCE->LoadImg(L"PlayerDuckR", L"Image\\PlayerDuckR.png");
-	m_pMoveImageR = RESOURCE->LoadImg(L"PlayerMoveR", L"Image\\PlayerMoveR.png");
-	m_pJumpImageR = RESOURCE->LoadImg(L"PlayerJumpR", L"Image\\PlayerJumpR.png");
-	m_pLookUpImageR = RESOURCE->LoadImg(L"PlayerUpR", L"Image\\PlayerUpR.png");
+	m_pIdleImageR	= RESOURCE->LoadImg(L"PlayerIdleR", L"Image\\Player\\PlayerIdleR.png");
+	m_pDuckImageR	= RESOURCE->LoadImg(L"PlayerDuckR", L"Image\\Player\\PlayerDuckR.png");
+	m_pMoveImageR	= RESOURCE->LoadImg(L"PlayerMoveR", L"Image\\Player\\PlayerMoveR.png");
+	m_pJumpImageR	= RESOURCE->LoadImg(L"PlayerJumpR", L"Image\\Player\\PlayerJumpR.png");
+	m_pLookUpImageR = RESOURCE->LoadImg(L"PlayerUpR",	L"Image\\Player\\PlayerUpR.png");
 
-	m_pAttackImageR = RESOURCE->LoadImg(L"PlayerAttackR", L"Image\\PlayerAttackR.png");
-	m_pDuckAttackImageR = RESOURCE->LoadImg(L"PlayerDuckAttackR", L"Image\\PlayerDuckAttackR.png");
-	m_pSubWeaponImageR = RESOURCE->LoadImg(L"PlayerSubWeaponR", L"Image\\PlayerSubWeaponR.png");
+	m_pAttackImageR		= RESOURCE->LoadImg(L"PlayerAttackR",	  L"Image\\Player\\PlayerAttackR.png");
+	m_pDuckAttackImageR = RESOURCE->LoadImg(L"PlayerDuckAttackR", L"Image\\Player\\PlayerDuckAttackR.png");
+	m_pSubWeaponImageR  = RESOURCE->LoadImg(L"PlayerSubWeaponR",  L"Image\\Player\\PlayerSubWeaponR.png");
 
-	m_pBackFlipImageR = RESOURCE->LoadImg(L"PlayerBackFlipR", L"Image\\PlayerBackFlipR.png");
+	m_pBackFlipImageR   = RESOURCE->LoadImg(L"PlayerBackFlipR",	  L"Image\\Player\\PlayerBackFlipR.png");
 
 #pragma endregion
 	
@@ -464,4 +466,14 @@ int CPlayer::GetHeart()
 void CPlayer::SetHeart(int heart)
 {
 	m_Heart = heart;
+}
+
+int CPlayer::GetCredit()
+{
+	return m_Credit;
+}
+
+int CPlayer::GetRest()
+{
+	return m_Rest;
 }

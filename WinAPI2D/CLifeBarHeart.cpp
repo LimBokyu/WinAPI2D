@@ -82,7 +82,7 @@ void CLifeBarHeart::Release()
 
 }
 
-void CLifeBarHeart::GetPlayer(CPlayer* player)
+void CLifeBarHeart::SetPlayer(CPlayer* player)
 {
 	pPlayer = player;
 }

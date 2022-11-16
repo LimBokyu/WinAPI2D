@@ -19,7 +19,16 @@ private:
 	Vector m_curLookAt;
 
 	CImage* m_pScoreBoard;
+	CImage* m_pRestBoard;
 	CImage* m_pScoreNum;
+
+	CImage* m_pScoreToRest;
+	CImage* m_pRestToScore;
+
+	float m_fTimer;
+
+	bool m_bScoreBoard;
+	bool m_bChangeOrder;
 
 public:
 	void Init() override;
@@ -28,4 +37,5 @@ public:
 	void Release() override;
 
 	void SetPlayer(CPlayer* player);
+	void AnimationUpdate();
 };

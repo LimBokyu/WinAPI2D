@@ -30,7 +30,7 @@ CStage01Effect::~CStage01Effect()
 
 void CStage01Effect::Init()
 {
-	m_Fire01 = RESOURCE->LoadImg(L"stage01_Effect1", L"Image\\Stage_01Effect01.png");
+	m_Fire01 = RESOURCE->LoadImg(L"stage01_Effect1", L"Image\\Stage\\Stage_01Effect01.png");
 	
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"stage01_Effect1", m_Fire01, Vector(0.f, 0.f), Vector(1050.f, 50.f), Vector(0.f, 50.f), 0.09f, 4);
