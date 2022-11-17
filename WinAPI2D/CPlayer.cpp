@@ -11,7 +11,7 @@
 #include "CImage.h"
 #include "CAnimator.h"
 
-#include "CMissile.h"
+#include "CWhip.h"
 
 #define MAXREST 99
 
@@ -24,10 +24,19 @@ CPlayer::CPlayer()
 	m_strName = L"플레이어";
 
 	m_Life = 94;
+	// ㄴ 체력 : 최초 94 이렇게 애매한 점수인 이유는
+	//          체력바 이미지의 길이가 94여서....
+
 	m_Score = 0;
+	// ㄴ 점수 : 적을 공격해서 죽였을 경우 해당
+	//          해당 적을 죽이기 까지 필요한 공격 x100 점 흭득
+
 	m_Heart = 10;
+	// ㄴ 하트 : 아이템 사용에 필요한 코스트
+	//			초기 시작시 10개를 들고 시작한다 
 
 	m_Credit = 500;
+	// ㄴ 크레딧 : 주운 돈 만큼 늘어남
 
 #pragma region 이미지용 포인터 초기화
 
@@ -38,6 +47,7 @@ CPlayer::CPlayer()
 
 	m_pAttackImage = nullptr;
 	m_pDuckAttackImage = nullptr;
+	m_pDuckAttackingImage = nullptr;
 
 	m_pIdleImageR = nullptr;
 	m_pDuckImageR = nullptr;
@@ -46,6 +56,7 @@ CPlayer::CPlayer()
 
 	m_pAttackImageR = nullptr;
 	m_pDuckAttackImageR = nullptr;
+	m_pDuckAttackingImageR = nullptr;
 
 	m_pBackFlipImage = nullptr;
 	m_pBackFlipImageR = nullptr;
@@ -80,7 +91,9 @@ CPlayer::CPlayer()
 	m_bLookup = false;
 	m_bAttackinBackFlip = false;
 	m_bOnStair = false;
-
+	m_bCommandBlock = false;
+	m_bAttacking = false;
+	m_bTriggerOnce = false;
 }
 
 CPlayer::~CPlayer()
@@ -102,6 +115,8 @@ void CPlayer::Init()
 	m_pAttackImage		 = RESOURCE->LoadImg(L"PlayerAttack",		 L"Image\\Player\\PlayerAttack.png");
 	m_pDuckAttackImage	 = RESOURCE->LoadImg(L"PlayerDuckAttack",	 L"Image\\Player\\PlayerDuckAttack.png");
 	m_pSubWeaponImage	 = RESOURCE->LoadImg(L"PlayerSubWeapon",	 L"Image\\Player\\PlayerSubWeapon.png");
+	m_pAttackingImage    = RESOURCE->LoadImg(L"PlayerAttacking",     L"Image\\Player\\PlayerAttacking.png");
+	m_pDuckAttackingImage = RESOURCE->LoadImg(L"DuckAttacking",      L"Image\\Player\\PlayerDuckAttacking.png");
 
 	m_pBackFlipImage	 = RESOURCE->LoadImg(L"PlayerBackFlip",		 L"Image\\Player\\PlayerBackFlip.png");
 
@@ -115,6 +130,9 @@ void CPlayer::Init()
 	m_pAttackImageR		= RESOURCE->LoadImg(L"PlayerAttackR",	  L"Image\\Player\\PlayerAttackR.png");
 	m_pDuckAttackImageR = RESOURCE->LoadImg(L"PlayerDuckAttackR", L"Image\\Player\\PlayerDuckAttackR.png");
 	m_pSubWeaponImageR  = RESOURCE->LoadImg(L"PlayerSubWeaponR",  L"Image\\Player\\PlayerSubWeaponR.png");
+	m_pAttackingImageR  = RESOURCE->LoadImg(L"PlayerAttackingR",  L"Image\\Player\\PlayerAttackingR.png");
+	m_pDuckAttackingImageR = RESOURCE->LoadImg(L"DuckAttackingR", L"Image\\Player\\PlayerDuckAttackingR.png");
+
 
 	m_pBackFlipImageR   = RESOURCE->LoadImg(L"PlayerBackFlipR",	  L"Image\\Player\\PlayerBackFlipR.png");
 
@@ -136,6 +154,8 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"PlayerAttack", m_pAttackImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttack",m_pDuckAttackImage,Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerSubWeapon",m_pSubWeaponImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.04f, 6, false);
+	m_pAnimator->CreateAnimation(L"PlayerAttacking", m_pAttackingImage, Vector(0,0), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"PlayerDuckAttacking",m_pDuckAttackingImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f),1, 1, false);
 
 	// ============ 반대방향 애니메이션 ================
 	m_pAnimator->CreateAnimation(L"PlayerIdleR", m_pIdleImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.2f, 3);
@@ -151,40 +171,124 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"PlayerAttackR", m_pAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttackR", m_pDuckAttackImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.03f, 6, false);
 	m_pAnimator->CreateAnimation(L"PlayerSubWeaponR", m_pSubWeaponImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.04f, 6, false);
+	m_pAnimator->CreateAnimation(L"PlayerAttackingR", m_pAttackingImageR, Vector(0, 0), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"PlayerDuckAttackingR", m_pDuckAttackingImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
 
 #pragma endregion
 
 	m_pAnimator->Play(L"PlayerIdle", false);
 	AddComponent(m_pAnimator);
 
-	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
+	//AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
+	//AddCollider(ColliderType::Rect, Vector(46, 50), Vector(0, -5));
 }
 
 void CPlayer::Update()
 {
 	m_bIsMove = false;
-	m_bDuck = false;
 	m_bLookup = false;
+
+	if (!m_bAttacking)
+	{
+		m_bDuck = false;
+	}
 
 	if (m_Heart == 0)
 	{
 		Logger::Debug(L"하트를 다씀");
 	}
 
-	if (BUTTONDOWN('Q'))
+	if (!m_bCommandBlock)
 	{
-		pItem = PlayerITEM::Dagger;
-	}
 
-	if (BUTTONDOWN('Z'))
-	{
-		m_bAttack = true;
-		m_Score += 10;
-	}
+		if (BUTTONDOWN('Q'))
+		{
+			pItem = PlayerITEM::Dagger;
+		}
 
-	if (BUTTONDOWN('X'))
-	{
-		m_bJump = true;
+		if (BUTTONDOWN('Z'))		// 공격
+		{
+			if (!m_bAttack)
+			{
+				m_bTriggerOnce = true;
+				m_bAttack = true;
+				m_Score += 10;
+			}
+		}
+
+		if (BUTTONDOWN('X'))		// 점프
+		{
+			m_bJump = true;
+		}
+
+		if (BUTTONSTAY(VK_UP))
+		{
+			m_bLookup = true;
+			if (BUTTONDOWN('Z'))
+			{
+				SetHeart(GetHeart() - 1);
+			}
+		}
+		else if (BUTTONSTAY(VK_DOWN))
+		{
+			if (!m_bJump)
+			{
+				m_fDuckTime += DT;
+				m_bDuck = true;
+				if (BUTTONSTAY(VK_LEFT))
+				{
+					m_bReverse = true;
+				}
+				else if (BUTTONSTAY(VK_RIGHT))
+				{
+					m_bReverse = false;
+				}
+			}
+		}
+		else
+		{
+			m_vecMoveDir.y = 0;
+		}
+
+		if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
+		{
+			if (BUTTONSTAY(VK_LEFT))
+			{
+				if (m_vecPos.x > 30)
+				{
+					m_vecPos.x -= m_fSpeed * DT;
+				}
+				m_bReverse = true;
+				m_bIsMove = true;
+				if (!m_bAttack)
+				{
+					m_vecMoveDir.x = -1;
+				}
+			}
+			else if (BUTTONSTAY(VK_RIGHT))
+			{
+
+				if (m_vecPos.x < (1024 * 2) - 30)
+				{
+					m_vecPos.x += m_fSpeed * DT;
+				}
+				m_bIsMove = true;
+				m_bReverse = false;
+				if (!m_bAttack)
+				{
+					m_vecMoveDir.x = +1;
+				}
+			}
+			else
+			{
+				m_vecMoveDir.x = 0;
+			}
+		}
+
+		if (BUTTONUP(VK_DOWN))
+		{
+			m_fDuckTime = 0;
+		}
 	}
 
 	if (m_bIsMove)
@@ -209,70 +313,6 @@ void CPlayer::Update()
 				m_vecMoveDir.x = +1;
 				m_bReverse = false;
 			}
-		}
-	}
-
-	if (BUTTONSTAY(VK_UP))
-	{
-		m_bLookup = true;
-		if (BUTTONDOWN('Z'))
-		{
-			SetHeart(GetHeart() - 1);
-		}
-	}
-	else if (BUTTONSTAY(VK_DOWN))
-	{
-		if (!m_bJump)
-		{
-			m_fDuckTime += DT;
-			m_bDuck = true;
-			if (BUTTONSTAY(VK_LEFT))
-			{
-				m_bReverse = true;
-			}
-			else if (BUTTONSTAY(VK_RIGHT))
-			{
-				m_bReverse = false;
-			}
-		}
-	}
-	else
-	{
-		m_vecMoveDir.y = 0;
-	}
-
-	if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
-	{
-		if (BUTTONSTAY(VK_LEFT))
-		{
-			if (m_vecPos.x > 30)
-			{
-				m_vecPos.x -= m_fSpeed * DT;
-			}
-			m_bReverse = true;
-			m_bIsMove = true;
-			if (!m_bAttack)
-			{
-				m_vecMoveDir.x = -1;
-			}
-		}
-		else if (BUTTONSTAY(VK_RIGHT))
-		{
-
-			if (m_vecPos.x < (1024 * 2) - 30)
-			{
-				m_vecPos.x += m_fSpeed * DT;
-			}
-			m_bIsMove = true;
-			m_bReverse = false;
-			if (!m_bAttack)
-			{
-				m_vecMoveDir.x = +1;
-			}
-		}
-		else
-		{
-			m_vecMoveDir.x = 0;
 		}
 	}
 
@@ -313,17 +353,31 @@ void CPlayer::Update()
 		}
 	}
 
-	if (BUTTONUP(VK_DOWN))
-	{
-		m_fDuckTime = 0;
-	}
 
-	if (m_bAttack)
+	if (m_bLookup && m_bAttack)
 	{
 		m_fAttackTime += DT;
-		if (m_fAttackTime >= 0.3)
+		if(m_fAttackTime > 0.2f)
 		{
 			m_bAttack = false;
+			m_bCommandBlock = false;
+			m_fAttackTime = 0;
+		}
+	}
+	else if (m_bAttack)
+	{
+		m_fAttackTime += DT;
+		if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
+		{
+			CreateMissile();
+			m_bAttacking = true;
+			m_bCommandBlock = true;
+		}
+		if (m_fAttackTime >= 0.3)
+		{
+			m_bAttacking = false;
+			m_bAttack = false;
+			m_bCommandBlock = false;
 			m_fAttackTime = 0;
 		}
 	}
@@ -415,6 +469,11 @@ void CPlayer::AnimatorUpdate()
 		}
 	}
 
+	if(m_bAttacking && !m_bLookup)
+	{
+		str += L"ing";
+	}
+
 	if (m_bReverse)
 	{
 		str += L"R";
@@ -425,13 +484,15 @@ void CPlayer::AnimatorUpdate()
 
 void CPlayer::CreateMissile()
 {
-	Logger::Debug(L"미사일 생성");
+	if (m_bTriggerOnce)
+	{
+		Logger::Debug(L"미사일 생성");
 
-	/*Vector MissilePos(m_vecPos.x - 30, m_vecPos.y - 20);
-	CMissile* pMissile = new CMissile();
-	pMissile->SetPos(MissilePos);
-	pMissile->SetDir(Vector(1, 0));
-	ADDOBJECT(pMissile);*/
+		CWhip* attack = new CWhip();
+		attack->SetPlayer(this);
+		ADDOBJECT(attack);
+		m_bTriggerOnce = false;
+	}
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
@@ -484,4 +545,14 @@ int CPlayer::GetRest()
 int CPlayer::GetScore()
 {
 	return m_Score;
+}
+
+bool CPlayer::GetReverse()
+{
+	return m_bReverse;
+}
+
+bool CPlayer::GetDuck()
+{
+	return m_bDuck;
 }

@@ -37,7 +37,9 @@ private:
 	CImage* m_pStairDown;
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImage;
+	CImage* m_pAttackingImage;
 	CImage* m_pDuckAttackImage;
+	CImage* m_pDuckAttackingImage;
 	CImage* m_pStairUpAttack;
 	CImage* m_pStairDownAttack;
 	CImage* m_pSubWeaponImage;
@@ -55,7 +57,9 @@ private:
 	CImage* m_pStairDownR;
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImageR;
+	CImage* m_pAttackingImageR;
 	CImage* m_pDuckAttackImageR;
+	CImage* m_pDuckAttackingImageR;
 	CImage* m_pStairUpAttackR;
 	CImage* m_pStairDownAttackR;
 	CImage* m_pSubWeaponImageR;
@@ -77,6 +81,8 @@ private:
 	bool m_bAttackinBackFlip;
 	bool m_bOnStair;
 	bool m_bCommandBlock;
+	bool m_bAttacking;
+	bool m_bTriggerOnce;
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
@@ -116,4 +122,8 @@ public:
 	int GetCredit();
 	int GetRest();
 	int GetScore();
+
+	bool GetReverse();
+	bool GetDuck();
+
 };

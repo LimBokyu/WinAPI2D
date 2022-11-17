@@ -14,7 +14,7 @@ CMissile::CMissile()
 	m_fVelocity = 0;
 	m_AttackTime = 0;
 
-	m_layer = Layer::Missile;
+	m_layer = Layer::PlayerAttack;
 
 	m_strName = L"πÃªÁ¿œ";
 }

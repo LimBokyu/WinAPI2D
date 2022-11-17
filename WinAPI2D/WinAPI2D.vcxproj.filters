@@ -198,6 +198,9 @@
     <ClCompile Include="CStage01Map.cpp">
       <Filter>GameObject\StageObject</Filter>
     </ClCompile>
+    <ClCompile Include="CWhip.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="CStage01Effect3.h">
       <Filter>GameObject\StageObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CWhip.h">
+      <Filter>GameObject\Stage01</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
