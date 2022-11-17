@@ -17,6 +17,7 @@
 
 #define NUMX  6
 #define NUMY  5
+#define SCALE 16
 
 CScoreBoardNum::CScoreBoardNum()
 {
@@ -91,7 +92,7 @@ void CScoreBoardNum::Init()
 void CScoreBoardNum::Update()
 {
 	m_curLookAt = CAMERA->GetLookAt();
-	m_vecPos = m_curLookAt - m_StartLookAt + Vector(187, 42);
+	m_vecPos = m_curLookAt - m_StartLookAt + Vector(187 - SCALE*m_NumScale, 42);
 
 	if (BUTTONDOWN('R'))
 	{
@@ -158,6 +159,7 @@ void CScoreBoardNum::UpdateAnimation()
 {
 	int Score;
 	int repeat = m_NumScale;
+	m_TenScale = m_NumScale;
 	wstring str = L"";
 
 	if (m_bScoreBoard)
@@ -167,6 +169,7 @@ void CScoreBoardNum::UpdateAnimation()
 	else
 	{
 		Score = pPlayer->GetRest();
+		
 	}
 
 	if (!m_NumScale)
@@ -177,14 +180,7 @@ void CScoreBoardNum::UpdateAnimation()
 	{
 		while (repeat)
 		{
-			if (!m_TenScale)
-			{
-				m_TenScale + 10;
-			}
-			else
-			{
-				m_TenScale *= 10;
-			}
+			m_TenScale *= 10;
 			repeat--;
 		}
 		m_OutputNum = Score / m_TenScale;
@@ -208,6 +204,13 @@ void CScoreBoardNum::UpdateAnimation()
 		{
 
 		}
+	}
+
+	if (m_NumScale == 2)
+	{
+		return;
+		// None Animation을 만들어서 재생시키게 해야할듯......
+		// 변환부분도 None을 출력시키게 전환해야
 	}
 
 	switch (m_OutputNum)

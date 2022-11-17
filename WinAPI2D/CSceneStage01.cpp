@@ -62,6 +62,37 @@ void CSceneStage01::Init()
 	Num->SetPlayer(pPlayer);
 	AddGameObject(Num);
 
+	CScoreBoardNum* Num1 = new CScoreBoardNum();
+	Num1->SetPlayer(pPlayer);
+	Num1->SetScale(1);
+	AddGameObject(Num1);
+
+	CScoreBoardNum* Num2 = new CScoreBoardNum();
+	Num2->SetPlayer(pPlayer);
+	Num2->SetScale(2);
+	AddGameObject(Num2);
+
+	CScoreBoardNum* Num3 = new CScoreBoardNum();
+	Num3->SetPlayer(pPlayer);
+	Num3->SetScale(3);
+	AddGameObject(Num3);
+
+	CScoreBoardNum* Num4 = new CScoreBoardNum();
+	Num4->SetPlayer(pPlayer);
+	Num4->SetScale(4);
+	AddGameObject(Num4);
+
+	CScoreBoardNum* Num5 = new CScoreBoardNum();
+	Num5->SetPlayer(pPlayer);
+	Num5->SetScale(5);
+	AddGameObject(Num5);
+
+	CScoreBoardNum* Num6 = new CScoreBoardNum();
+	Num6->SetPlayer(pPlayer);
+	Num6->SetScale(6);
+	AddGameObject(Num6);
+
+
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 
 	Map = new CStage01Map();
