@@ -84,12 +84,12 @@ private:
 
 	float m_fSpeed = 150.0f;
 
-	float m_fScore;
-	float m_fLife;
+	int m_Score;
+	int m_Life;
 
 	unsigned int m_Heart;
 	unsigned int m_Credit;
-	unsigned int m_Rest = 3;
+	unsigned int m_Rest = 13;
 
 private:
 	void Init() override;
@@ -115,4 +115,5 @@ public:
 
 	int GetCredit();
 	int GetRest();
+	int GetScore();
 };

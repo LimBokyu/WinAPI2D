@@ -27,7 +27,6 @@ CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
 	Map = nullptr;
-	//m_Map = nullptr;
 }
 
 CSceneStage01::~CSceneStage01()
@@ -39,6 +38,8 @@ void CSceneStage01::Init()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(150, 376);
 	AddGameObject(pPlayer);
+
+#pragma region 라이프바와 스코어바 본체와 숫자의 구현
 
 	CLifeBar* Lifebar = new CLifeBar();
 	Lifebar->SetPlayer(pPlayer);
@@ -92,6 +93,7 @@ void CSceneStage01::Init()
 	Num6->SetScale(6);
 	AddGameObject(Num6);
 
+#pragma endregion
 
 	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
 
@@ -100,10 +102,6 @@ void CSceneStage01::Init()
 
 	SOUND->Play(BGM, 0.5f, true);
 
-	CMonster* pMonster = new CMonster();
-	pMonster->SetPos(1000, WINSIZEY * 0.5f);
-	AddGameObject(pMonster);
-	
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 

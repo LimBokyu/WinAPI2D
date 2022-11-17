@@ -13,6 +13,8 @@
 
 #include "CMissile.h"
 
+#define MAXREST 99
+
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
@@ -21,11 +23,11 @@ CPlayer::CPlayer()
 	pItem = PlayerITEM::None;
 	m_strName = L"플레이어";
 
-	m_fLife = 94;
-	m_fScore = 0;
+	m_Life = 94;
+	m_Score = 0;
 	m_Heart = 10;
 
-	m_Credit = 0;
+	m_Credit = 500;
 
 #pragma region 이미지용 포인터 초기화
 
@@ -177,6 +179,7 @@ void CPlayer::Update()
 	if (BUTTONDOWN('Z'))
 	{
 		m_bAttack = true;
+		m_Score += 10;
 	}
 
 	if (BUTTONDOWN('X'))
@@ -476,4 +479,9 @@ int CPlayer::GetCredit()
 int CPlayer::GetRest()
 {
 	return m_Rest;
+}
+
+int CPlayer::GetScore()
+{
+	return m_Score;
 }

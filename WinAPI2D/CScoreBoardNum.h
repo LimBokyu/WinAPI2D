@@ -21,14 +21,18 @@ private:
 	CImage* m_pNumOut;
 	CImage* m_pNumIn;
 
+	CImage* m_pNumNone;
+
 	bool m_bScoreBoard;
 	bool m_bChangeBoard;
+	bool m_bChangeTrigger;
 
 	int m_Credit;
 	int m_Rest;
+	int m_Score;
 
 	int m_NumScale = 0;
-	int m_TenScale = 10;
+	int m_TenScale;
 	int m_OutputNum = 0;
 
 	float m_fTimer = 0;

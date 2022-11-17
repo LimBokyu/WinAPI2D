@@ -42,11 +42,11 @@ CLifeBarScore::~CLifeBarScore()
 void CLifeBarScore::Init()
 {
 	m_pAnimator = new CAnimator();
-	m_pScoreBoard  = RESOURCE->LoadImg(L"ScoreBoard",	L"Image\\ScoreBoardIdle.png");
-	m_pRestBoard =   RESOURCE->LoadImg(L"RestBoard",    L"Image\\RestBoardIdle.png");
-	m_pScoreNum    = RESOURCE->LoadImg(L"ScoreNum",		L"Image\\PlayerScoreNum.png");
-	m_pScoreToRest = RESOURCE->LoadImg(L"ScoreToRest",	L"Image\\ChangeBoardSR.png");
-	m_pRestToScore = RESOURCE->LoadImg(L"RestToScore",	L"Image\\ChangeBoardRS.png");
+	m_pScoreBoard  = RESOURCE->LoadImg(L"ScoreBoard",	L"Image\\Interface\\ScoreBoardIdle.png");
+	m_pRestBoard =   RESOURCE->LoadImg(L"RestBoard",    L"Image\\Interface\\RestBoardIdle.png");
+	m_pScoreNum    = RESOURCE->LoadImg(L"ScoreNum",		L"Image\\Interface\\PlayerScoreNum.png");
+	m_pScoreToRest = RESOURCE->LoadImg(L"ScoreToRest",	L"Image\\Interface\\ChangeBoardSR.png");
+	m_pRestToScore = RESOURCE->LoadImg(L"RestToScore",	L"Image\\Interface\\ChangeBoardRS.png");
 
 	m_pAnimator->CreateAnimation(L"ScoreBoardIdle", m_pScoreBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false);
 	m_pAnimator->CreateAnimation(L"RestBoard",		 m_pRestBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false);

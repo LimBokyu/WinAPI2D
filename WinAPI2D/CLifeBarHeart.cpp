@@ -38,7 +38,7 @@ void CLifeBarHeart::Init()
 {
 	m_pAnimator = new CAnimator;
 
-	m_pHeart = RESOURCE->LoadImg(L"LifeBarHeart", L"Image\\LifeBarHeart.png");
+	m_pHeart = RESOURCE->LoadImg(L"LifeBarHeart", L"Image\\Interface\\LifeBarHeart.png");
 
 	m_pAnimator->CreateAnimation(L"Heart:Zero",  m_pHeart,	 Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.05f, 4);
 	m_pAnimator->CreateAnimation(L"Heart:One",   m_pHeart,	 Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.05f, 4);

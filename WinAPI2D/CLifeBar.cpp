@@ -36,8 +36,8 @@ CLifeBar::~CLifeBar()
 
 void CLifeBar::Init()
 {
-	m_pLifeBar			= RESOURCE->LoadImg(L"LifeBar", L"Image\\LifeBar.png");
-	m_pLifeBarGauge		= RESOURCE->LoadImg(L"LifeBarGauge", L"Image\\LifeBarFull.png");
+	m_pLifeBar			= RESOURCE->LoadImg(L"LifeBar",      L"Image\\Interface\\LifeBar.png");
+	m_pLifeBarGauge		= RESOURCE->LoadImg(L"LifeBarGauge", L"Image\\Interface\\LifeBarFull.png");
 
 	m_pItemDagger		= RESOURCE->LoadImg(L"Dagger",		L"Image\\Item\\ItemDagger.png");
 	m_pItemAxe			= RESOURCE->LoadImg(L"Axe",			L"Image\\Item\\ItemAxe.png");

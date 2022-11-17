@@ -28,12 +28,16 @@ CScoreBoardNum::CScoreBoardNum()
 	m_pNumIdle = nullptr;
 	m_pNumOut = nullptr;
 	m_pNumIn = nullptr;
+	m_pNumNone = nullptr;
 
 	m_Credit = 0;
 	m_Rest = 0;
+	m_Score = 0;
+	m_TenScale = 1;
 
 	m_bScoreBoard = true;
 	m_bChangeBoard = false;
+	m_bChangeTrigger = false;
 
 	m_StartLookAt = Vector(WINSIZEX * 0.5f, WINSIZEY * 0.5f);
 	m_curLookAt = Vector(WINSIZEX * 0.5f, WINSIZEY * 0.5f);
@@ -47,9 +51,10 @@ void CScoreBoardNum::Init()
 {
 	m_pAnimator = new CAnimator();
 
-	m_pNumIdle = RESOURCE->LoadImg(L"NumIdle", L"Image\\ScoreNumIdle.png");
-	m_pNumOut  = RESOURCE->LoadImg(L"NumOut",  L"Image\\ScoreNumChange1.png");
-	m_pNumIn   = RESOURCE->LoadImg(L"NumIn",   L"Image\\ScoreNumChange2.png");
+	m_pNumIdle = RESOURCE->LoadImg(L"NumIdle", L"Image\\Interface\\ScoreNumIdle.png");
+	m_pNumOut  = RESOURCE->LoadImg(L"NumOut",  L"Image\\Interface\\ScoreNumChange1.png");
+	m_pNumIn   = RESOURCE->LoadImg(L"NumIn",   L"Image\\Interface\\ScoreNumChange2.png");
+	m_pNumNone = RESOURCE->LoadImg(L"NumNone", L"Image\\Interface\\NumNone.png");
 
 	m_pAnimator->CreateAnimation(L"Idle:Zero",	 m_pNumIdle, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
 	m_pAnimator->CreateAnimation(L"Idle:One",	 m_pNumIdle, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
@@ -84,6 +89,8 @@ void CScoreBoardNum::Init()
 	m_pAnimator->CreateAnimation(L"Out:Eight", m_pNumOut, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
 	m_pAnimator->CreateAnimation(L"Out:Nine",  m_pNumOut, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
 
+	m_pAnimator->CreateAnimation(L"NumNone", m_pNumNone, Vector(NUMX, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
+
 	m_pAnimator->Play(L"Idle:Zero", false);
 	AddComponent(m_pAnimator);
 
@@ -92,27 +99,32 @@ void CScoreBoardNum::Init()
 void CScoreBoardNum::Update()
 {
 	m_curLookAt = CAMERA->GetLookAt();
-	m_vecPos = m_curLookAt - m_StartLookAt + Vector(187 - SCALE*m_NumScale, 42);
+	m_vecPos = m_curLookAt - m_StartLookAt + Vector(187 - float(SCALE*m_NumScale), 42);
 
 	if (BUTTONDOWN('R'))
 	{
+		if (!m_bChangeBoard)
+		{
+			m_bChangeTrigger = true;
+		}
 		m_bChangeBoard = true;
 	}
 
 	if (m_bChangeBoard)
 	{
 		m_fTimer += DT;
+
+		if (m_fTimer > 0.16f && m_fTimer < 0.28)
+		{
+			if (m_bChangeTrigger)
+			{
+				ChangeBoard();
+			}
+		}
+
 		if (m_fTimer > 0.45f)
 		{
 			m_bChangeBoard = false;
-			if (m_bScoreBoard)
-			{
-				m_bScoreBoard = false;
-			}
-			else
-			{
-				m_bScoreBoard = true;
-			}
 			m_fTimer = 0;
 		}
 	}
@@ -145,6 +157,7 @@ void CScoreBoardNum::SetScale(int scale)
 
 void CScoreBoardNum::ChangeBoard()
 {
+	m_bChangeTrigger = false;
 	if (m_bScoreBoard)
 	{
 		m_bScoreBoard = false;
@@ -157,36 +170,50 @@ void CScoreBoardNum::ChangeBoard()
 
 void CScoreBoardNum::UpdateAnimation()
 {
-	int Score;
 	int repeat = m_NumScale;
-	m_TenScale = m_NumScale;
+	int credit = m_NumScale - 3;
+	m_TenScale = 1;
 	wstring str = L"";
 
 	if (m_bScoreBoard)
 	{
-		Score = pPlayer->GetCredit();
-	}
-	else
-	{
-		Score = pPlayer->GetRest();
-		
-	}
-
-	if (!m_NumScale)
-	{
-		m_OutputNum = Score % 10;
-	}
-	else
-	{
+		m_Score = pPlayer->GetScore();
 		while (repeat)
 		{
 			m_TenScale *= 10;
 			repeat--;
 		}
-		m_OutputNum = Score / m_TenScale;
+		m_OutputNum = m_Score / m_TenScale;
+		m_OutputNum %= 10;
+	}
+	else
+	{
+		m_Rest = pPlayer->GetRest();
+		m_Credit = pPlayer->GetCredit() / 100;
+
+		while (repeat)
+		{
+			m_TenScale *= 10;
+			repeat--;
+		}
+		m_OutputNum = m_Rest / m_TenScale;
+		m_OutputNum %= 10;
+
+
+		if (m_NumScale >= 3)
+		{
+			m_TenScale = 1;
+			while (credit)
+			{
+				m_TenScale *= 10;
+				credit--;
+			}
+			m_OutputNum = m_Credit / m_TenScale;
+			m_OutputNum  %= 10;
+		}
 	}
 
-	if (!m_bChangeBoard)
+	if(!m_bChangeBoard)
 	{
 		str += L"Idle:";
 	}
@@ -200,17 +227,6 @@ void CScoreBoardNum::UpdateAnimation()
 		{
 			str += L"In:";
 		}
-		else
-		{
-
-		}
-	}
-
-	if (m_NumScale == 2)
-	{
-		return;
-		// None Animation을 만들어서 재생시키게 해야할듯......
-		// 변환부분도 None을 출력시키게 전환해야
 	}
 
 	switch (m_OutputNum)
@@ -247,9 +263,13 @@ void CScoreBoardNum::UpdateAnimation()
 		break;
 	}
 
-	if (m_fTimer > 0.16f && m_fTimer < 0.28)
+	if (m_NumScale == 2 && !m_bScoreBoard)
 	{
-
+		m_pAnimator->Play(L"NumNone", false);
+	}
+	else if (m_fTimer > 0.16f && m_fTimer < 0.28)
+	{
+		m_pAnimator->Play(L"NumNone", false);
 	}
 	else
 	{
