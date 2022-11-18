@@ -198,6 +198,11 @@ void CPlayer::Update()
 		Logger::Debug(L"ÇÏÆ®¸¦ ´Ù¾¸");
 	}
 
+	if (BUTTONDOWN('W'))
+	{
+		m_Credit += 100;
+	}
+
 	if (!m_bCommandBlock)
 	{
 

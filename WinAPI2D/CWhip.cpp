@@ -12,6 +12,7 @@ CWhip::CWhip()
 {
 	m_vecScale = Vector(50, 10);
 	m_vecDir = Vector(0, 0);
+	m_vecLong = Vector(0, 0);
 
 	m_fVelocity = 0;
 	m_AttackTime = 0;
@@ -21,6 +22,8 @@ CWhip::CWhip()
 	m_bReverse = false;
 	m_bLongAttack = false;
 	m_bDuck = false;
+	m_bHit = true;
+	m_bTriggerOnce = false;
 
 	m_pNormalAttack = nullptr;
 	m_pLongAttack = nullptr;
@@ -66,7 +69,7 @@ void CWhip::Init()
 	m_pAnimator->CreateAnimation(L"DuckLongR",   m_pDuckLongAttackR, Vector(0, 0), Vector(64, 9), Vector(0, 9), 0.001f, 2, true);
 
 	AddComponent(m_pAnimator);
-	//AddCollider(ColliderType::Rect, Vector(120, 10), Vector(m_vecPos.x, m_vecPos.y));
+	AddCollider(ColliderType::Rect, Vector(120, 10), Vector(m_vecPos.x, m_vecPos.y));
 }
 
 void CWhip::Update()
@@ -74,22 +77,59 @@ void CWhip::Update()
 	m_bReverse = pPlayer->GetReverse();
 	m_bDuck = pPlayer->GetDuck();
 
-	if (m_bDuck && !m_bReverse)
+	//m_bLongAttack = true;
+	// ㄴ 줌 어택 활성화
+	//m_bTriggerOnce = true;
+
+#pragma region 공격 이펙트의 이미지 생성 좌표 설정
+
+	if (m_bLongAttack)
 	{
-		m_vecPos = pPlayer->GetPos() + Vector(81, 11);
+		if (m_bDuck && !m_bReverse)	// 앉아서 정면
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(87, 11);
+		}
+		else if (m_bDuck && m_bReverse)	// 앉아서 후면
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(-87, 10);
+		}	
+		else if (!m_bReverse)			// 서서 정면
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(92, -22);
+		}
+		else if (m_bReverse)			// 서서 후면
+		{	
+			m_vecPos = pPlayer->GetPos() + Vector(-98, -22);
+		}
 	}
-	else if (m_bDuck && m_bReverse)
+	else
 	{
-		m_vecPos = pPlayer->GetPos() + Vector(-97, 10);
+		if (m_bDuck && !m_bReverse)
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(81, 11);
+		}
+		else if (m_bDuck && m_bReverse)
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(-97, 10);
+		}
+		else if (!m_bReverse)
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(83, -22);
+		}
+		else if (m_bReverse)
+		{
+			m_vecPos = pPlayer->GetPos() + Vector(-107, -22);
+		}
 	}
-	else if (!m_bReverse)
+
+#pragma endregion
+
+
+	if (m_bLongAttack)
 	{
-		m_vecPos = pPlayer->GetPos() + Vector(83, -22);
+		ResetCollider();
 	}
-	else if(m_bReverse)
-	{
-		m_vecPos = pPlayer->GetPos() + Vector(-107, -22);
-	}
+
 
 	m_AttackTime += DT;
 
@@ -104,6 +144,7 @@ void CWhip::Update()
 		if (BUTTONDOWN(VK_LEFT))
 		{
 			m_bLongAttack = true;
+			m_bTriggerOnce = true;
 		}
 	}
 	else
@@ -111,15 +152,9 @@ void CWhip::Update()
 		if (BUTTONDOWN(VK_RIGHT))
 		{
 			m_bLongAttack = true;
+			m_bTriggerOnce = true;
 		}
 	}
-	
-	if (m_bLongAttack)
-	{
-		
-	}
-
-
 
 	UpdateAnimation();
 }
@@ -163,7 +198,23 @@ void CWhip::UpdateAnimation()
 	m_pAnimator->Play(str, false);
 }
 
+void CWhip::ResetCollider()
+{
+	/*if (m_bTriggerOnce)
+	{
+		RemoveCollider();
+		AddCollider(ColliderType::Rect, Vector(170, 10), Vector(m_vecPos.x, m_vecPos.y));
+		m_bTriggerOnce = false;
+	}*/
+}
+
 void CWhip::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	Logger::Debug(L"공격 Hit");
+	if (m_bHit)
+	{
+
+	}
+
+	m_bHit = false;
 }

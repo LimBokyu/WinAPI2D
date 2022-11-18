@@ -29,6 +29,7 @@ private:
 	CPlayer* pPlayer;
 
 	Vector m_vecDir;
+	Vector m_vecLong;
 
 	float m_fVelocity;
 	float m_AttackTime;
@@ -36,6 +37,8 @@ private:
 	bool m_bLongAttack;
 	bool m_bReverse;
 	bool m_bDuck;
+	bool m_bHit;
+	bool m_bTriggerOnce;
 
 public:
 	void Init() override;
@@ -45,6 +48,7 @@ public:
 
 	void SetPlayer(CPlayer* player);
 	void UpdateAnimation();
+	void ResetCollider();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 

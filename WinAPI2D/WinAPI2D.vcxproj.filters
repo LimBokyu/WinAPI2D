@@ -61,6 +61,9 @@
     <Filter Include="GameObject\PlayerScoreBoard">
       <UniqueIdentifier>{c8e87e4b-351f-48bf-8386-ff7ff6dd5dc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Item">
+      <UniqueIdentifier>{cad0ba35-6507-4948-9ba1-9c8856056505}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="CWhip.cpp">
       <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeart.cpp">
+      <Filter>GameObject\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="CWhip.h">
       <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeart.h">
+      <Filter>GameObject\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
