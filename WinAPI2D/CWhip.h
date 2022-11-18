@@ -48,9 +48,5 @@ public:
 
 	void SetPlayer(CPlayer* player);
 	void UpdateAnimation();
-	void ResetCollider();
-
-	void OnCollisionEnter(CCollider* pOtherCollider) override;
-
 };
 

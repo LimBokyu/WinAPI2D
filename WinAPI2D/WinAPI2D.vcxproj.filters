@@ -64,6 +64,9 @@
     <Filter Include="GameObject\Item">
       <UniqueIdentifier>{cad0ba35-6507-4948-9ba1-9c8856056505}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{adf0aa8f-4faf-4116-8c4c-780edcbfbb23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -138,9 +141,6 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CCameraManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
@@ -201,11 +201,20 @@
     <ClCompile Include="CStage01Map.cpp">
       <Filter>GameObject\StageObject</Filter>
     </ClCompile>
-    <ClCompile Include="CWhip.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CHeart.cpp">
       <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CBigHeart.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CWhip.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CAttackCollider.cpp">
+      <Filter>GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +308,6 @@
     <ClInclude Include="CMonster.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CCameraManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
@@ -362,11 +368,20 @@
     <ClInclude Include="CStage01Effect3.h">
       <Filter>GameObject\StageObject</Filter>
     </ClInclude>
-    <ClInclude Include="CWhip.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CHeart.h">
       <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CBigHeart.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CWhip.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CAttackCollider.h">
+      <Filter>GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

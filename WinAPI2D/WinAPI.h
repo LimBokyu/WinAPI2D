@@ -47,6 +47,7 @@ enum class Layer
 	Tile,
 	Player,
 	Monster,
+	Item,
 	MonsterAttack,
 	PlayerAttack,
 	Interface,

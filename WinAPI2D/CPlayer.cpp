@@ -12,6 +12,8 @@
 #include "CAnimator.h"
 
 #include "CWhip.h"
+#include "CHeart.h"
+#include "CBigHeart.h"
 
 #define MAXREST 99
 
@@ -21,7 +23,7 @@ CPlayer::CPlayer()
 	m_vecScale = Vector(46, 91);
 	m_layer = Layer::Player;
 	pItem = PlayerITEM::None;
-	m_strName = L"플레이어";
+	m_strName = L"Player";
 
 	m_Life = 94;
 	// ㄴ 체력 : 최초 94 이렇게 애매한 점수인 이유는
@@ -179,7 +181,7 @@ void CPlayer::Init()
 	m_pAnimator->Play(L"PlayerIdle", false);
 	AddComponent(m_pAnimator);
 
-	//AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
+	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
 	//AddCollider(ColliderType::Rect, Vector(46, 50), Vector(0, -5));
 }
 
@@ -201,6 +203,18 @@ void CPlayer::Update()
 	if (BUTTONDOWN('W'))
 	{
 		m_Credit += 100;
+	}
+
+	if (BUTTONDOWN('P'))
+	{
+		CreateItem();
+	}
+
+	if (BUTTONDOWN('O'))
+	{
+		CBigHeart* bHeart = new CBigHeart();
+		bHeart->SetPos(m_vecPos.x + 200, m_vecPos.y - 100);
+		ADDOBJECT(bHeart);
 	}
 
 	if (!m_bCommandBlock)
@@ -374,7 +388,7 @@ void CPlayer::Update()
 		m_fAttackTime += DT;
 		if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
 		{
-			CreateMissile();
+			WhipAttack();
 			m_bAttacking = true;
 			m_bCommandBlock = true;
 		}
@@ -487,12 +501,11 @@ void CPlayer::AnimatorUpdate()
 	m_pAnimator->Play(str, false);
 }
 
-void CPlayer::CreateMissile()
+void CPlayer::WhipAttack()
 {
 	if (m_bTriggerOnce)
 	{
-		Logger::Debug(L"미사일 생성");
-
+		Logger::Debug(L"플레이어의 공격");
 		CWhip* attack = new CWhip();
 		attack->SetPlayer(this);
 		ADDOBJECT(attack);
@@ -500,9 +513,58 @@ void CPlayer::CreateMissile()
 	}
 }
 
+void CPlayer::CreateItem()
+{
+	CHeart* heart = new CHeart();
+	heart->SetPos(m_vecPos.x + 100, m_vecPos.y);
+	ADDOBJECT(heart);
+}
+
+void CPlayer::ItemCrash()
+{
+	switch (pItem)
+	{
+	case PlayerITEM::None:
+		break;
+	case PlayerITEM::Dagger:
+		break;
+	case PlayerITEM::Axe:
+		break;
+	case PlayerITEM::HolyWater:
+		break;
+	case PlayerITEM::Cross:
+		break;
+	case PlayerITEM::Clock:
+		break;
+	case PlayerITEM::Bible:
+		break;
+	}
+}
+
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
+	if (pOtherCollider->GetObjName() == L"Heart")
+	{
+		if (m_Heart == 99)
+		{
 
+		}
+		else
+		{
+			m_Heart++;
+		}
+	}
+	else if (pOtherCollider->GetObjName() == L"BigHeart")
+	{
+		if ((m_Heart + 5) > 99)
+		{
+			m_Heart = 99;
+		}
+		else
+		{
+			m_Heart += 5;
+		}
+	}
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)

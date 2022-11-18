@@ -14,7 +14,6 @@ enum struct PlayerITEM
 	Clock,
 	Bible,
 
-
 	Size
 };
 
@@ -104,7 +103,9 @@ private:
 	void Release() override;
 
 	void AnimatorUpdate();
-	void CreateMissile();
+	void WhipAttack();
+	void CreateItem();
+	void ItemCrash();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;

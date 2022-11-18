@@ -4,21 +4,17 @@
 class CAnimator;
 class CImage;
 
-class CHeart : public CGameObject
+class CBigHeart : public CGameObject
 {
 public:
-	CHeart();
-	virtual ~CHeart();
+	CBigHeart();
+	virtual ~CBigHeart();
 
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pHeart;
 
-	float m_fVelocity = 50;
-	float m_fSpeed = 100;
-	float m_fTimer = 0;
-	bool m_bReverse;
-	bool m_bOnGround;
+	float m_fVelocity = 300;
 
 public:
 	void Init() override;
@@ -27,6 +23,5 @@ public:
 	void Release() override;
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
-
 };
 

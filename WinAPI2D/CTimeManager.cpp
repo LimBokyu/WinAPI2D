@@ -5,8 +5,11 @@ CTimeManager::CTimeManager()
 {
 	m_uiFPS = 1;
 	m_fDT = 1;
+	m_fUDT = 1;
 	updateCount = 0;
 	updateOneSecond = 0;
+
+	m_bStop = false;
 
 	prevTime = {};
 	curTime = {};
@@ -29,8 +32,16 @@ void CTimeManager::Update()
 	chrono::duration<float> elapsed = curTime - prevTime;
 
 	m_fDT = elapsed.count();
+	m_fUDT = elapsed.count();
+
 	if (m_fDT > 0.1f) m_fDT = 0.1f;
+	if (m_fUDT > 0.1f) m_fUDT = 0.1f;
 	prevTime = curTime;
+
+	if (m_bStop)
+	{
+		m_fDT = 0;
+	}
 
 	// 1초가 걸릴때까지 반복한 횟수가 초당프레임수
 	updateCount++;
@@ -55,4 +66,19 @@ UINT CTimeManager::GetFPS()
 float CTimeManager::GetDT()
 {
 	return m_fDT;
+}
+
+float CTimeManager::GetUDT()
+{
+	return m_fUDT;
+}
+
+void CTimeManager::StopTime()
+{
+	m_bStop = true;
+}
+
+void CTimeManager::GoTime()
+{
+	m_bStop = false;
 }
