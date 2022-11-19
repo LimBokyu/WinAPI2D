@@ -22,6 +22,7 @@
 #include "CLifeBarHeart.h"
 #include "CLifeBarScore.h"
 #include "CScoreBoardNum.h"
+#include "CTorch.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -92,6 +93,38 @@ void CSceneStage01::Init()
 	Num6->SetPlayer(pPlayer);
 	Num6->SetScale(6);
 	AddGameObject(Num6);
+
+	CTorch* torch1 = new CTorch();
+	torch1->SetPos(350, 335);
+	torch1->SetItem(ItemCase::Heart);
+	AddGameObject(torch1);
+
+	CTorch* torch2 = new CTorch();
+	torch2->SetPos(650, 365);
+	torch2->SetItem(ItemCase::Heart);
+	AddGameObject(torch2);
+
+	CTorch* torch3 = new CTorch();
+	torch3->SetPos(800, 190);
+	torch3->SetCredit(100);
+	torch3->SetPlayer(pPlayer);
+	torch3->SetItem(ItemCase::Credit);
+	AddGameObject(torch3);
+
+	CTorch* torch4 = new CTorch();
+	torch4->SetPos(900, 365);
+	torch4->SetItem(ItemCase::Heart);
+	AddGameObject(torch4);
+
+	CTorch* torch5 = new CTorch();
+	torch5->SetPos(1200, 365);
+	torch5->SetItem(ItemCase::Heart);
+	AddGameObject(torch5);
+
+	CTorch* torch6 = new CTorch();
+	torch6->SetPos(1450, 365);
+	torch6->SetItem(ItemCase::SubWeapon);
+	AddGameObject(torch6);
 
 #pragma endregion
 

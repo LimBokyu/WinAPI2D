@@ -30,6 +30,7 @@ private:
 
 	Vector m_vecDir;
 	Vector m_vecLong;
+	Vector m_vecDotFix;
 
 	float m_fVelocity;
 	float m_AttackTime;

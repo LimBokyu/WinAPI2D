@@ -3,11 +3,11 @@
 
 class CWhip;
 
-class CAttackCollider : public CGameObject
+class CLongAttackCollider : public CGameObject
 {
 public:
-	CAttackCollider();
-	virtual ~CAttackCollider();
+	CLongAttackCollider();
+	virtual ~CLongAttackCollider();
 
 private:
 	CWhip* m_pWhip;

@@ -138,6 +138,7 @@
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CCredit.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGroundTile.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="CLifeBar.cpp" />
     <ClCompile Include="CLifeBarHeart.cpp" />
     <ClCompile Include="CLifeBarScore.cpp" />
+    <ClCompile Include="CLongAttackCollider.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CPanel.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="CTileButton.cpp" />
     <ClCompile Include="CTilePanel.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
+    <ClCompile Include="CTorch.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIManager.cpp" />
     <ClCompile Include="CWhip.cpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CCredit.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGroundTile.h" />
@@ -199,6 +203,7 @@
     <ClInclude Include="CLifeBar.h" />
     <ClInclude Include="CLifeBarHeart.h" />
     <ClInclude Include="CLifeBarScore.h" />
+    <ClInclude Include="CLongAttackCollider.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CPanel.h" />
@@ -223,6 +228,7 @@
     <ClInclude Include="CTileButton.h" />
     <ClInclude Include="CTilePanel.h" />
     <ClInclude Include="CTimeManager.h" />
+    <ClInclude Include="CTorch.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CUIManager.h" />
     <ClInclude Include="CWhip.h" />

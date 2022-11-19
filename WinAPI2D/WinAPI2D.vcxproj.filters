@@ -67,6 +67,9 @@
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{adf0aa8f-4faf-4116-8c4c-780edcbfbb23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\InGameObject">
+      <UniqueIdentifier>{e32c6521-2fc3-401d-a03f-b06ee0077779}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -215,6 +218,15 @@
     </ClCompile>
     <ClCompile Include="CAttackCollider.cpp">
       <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CLongAttackCollider.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CTorch.cpp">
+      <Filter>GameObject\InGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CCredit.cpp">
+      <Filter>GameObject\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +394,15 @@
     </ClInclude>
     <ClInclude Include="CAttackCollider.h">
       <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CLongAttackCollider.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CTorch.h">
+      <Filter>GameObject\InGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CCredit.h">
+      <Filter>GameObject\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

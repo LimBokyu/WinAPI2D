@@ -604,6 +604,11 @@ int CPlayer::GetCredit()
 	return m_Credit;
 }
 
+void CPlayer::SetCredit(int credit)
+{
+	m_Credit = credit;
+}
+
 int CPlayer::GetRest()
 {
 	return m_Rest;
@@ -612,6 +617,11 @@ int CPlayer::GetRest()
 int CPlayer::GetScore()
 {
 	return m_Score;
+}
+
+void CPlayer::SetScore(int score)
+{
+	m_Score = score;
 }
 
 bool CPlayer::GetReverse()

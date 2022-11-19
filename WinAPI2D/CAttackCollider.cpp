@@ -11,7 +11,6 @@
 CAttackCollider::CAttackCollider()
 {
 	m_pWhip = nullptr;
-	m_fTimer = 0;
 	m_layer = Layer::PlayerAttack;
 	m_strName = L"PlayerAttack";
 }
@@ -22,7 +21,7 @@ CAttackCollider::~CAttackCollider()
 
 void CAttackCollider::Init()
 {
-	AddCollider(ColliderType::Rect, Vector(140, 20), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(100, 20), Vector(10, 0));
 }
 
 void CAttackCollider::Update()

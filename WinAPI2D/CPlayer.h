@@ -121,8 +121,12 @@ public:
 	void SetHeart(int heart);
 
 	int GetCredit();
+	void SetCredit(int credit);
+
 	int GetRest();
+
 	int GetScore();
+	void SetScore(int score);
 
 	bool GetReverse();
 	bool GetDuck();

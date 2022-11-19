@@ -27,12 +27,12 @@ void CBigHeart::Init()
 {
 	m_pAnimator = new CAnimator();
 
-	m_pHeart = RESOURCE->LoadImg(L"Heart", L"Image\\Item\\BigHeart.png");
+	m_pHeart = RESOURCE->LoadImg(L"BigHeart", L"Image\\Item\\BigHeart.png");
 
-	m_pAnimator->CreateAnimation(L"BigHeart", m_pHeart, Vector(0, 0), Vector(12, 10), Vector(12, 0), 0.02f, 10);
+	m_pAnimator->CreateAnimation(L"BigHeart", m_pHeart, Vector(0, 0), Vector(12, 10), Vector(12, 0), 0.02f, 10, true);
+
 	m_pAnimator->Play(L"BigHeart");
 	AddComponent(m_pAnimator);
-
 	AddCollider(ColliderType::Rect, Vector(20, 20), Vector(0, 0));
 }
 

@@ -7,6 +7,7 @@
 #include "CWhip.h"
 #include "CPlayer.h"
 #include "CAttackCollider.h"
+#include "CLongAttackCollider.h"
 
 
 CWhip::CWhip()
@@ -14,6 +15,7 @@ CWhip::CWhip()
 	m_vecScale = Vector(50, 10);
 	m_vecDir = Vector(0, 0);
 	m_vecLong = Vector(0, 0);
+	m_vecDotFix = Vector(0, 0);
 
 	m_fVelocity = 0;
 	m_AttackTime = 0;
@@ -70,8 +72,6 @@ void CWhip::Init()
 	m_pAnimator->CreateAnimation(L"DuckLongR",   m_pDuckLongAttackR, Vector(0, 0), Vector(64, 9), Vector(0, 9), 0.001f, 2, true);
 
 	AddComponent(m_pAnimator);
-
-	AddCollider(ColliderType::Rect, Vector(120, 20), Vector(0, 0));
 }
 
 void CWhip::Update()
@@ -81,11 +81,8 @@ void CWhip::Update()
 
 #pragma region 공격 이펙트의 이미지 생성 좌표 설정
 
-
-
 	if (m_bLongAttack)
 	{
-		RemoveCollider();
 		if (m_bDuck && !m_bReverse)	// 앉아서 정면
 		{
 			m_vecPos = pPlayer->GetPos() + Vector(87, 11);
@@ -103,9 +100,9 @@ void CWhip::Update()
 			m_vecPos = pPlayer->GetPos() + Vector(-98, -22);
 		}
 
-		CAttackCollider* att = new CAttackCollider();
-		att->SetPos(m_vecPos);
-		ADDOBJECT(att);
+		CLongAttackCollider* longatt = new CLongAttackCollider();
+		longatt->SetPos(m_vecPos);
+		ADDOBJECT(longatt);
 	}
 	else
 	{
@@ -125,6 +122,9 @@ void CWhip::Update()
 		{
 			m_vecPos = pPlayer->GetPos() + Vector(-107, -22);
 		}
+		CAttackCollider* att = new CAttackCollider();
+		att->SetPos(m_vecPos);
+		ADDOBJECT(att);
 	}
 
 #pragma endregion
