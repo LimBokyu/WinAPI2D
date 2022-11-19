@@ -6,6 +6,8 @@ class CAnimator;
 
 enum struct PlayerITEM
 {
+	Default,
+
 	None,
 	Dagger,
 	Axe,
@@ -113,6 +115,7 @@ private:
 
 public:
 	PlayerITEM pItem;
+	PlayerITEM prevItem;
 
 	PlayerITEM GetItem();
 	void SetItem(PlayerITEM item);
@@ -130,5 +133,8 @@ public:
 
 	bool GetReverse();
 	bool GetDuck();
+
+	void SwitchItem();
+	void DropItem();
 
 };

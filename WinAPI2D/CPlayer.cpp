@@ -633,3 +633,26 @@ bool CPlayer::GetDuck()
 {
 	return m_bDuck;
 }
+
+void CPlayer::SwitchItem()
+{
+	switch (pItem)
+	{
+	case PlayerITEM::Dagger:
+		break;
+	case PlayerITEM::Axe:
+		break;
+	case PlayerITEM::HolyWater:
+		break;
+	case PlayerITEM::Cross:
+		break;
+	case PlayerITEM::Clock:
+		break;
+	case PlayerITEM::Bible:
+		break;
+	}
+}
+
+void CPlayer::DropItem()
+{
+}

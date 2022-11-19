@@ -130,6 +130,7 @@
     <ClCompile Include="CAnimation.cpp" />
     <ClCompile Include="CAnimator.cpp" />
     <ClCompile Include="CAttackCollider.cpp" />
+    <ClCompile Include="CAxe.cpp" />
     <ClCompile Include="CBigHeart.cpp" />
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CCameraController.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CCredit.cpp" />
+    <ClCompile Include="CDagger.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGroundTile.cpp" />
@@ -164,6 +166,8 @@
     <ClCompile Include="CSceneTileTool.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CScoreBoardNum.cpp" />
+    <ClCompile Include="CSkeltonApe.cpp" />
+    <ClCompile Include="CSkeltonApeDeath.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CStage01Effect.cpp" />
@@ -184,6 +188,7 @@
     <ClInclude Include="CAnimation.h" />
     <ClInclude Include="CAnimator.h" />
     <ClInclude Include="CAttackCollider.h" />
+    <ClInclude Include="CAxe.h" />
     <ClInclude Include="CBigHeart.h" />
     <ClInclude Include="CButton.h" />
     <ClInclude Include="CCameraController.h" />
@@ -193,6 +198,7 @@
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CCredit.h" />
+    <ClInclude Include="CDagger.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGroundTile.h" />
@@ -218,6 +224,8 @@
     <ClInclude Include="CSceneTileTool.h" />
     <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CScoreBoardNum.h" />
+    <ClInclude Include="CSkeltonApe.h" />
+    <ClInclude Include="CSkeltonApeDeath.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CStage01Effect.h" />

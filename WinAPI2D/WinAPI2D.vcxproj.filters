@@ -70,6 +70,12 @@
     <Filter Include="GameObject\InGameObject">
       <UniqueIdentifier>{e32c6521-2fc3-401d-a03f-b06ee0077779}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Monster">
+      <UniqueIdentifier>{4c1e9976-03aa-409c-9ca7-0d26841f40ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\SkeltonApe">
+      <UniqueIdentifier>{f23f4e50-01b1-4043-8067-ab206b7ddc70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -227,6 +233,18 @@
     </ClCompile>
     <ClCompile Include="CCredit.cpp">
       <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CDagger.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CAxe.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeltonApe.cpp">
+      <Filter>GameObject\Monster\SkeltonApe</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeltonApeDeath.cpp">
+      <Filter>GameObject\Monster\SkeltonApe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +421,18 @@
     </ClInclude>
     <ClInclude Include="CCredit.h">
       <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CDagger.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CAxe.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkeltonApe.h">
+      <Filter>GameObject\Monster\SkeltonApe</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkeltonApeDeath.h">
+      <Filter>GameObject\Monster\SkeltonApe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

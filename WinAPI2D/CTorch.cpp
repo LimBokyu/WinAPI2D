@@ -14,11 +14,15 @@
 #include "CBigHeart.h"
 #include "CCredit.h"
 #include "CPlayer.h"
+#include "CDagger.h"
+#include "CAxe.h"
 
 CTorch::CTorch()
 {
 	m_pAnimator = nullptr;
 	m_pTorch = nullptr;
+	pPlayer = nullptr;
+
 	m_credit = 0;
 	m_layer = Layer::Object;
 	m_Item = ItemCase::Null;
@@ -87,10 +91,18 @@ void CTorch::CreateCredit()
 
 void CTorch::CreateAxe()
 {
+	CAxe* axe = new CAxe();
+	axe->SetPos(m_vecPos);
+	axe->SetPlayer(pPlayer);
+	ADDOBJECT(axe);
 }
 
 void CTorch::CreateDagger()
 {
+	CDagger* dagger = new CDagger();
+	dagger->SetPos(m_vecPos);
+	dagger->SetPlayer(pPlayer);
+	ADDOBJECT(dagger);
 }
 
 void CTorch::SetPlayer(CPlayer* player)
@@ -113,8 +125,11 @@ void CTorch::OnCollisionEnter(CCollider* pOtherCollider)
 		case ItemCase::Credit:
 			CreateCredit();
 			break;
-		case ItemCase::SubWeapon:
+		case ItemCase::Dagger:
+			CreateDagger();
 			break;
+		case ItemCase::Axe:
+			CreateAxe();
 		}
 		
 		DELETEOBJECT(this);

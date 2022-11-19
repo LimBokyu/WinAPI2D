@@ -23,6 +23,7 @@
 #include "CLifeBarScore.h"
 #include "CScoreBoardNum.h"
 #include "CTorch.h"
+#include "CSkeltonApe.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -101,7 +102,8 @@ void CSceneStage01::Init()
 
 	CTorch* torch2 = new CTorch();
 	torch2->SetPos(650, 365);
-	torch2->SetItem(ItemCase::Heart);
+	torch2->SetPlayer(pPlayer);
+	torch2->SetItem(ItemCase::Dagger);
 	AddGameObject(torch2);
 
 	CTorch* torch3 = new CTorch();
@@ -123,8 +125,37 @@ void CSceneStage01::Init()
 
 	CTorch* torch6 = new CTorch();
 	torch6->SetPos(1450, 365);
-	torch6->SetItem(ItemCase::SubWeapon);
+	torch6->SetPlayer(pPlayer);
+	torch6->SetItem(ItemCase::Axe);
 	AddGameObject(torch6);
+
+	CSkeltonApe* SA = new CSkeltonApe();
+	SA->SetPos(620, 365);
+	AddGameObject(SA);
+
+	CSkeltonApe* SA2 = new CSkeltonApe();
+	SA2->SetPos(900, 365);
+	AddGameObject(SA2);
+
+	CSkeltonApe* SA3 = new CSkeltonApe();
+	SA3->SetPos(1100, 365);
+	AddGameObject(SA3);
+
+	CSkeltonApe* SA4 = new CSkeltonApe();
+	SA4->SetPos(1400, 365);
+	AddGameObject(SA4);
+
+	CSkeltonApe* SA5 = new CSkeltonApe();
+	SA5->SetPos(1600, 365);
+	AddGameObject(SA5);
+
+	CSkeltonApe* SA6 = new CSkeltonApe();
+	SA6->SetPos(1800, 365);
+	AddGameObject(SA6);
+
+	CSkeltonApe* SA7 = new CSkeltonApe();
+	SA7->SetPos(2000, 365);
+	AddGameObject(SA7);
 
 #pragma endregion
 

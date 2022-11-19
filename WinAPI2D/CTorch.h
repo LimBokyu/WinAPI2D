@@ -11,7 +11,12 @@ enum struct ItemCase
 	Credit,
 	Heart,
 	BigHeart,
-	SubWeapon,
+	Dagger,
+	Axe,
+	Cross,
+	HollyWater,
+	Bible,
+	Clock,
 
 	size
 };
