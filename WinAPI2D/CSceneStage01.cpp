@@ -24,6 +24,8 @@
 #include "CScoreBoardNum.h"
 #include "CTorch.h"
 #include "CSkeltonApe.h"
+#include "CStair.h"
+#include "CBGM.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -159,13 +161,21 @@ void CSceneStage01::Init()
 
 #pragma endregion
 
-	CSound* BGM = RESOURCE->LoadSound(L"Stage_01", L"Sound\\04_Opposing Bloodlines.mp3");
+	CStair* stair = new CStair();
+	stair->SetCount(11);
+	stair->SetPos(520,423);
+	AddGameObject(stair);
+
+	CStair* stair1 = new CStair();
+	stair1->SetCount(11);
+	stair1->SetReverse(true);
+	stair1->SetPos(1080, 423);
+	AddGameObject(stair1);
 
 	Map = new CStage01Map();
 	AddGameObject(Map);
 
-	SOUND->Play(BGM, 0.5f, true);
-
+	
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
@@ -192,6 +202,8 @@ void CSceneStage01::Enter()
 {
 	CAMERA->FadeIn(0.25f);
 	LoadTile(GETPATH + L"Tile\\Stage01.tile");
+	CBGM* bgm = new CBGM();
+	AddGameObject(bgm);
 }
 
 void CSceneStage01::Update()

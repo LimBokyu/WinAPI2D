@@ -76,6 +76,9 @@
     <Filter Include="GameObject\Monster\SkeltonApe">
       <UniqueIdentifier>{f23f4e50-01b1-4043-8067-ab206b7ddc70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01-1">
+      <UniqueIdentifier>{7883daec-e6f9-4937-a20d-bf4bdc6619ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -245,6 +248,18 @@
     </ClCompile>
     <ClCompile Include="CSkeltonApeDeath.cpp">
       <Filter>GameObject\Monster\SkeltonApe</Filter>
+    </ClCompile>
+    <ClCompile Include="CStair.cpp">
+      <Filter>GameObject\InGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CBGM.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CScoreText.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01_1.cpp">
+      <Filter>GameObject\Stage01-1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +448,18 @@
     </ClInclude>
     <ClInclude Include="CSkeltonApeDeath.h">
       <Filter>GameObject\Monster\SkeltonApe</Filter>
+    </ClInclude>
+    <ClInclude Include="CStair.h">
+      <Filter>GameObject\InGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CBGM.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CScoreText.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01_1.h">
+      <Filter>GameObject\Stage01-1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

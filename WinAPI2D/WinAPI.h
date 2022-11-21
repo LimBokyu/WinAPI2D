@@ -45,6 +45,7 @@ enum class Layer
 	MiddleMap,
 	NearMap,
 	Tile,
+	Stair,
 	Object,
 	Player,
 	Monster,

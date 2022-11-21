@@ -11,6 +11,7 @@
 #include "CImage.h"
 #include "CAnimator.h"
 #include "CPlayer.h"
+#include "CScoreText.h"
 
 CCredit::CCredit()
 {
@@ -88,6 +89,11 @@ void CCredit::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		pPlayer->SetCredit(pPlayer->GetCredit() + m_Credit);
 		pPlayer->SetScore(pPlayer->GetScore() + m_Credit);
+		CScoreText* text = new CScoreText();
+		text->SetCredit(m_Credit);
+		text->SetPos(m_vecPos);
+		ADDOBJECT(text);
+
 		DELETEOBJECT(this);
 	}
 }
