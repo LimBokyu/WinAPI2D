@@ -261,6 +261,9 @@
     <ClCompile Include="CStage01_1.cpp">
       <Filter>GameObject\Stage01-1</Filter>
     </ClCompile>
+    <ClCompile Include="CPlayerStiarCollider.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -460,6 +463,9 @@
     </ClInclude>
     <ClInclude Include="CStage01_1.h">
       <Filter>GameObject\Stage01-1</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerStiarCollider.h">
+      <Filter>GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

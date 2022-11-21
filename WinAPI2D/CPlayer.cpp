@@ -25,6 +25,8 @@ CPlayer::CPlayer()
 	pItem = PlayerITEM::None;
 	m_strName = L"Player";
 
+	m_fVelocity = 100;
+
 	m_Life = 94;
 	// ㄴ 체력 : 최초 94 이렇게 애매한 점수인 이유는
 	//          체력바 이미지의 길이가 94여서....
@@ -69,10 +71,19 @@ CPlayer::CPlayer()
 	m_pSubWeaponImage = nullptr;
 	m_pSubWeaponImageR = nullptr;
 
-	m_pStairDown = nullptr;
-	m_pStairUp = nullptr;
-	m_pStairDownR = nullptr;
-	m_pStairUpR = nullptr;
+	m_pStairUpMove = nullptr;
+	m_pStairUpIdle = nullptr;
+	m_pStairDownMove = nullptr;
+	m_pStairDownIdle = nullptr;
+	m_pStairUpMoving = nullptr;
+	m_pStairDownMoving = nullptr;
+
+	m_pStairUpMoveR = nullptr;
+	m_pStairUpIdleR = nullptr;
+	m_pStairDownMoveR = nullptr;
+	m_pStairDownIdleR = nullptr;
+	m_pStairUpMovingR = nullptr;
+	m_pStairDownMovingR = nullptr;
 
 	m_pStairDownAttack = nullptr;
 	m_pStairDownAttackR = nullptr;
@@ -96,6 +107,8 @@ CPlayer::CPlayer()
 	m_bCommandBlock = false;
 	m_bAttacking = false;
 	m_bTriggerOnce = false;
+	m_bFalling = false;
+	m_bStairCollider = false;
 
 	m_bStop = false;
 }
@@ -116,6 +129,10 @@ void CPlayer::Init()
 	m_pJumpImage	= RESOURCE->LoadImg(L"PlayerJump",	 L"Image\\Player\\PlayerJump.png");
 	m_pLookUpImage	= RESOURCE->LoadImg(L"PlayerUp",	 L"Image\\Player\\PlayerUp.png");
 
+	m_pStairUpIdle = RESOURCE->LoadImg(L"PlayerUpStairIdle", L"Image\\Player\\PlayerUpStairIdle.png");
+	m_pStairUpMove = RESOURCE->LoadImg(L"PlayerUpStairMove", L"Image\\Player\\PlayerUpStairMove.png");
+	m_pStairUpMoving = RESOURCE->LoadImg(L"PlayerUpStairMoveing", L"Image\\Player\\PlayerUpStairMoveing.png");
+
 	m_pAttackImage		 = RESOURCE->LoadImg(L"PlayerAttack",		 L"Image\\Player\\PlayerAttack.png");
 	m_pDuckAttackImage	 = RESOURCE->LoadImg(L"PlayerDuckAttack",	 L"Image\\Player\\PlayerDuckAttack.png");
 	m_pSubWeaponImage	 = RESOURCE->LoadImg(L"PlayerSubWeapon",	 L"Image\\Player\\PlayerSubWeapon.png");
@@ -131,6 +148,10 @@ void CPlayer::Init()
 	m_pJumpImageR	= RESOURCE->LoadImg(L"PlayerJumpR", L"Image\\Player\\PlayerJumpR.png");
 	m_pLookUpImageR = RESOURCE->LoadImg(L"PlayerUpR",	L"Image\\Player\\PlayerUpR.png");
 
+	m_pStairUpIdleR = RESOURCE->LoadImg(L"PlayerUpStairIdleR", L"Image\\Player\\PlayerUpStairIdleR.png");
+	m_pStairUpMoveR = RESOURCE->LoadImg(L"PlayerUpStairMoveR", L"Image\\Player\\PlayerUpStairMoveR.png");
+	m_pStairUpMovingR = RESOURCE->LoadImg(L"PlayerUpStairMoveingR", L"Image\\Player\\PlayerUpStairMoveingR.png");
+
 	m_pAttackImageR		= RESOURCE->LoadImg(L"PlayerAttackR",	  L"Image\\Player\\PlayerAttackR.png");
 	m_pDuckAttackImageR = RESOURCE->LoadImg(L"PlayerDuckAttackR", L"Image\\Player\\PlayerDuckAttackR.png");
 	m_pSubWeaponImageR  = RESOURCE->LoadImg(L"PlayerSubWeaponR",  L"Image\\Player\\PlayerSubWeaponR.png");
@@ -139,6 +160,7 @@ void CPlayer::Init()
 
 
 	m_pBackFlipImageR   = RESOURCE->LoadImg(L"PlayerBackFlipR",	  L"Image\\Player\\PlayerBackFlipR.png");
+
 
 #pragma endregion
 	
@@ -161,6 +183,10 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"PlayerAttacking", m_pAttackingImage, Vector(0,0), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttacking",m_pDuckAttackingImage, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f),1, 1, false);
 
+	m_pAnimator->CreateAnimation(L"PlayerUpStairIdle", m_pStairUpIdle, Vector(0, 0), Vector(200, 100), Vector(200, 0), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"PlayerUpStairMove", m_pStairUpMove, Vector(0, 0), Vector(200, 100), Vector(200, 0), 0.1f, 3, false);
+	m_pAnimator->CreateAnimation(L"PlayerUpStairMoveing", m_pStairUpMoving, Vector(0, 0), Vector(200, 100), Vector(200, 0), 0.1f, 6, false);
+
 	// ============ 반대방향 애니메이션 ================
 	m_pAnimator->CreateAnimation(L"PlayerIdleR", m_pIdleImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.2f, 3);
 	m_pAnimator->CreateAnimation(L"PlayerDuckR", m_pDuckImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 0.05f, 3, false);
@@ -178,21 +204,27 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"PlayerAttackingR", m_pAttackingImageR, Vector(0, 0), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
 	m_pAnimator->CreateAnimation(L"PlayerDuckAttackingR", m_pDuckAttackingImageR, Vector(0.f, 0.f), Vector(200.f, 100.f), Vector(200.f, 0.f), 1, 1, false);
 
+	m_pAnimator->CreateAnimation(L"PlayerUpStairIdleR", m_pStairUpIdleR, Vector(0, 0), Vector(200, 100), Vector(200, 0), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"PlayerUpStairMoveR", m_pStairUpMoveR, Vector(0, 0), Vector(200, 100), Vector(200, 0), 0.1f, 3, false);
+	m_pAnimator->CreateAnimation(L"PlayerUpStairMoveingR", m_pStairUpMovingR, Vector(0, 0), Vector(200, 100), Vector(200, 0), 0.1f, 6, false);
+
+
 #pragma endregion
 
 	m_pAnimator->Play(L"PlayerIdle", false);
 	AddComponent(m_pAnimator);
 
 	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
-	//AddCollider(ColliderType::Rect, Vector(46, 50), Vector(0, -5));
 }
 
 void CPlayer::Update()
 {
 	if (!m_bStop)
 	{
+		m_vecPos.y += m_fVelocity * DT;
 		m_bIsMove = false;
 		m_bLookup = false;
+
 
 		if (!m_bAttacking)
 		{
@@ -202,6 +234,14 @@ void CPlayer::Update()
 		if (m_Heart == 0)
 		{
 			Logger::Debug(L"하트를 다씀");
+		}
+
+		if (m_bFalling)
+		{
+			if (BUTTONDOWN(VK_UP) || m_bStairCollider)
+			{
+				m_bOnStair = true;
+			}
 		}
 
 		if (BUTTONDOWN('W'))
@@ -229,179 +269,196 @@ void CPlayer::Update()
 				pItem = PlayerITEM::Dagger;
 			}
 
-			if (BUTTONDOWN('Z'))		// 공격
+			if (!m_bOnStair)
 			{
-				if (!m_bAttack)
-				{
-					m_bTriggerOnce = true;
-					m_bAttack = true;
-					m_Score += 10;
-				}
-			}
 
-			if (BUTTONDOWN('X'))		// 점프
-			{
-				m_bJump = true;
-			}
 
-			if (BUTTONSTAY(VK_UP))
-			{
-				m_bLookup = true;
-				if (BUTTONDOWN('Z'))
+
+				if (BUTTONDOWN('Z'))		// 공격
 				{
-					SetHeart(GetHeart() - 1);
+					if (!m_bAttack)
+					{
+						m_bTriggerOnce = true;
+						m_bAttack = true;
+						m_Score += 10;
+					}
 				}
-			}
-			else if (BUTTONSTAY(VK_DOWN))
-			{
-				if (!m_bJump)
+
+				if (BUTTONDOWN('X'))		// 점프
 				{
-					m_fDuckTime += DT;
-					m_bDuck = true;
+					m_bJump = true;
+				}
+
+				if (BUTTONSTAY(VK_UP))
+				{
+					m_bLookup = true;
+					if (BUTTONDOWN('Z'))
+					{
+						SetHeart(GetHeart() - 1);
+					}
+				}
+				else if (BUTTONSTAY(VK_DOWN))
+				{
+					if (!m_bJump)
+					{
+						m_fDuckTime += DT;
+						m_bDuck = true;
+						if (BUTTONSTAY(VK_LEFT))
+						{
+							m_bReverse = true;
+						}
+						else if (BUTTONSTAY(VK_RIGHT))
+						{
+							m_bReverse = false;
+						}
+					}
+				}
+				else
+				{
+					m_vecMoveDir.y = 0;
+				}
+
+				if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
+				{
 					if (BUTTONSTAY(VK_LEFT))
 					{
+						if (m_vecPos.x > 30)
+						{
+							m_vecPos.x -= m_fSpeed * DT;
+						}
 						m_bReverse = true;
+						m_bIsMove = true;
+						if (!m_bAttack)
+						{
+							m_vecMoveDir.x = -1;
+						}
 					}
 					else if (BUTTONSTAY(VK_RIGHT))
 					{
+
+						if (m_vecPos.x < (1024 * 2) - 30)
+						{
+							m_vecPos.x += m_fSpeed * DT;
+						}
+						m_bIsMove = true;
+						m_bReverse = false;
+						if (!m_bAttack)
+						{
+							m_vecMoveDir.x = +1;
+						}
+					}
+					else
+					{
+						m_vecMoveDir.x = 0;
+					}
+				}
+
+				if (BUTTONUP(VK_DOWN))
+				{
+					m_fDuckTime = 0;
+				}
+			}
+
+			if (m_bIsMove)
+			{
+				if (m_bJump)
+				{
+					if (m_bReverse)
+					{
+						if (m_vecPos.x > 30)
+						{
+							m_vecPos.x -= m_fSpeed * DT;
+						}
+						m_vecMoveDir.x = -1;
+						m_bReverse = true;
+					}
+					else
+					{
+						if (m_vecPos.x < (1024 * 2) - 30)
+						{
+							m_vecPos.x += m_fSpeed * DT;
+						}
+						m_vecMoveDir.x = +1;
 						m_bReverse = false;
 					}
 				}
 			}
 			else
 			{
-				m_vecMoveDir.y = 0;
-			}
-
-			if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
-			{
-				if (BUTTONSTAY(VK_LEFT))
+				if(BUTTONSTAY(VK_RIGHT))
 				{
-					if (m_vecPos.x > 30)
-					{
-						m_vecPos.x -= m_fSpeed * DT;
-					}
-					m_bReverse = true;
 					m_bIsMove = true;
-					if (!m_bAttack)
-					{
-						m_vecMoveDir.x = -1;
-					}
 				}
-				else if (BUTTONSTAY(VK_RIGHT))
+				else if (BUTTONSTAY(VK_LEFT))
 				{
-
-					if (m_vecPos.x < (1024 * 2) - 30)
-					{
-						m_vecPos.x += m_fSpeed * DT;
-					}
 					m_bIsMove = true;
-					m_bReverse = false;
-					if (!m_bAttack)
-					{
-						m_vecMoveDir.x = +1;
-					}
-				}
-				else
-				{
-					m_vecMoveDir.x = 0;
 				}
 			}
 
-			if (BUTTONUP(VK_DOWN))
-			{
-				m_fDuckTime = 0;
-			}
-		}
-
-		if (m_bIsMove)
-		{
 			if (m_bJump)
 			{
-				if (m_bReverse)
+				m_fJumpTime += DT;
+
+				if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
 				{
-					if (m_vecPos.x > 30)
+					m_bBackFlip = true;
+				}
+
+				if (m_fJumpTime <= 0.4)
+				{
+					m_vecPos.y -= m_fVelocity * DT * 2;
+				}
+				else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
+				{
+					m_vecPos.y += m_fVelocity * DT * 2;
+					if (m_bBackFlip)
 					{
-						m_vecPos.x -= m_fSpeed * DT;
+						if (m_bReverse)
+						{
+							m_vecPos.x += DT * 370;
+						}
+						else
+						{
+							m_vecPos.x -= DT * 370;
+						}
 					}
-					m_vecMoveDir.x = -1;
-					m_bReverse = true;
 				}
 				else
 				{
-					if (m_vecPos.x < (1024 * 2) - 30)
-					{
-						m_vecPos.x += m_fSpeed * DT;
-					}
-					m_vecMoveDir.x = +1;
-					m_bReverse = false;
+					m_fJumpTime = 0;
+					m_bJump = false;
+					m_bBackFlip = false;
+					m_bAttackinBackFlip = false;
 				}
 			}
-		}
 
-		if (m_bJump)
-		{
-			m_fJumpTime += DT;
 
-			if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
+			if (m_bLookup && m_bAttack)
 			{
-				m_bBackFlip = true;
-			}
-
-			if (m_fJumpTime <= 0.4)
-			{
-				m_vecPos.y -= m_fSpeed * DT * 2;
-			}
-			else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
-			{
-				m_vecPos.y += m_fSpeed * DT * 2;
-				if (m_bBackFlip)
+				m_fAttackTime += DT;
+				if (m_fAttackTime > 0.2f)
 				{
-					if (m_bReverse)
-					{
-						m_vecPos.x += DT * 370;
-					}
-					else
-					{
-						m_vecPos.x -= DT * 370;
-					}
+					m_bAttack = false;
+					m_bCommandBlock = false;
+					m_fAttackTime = 0;
 				}
 			}
-			else
+			else if (m_bAttack)
 			{
-				m_fJumpTime = 0;
-				m_bJump = false;
-				m_bBackFlip = false;
-				m_bAttackinBackFlip = false;
-			}
-		}
-
-
-		if (m_bLookup && m_bAttack)
-		{
-			m_fAttackTime += DT;
-			if (m_fAttackTime > 0.2f)
-			{
-				m_bAttack = false;
-				m_bCommandBlock = false;
-				m_fAttackTime = 0;
-			}
-		}
-		else if (m_bAttack)
-		{
-			m_fAttackTime += DT;
-			if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
-			{
-				WhipAttack();
-				m_bAttacking = true;
-				m_bCommandBlock = true;
-			}
-			if (m_fAttackTime >= 0.3)
-			{
-				m_bAttacking = false;
-				m_bAttack = false;
-				m_bCommandBlock = false;
-				m_fAttackTime = 0;
+				m_fAttackTime += DT;
+				if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
+				{
+					WhipAttack();
+					m_bAttacking = true;
+					m_bCommandBlock = true;
+				}
+				if (m_fAttackTime >= 0.3)
+				{
+					m_bAttacking = false;
+					m_bAttack = false;
+					m_bCommandBlock = false;
+					m_fAttackTime = 0;
+				}
 			}
 		}
 	}
@@ -427,6 +484,7 @@ void CPlayer::AnimatorUpdate()
 
 		if (m_fJumpTime >= 0.4f)
 		{
+			m_bFalling = true;
 			str += L"Down";
 		}
 	}
@@ -498,6 +556,11 @@ void CPlayer::AnimatorUpdate()
 		str += L"ing";
 	}
 
+	if (m_bOnStair)
+	{
+		str = L"PlayerUpStairIdle";
+	}
+
 	if (m_bReverse)
 	{
 		str += L"R";
@@ -527,23 +590,7 @@ void CPlayer::CreateItem()
 
 void CPlayer::ItemCrash()
 {
-	switch (pItem)
-	{
-	case PlayerITEM::None:
-		break;
-	case PlayerITEM::Dagger:
-		break;
-	case PlayerITEM::Axe:
-		break;
-	case PlayerITEM::HolyWater:
-		break;
-	case PlayerITEM::Cross:
-		break;
-	case PlayerITEM::Clock:
-		break;
-	case PlayerITEM::Bible:
-		break;
-	}
+	
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
@@ -576,7 +623,7 @@ void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Tile")
 	{
-		
+		m_fVelocity = 0;
 	}
 }
 
@@ -619,6 +666,16 @@ int CPlayer::GetRest()
 	return m_Rest;
 }
 
+int CPlayer::GetLife()
+{
+	return m_Life;
+}
+
+void CPlayer::SetLife(int life)
+{
+	m_Life = life;
+}
+
 int CPlayer::GetScore()
 {
 	return m_Score;
@@ -641,20 +698,13 @@ bool CPlayer::GetDuck()
 
 void CPlayer::SwitchItem()
 {
-	switch (pItem)
+	if (pItem == PlayerITEM::Dagger)
 	{
-	case PlayerITEM::Dagger:
-		break;
-	case PlayerITEM::Axe:
-		break;
-	case PlayerITEM::HolyWater:
-		break;
-	case PlayerITEM::Cross:
-		break;
-	case PlayerITEM::Clock:
-		break;
-	case PlayerITEM::Bible:
-		break;
+		
+	}
+	else if (pItem == PlayerITEM::Axe)
+	{
+
 	}
 }
 
@@ -677,5 +727,10 @@ void CPlayer::SwitchStop()
 	{
 		m_bStop = true;
 	}
+}
+
+void CPlayer::SetStairCollider(bool index)
+{
+	m_bStairCollider = index;
 }
 

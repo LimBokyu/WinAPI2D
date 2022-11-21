@@ -97,6 +97,10 @@ void CSceneStage01::Init()
 	Num6->SetScale(6);
 	AddGameObject(Num6);
 
+#pragma endregion
+
+#pragma region 화로 생성
+
 	CTorch* torch1 = new CTorch();
 	torch1->SetPos(350, 335);
 	torch1->SetItem(ItemCase::Heart);
@@ -131,35 +135,48 @@ void CSceneStage01::Init()
 	torch6->SetItem(ItemCase::Axe);
 	AddGameObject(torch6);
 
+#pragma endregion
+
+#pragma region 몬스터 생성
+
 	CSkeltonApe* SA = new CSkeltonApe();
 	SA->SetPos(620, 365);
+	SA->SetPlayer(pPlayer);
 	AddGameObject(SA);
 
 	CSkeltonApe* SA2 = new CSkeltonApe();
 	SA2->SetPos(900, 365);
+	SA2->SetPlayer(pPlayer);
 	AddGameObject(SA2);
 
 	CSkeltonApe* SA3 = new CSkeltonApe();
 	SA3->SetPos(1100, 365);
+	SA3->SetPlayer(pPlayer);
 	AddGameObject(SA3);
 
 	CSkeltonApe* SA4 = new CSkeltonApe();
 	SA4->SetPos(1400, 365);
+	SA4->SetPlayer(pPlayer);
 	AddGameObject(SA4);
 
 	CSkeltonApe* SA5 = new CSkeltonApe();
 	SA5->SetPos(1600, 365);
+	SA5->SetPlayer(pPlayer);
 	AddGameObject(SA5);
 
 	CSkeltonApe* SA6 = new CSkeltonApe();
 	SA6->SetPos(1800, 365);
+	SA6->SetPlayer(pPlayer);
 	AddGameObject(SA6);
 
 	CSkeltonApe* SA7 = new CSkeltonApe();
 	SA7->SetPos(2000, 365);
+	SA7->SetPlayer(pPlayer);
 	AddGameObject(SA7);
 
 #pragma endregion
+
+#pragma region 계단 생성
 
 	CStair* stair = new CStair();
 	stair->SetCount(11);
@@ -171,6 +188,8 @@ void CSceneStage01::Init()
 	stair1->SetReverse(true);
 	stair1->SetPos(1080, 423);
 	AddGameObject(stair1);
+
+#pragma endregion
 
 	Map = new CStage01Map();
 	AddGameObject(Map);

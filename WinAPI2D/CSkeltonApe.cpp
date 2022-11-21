@@ -11,6 +11,7 @@
 #include "CImage.h"
 #include "CAnimator.h"
 #include "CSkeltonApeDeath.h"
+#include "CPlayer.h"
 
 
 CSkeltonApe::CSkeltonApe()
@@ -25,6 +26,8 @@ CSkeltonApe::CSkeltonApe()
 	m_pMonsterAttaking = nullptr;
 
 	m_bMove = false;
+
+	pPlayer = nullptr;
 
 	m_fSpeed = 30;
 }
@@ -81,6 +84,11 @@ void CSkeltonApe::Release()
 {
 }
 
+void CSkeltonApe::SetPlayer(CPlayer* player)
+{
+	pPlayer = player;
+}
+
 void CSkeltonApe::UpdateAnimation()
 {
 	wstring str = L"SkeltonApe";
@@ -101,6 +109,8 @@ void CSkeltonApe::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerAttack")
 	{
+		pPlayer->SetScore(pPlayer->GetScore() + 100);
+
 		CSkeltonApeDeath* death = new CSkeltonApeDeath();
 		death->SetPos(m_vecPos.x, m_vecPos.y-30);
 		ADDOBJECT(death);

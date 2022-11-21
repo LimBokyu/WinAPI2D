@@ -26,6 +26,9 @@ private:
 	Vector FirstLookAt;
 
 	CPlayer* pPlayer;
+
+	float m_fTimer = 0;
+	int m_maxLife = 94;
 	
 public:
 	void Init() override;
@@ -36,4 +39,6 @@ public:
 	void SetPlayer(CPlayer* player);
 	void UpdateAnimation();
 	void ItemUpdate();
+
+	int LifeCal();
 };

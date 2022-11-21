@@ -34,8 +34,12 @@ private:
 	CImage* m_pDuckImage;
 	CImage* m_pMoveImage;
 	CImage* m_pLookUpImage;
-	CImage* m_pStairUp;
-	CImage* m_pStairDown;
+	CImage* m_pStairUpMove;
+	CImage* m_pStairUpIdle;
+	CImage* m_pStairUpMoving;
+	CImage* m_pStairDownMove;
+	CImage* m_pStairDownIdle;
+	CImage* m_pStairDownMoving;
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImage;
 	CImage* m_pAttackingImage;
@@ -54,8 +58,13 @@ private:
 	CImage* m_pDuckImageR;
 	CImage* m_pMoveImageR;
 	CImage* m_pLookUpImageR;
-	CImage* m_pStairUpR;
-	CImage* m_pStairDownR;
+	CImage* m_pStairUpMoveR;
+	CImage* m_pStairUpIdleR;
+	CImage* m_pStairUpMovingR;
+	CImage* m_pStairDownMovingR;
+	CImage* m_pStairDownMoveR;
+	CImage* m_pStairDownIdleR;
+
 	// ㄴ 캐릭터 움직임 이미지
 	CImage* m_pAttackImageR;
 	CImage* m_pAttackingImageR;
@@ -84,12 +93,15 @@ private:
 	bool m_bCommandBlock;
 	bool m_bAttacking;
 	bool m_bTriggerOnce;
+	bool m_bFalling;
+	bool m_bStairCollider;
 
 	bool m_bStop;
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
+	float m_fTimer = 0;
 
 	float m_fSpeed = 150.0f;
 	float m_fVelocity = 150.0f;
@@ -130,6 +142,8 @@ public:
 	void SetCredit(int credit);
 
 	int GetRest();
+	int GetLife();
+	void SetLife(int life);
 
 	int GetScore();
 	void SetScore(int score);
@@ -142,4 +156,6 @@ public:
 
 	void SetStop(bool stop);
 	void SwitchStop();
+
+	void SetStairCollider(bool index);
 };

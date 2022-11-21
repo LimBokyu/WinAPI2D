@@ -50,20 +50,26 @@ void CLifeBar::Init()
 
 void CLifeBar::Update()
 {
+	m_fTimer += DT;
 	curLookAt = CAMERA->GetLookAt();
+	if (m_fTimer >= 0.05f)
+	{
+		m_fTimer = 0;
+		LifeCal();
+	}
 }
 
 void CLifeBar::Render()
 {
 	RENDER->Image(m_pLifeBar,
 		curLookAt.x - FirstLookAt.x + 10,
-		curLookAt.y - FirstLookAt.y + 20,
+		curLookAt.y - FirstLookAt.y + 20   ,
 		curLookAt.x - FirstLookAt.x + m_pLifeBar->GetWidth()*2 + 10,
 		curLookAt.y - FirstLookAt.y + m_pLifeBar->GetHeight()*2 + 20);
 
 	RENDER->FrameImage(m_pLifeBarGauge,
 		curLookAt.x - FirstLookAt.x + 17,
-		curLookAt.y - FirstLookAt.y + 24,
+		curLookAt.y - FirstLookAt.y + 24 ,
 		curLookAt.x - FirstLookAt.x + m_pLifeBarGauge->GetWidth()*2 + 17,
 		curLookAt.y - FirstLookAt.y + m_pLifeBarGauge->GetHeight() * 2 + 24,
 		0,0,
@@ -130,6 +136,7 @@ void CLifeBar::ItemUpdate()
 			curLookAt.y - FirstLookAt.y + 42,
 			curLookAt.x - FirstLookAt.x + m_pItemClock->GetWidth() * 2 + 36,
 			curLookAt.y - FirstLookAt.y + m_pItemClock->GetHeight() * 2 + 42);
+		break;
 
 	case PlayerITEM::Bible:
 		RENDER->Image(m_pItemBible,
@@ -137,7 +144,17 @@ void CLifeBar::ItemUpdate()
 			curLookAt.y - FirstLookAt.y + 42,
 			curLookAt.x - FirstLookAt.x + m_pItemBible->GetWidth() * 2 + 36,
 			curLookAt.y - FirstLookAt.y + m_pItemBible->GetHeight() * 2 + 42);
-	case PlayerITEM::Size:
 		break;
 	}
+}
+
+int CLifeBar::LifeCal()
+{
+	int OUTLIFE = 94;
+	if (m_maxLife > pPlayer->GetLife())
+	{
+		m_maxLife--;
+	}
+	OUTLIFE - m_maxLife;
+	return OUTLIFE;
 }

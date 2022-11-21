@@ -3,6 +3,7 @@
 
 class CImage;
 class CAnimator;
+class CPlayer;
 
 class CSkeltonApe : public CGameObject
 {
@@ -19,6 +20,8 @@ private:
 	CImage* m_pMonsterAttack;
 	CImage* m_pMonsterAttaking;
 
+	CPlayer* pPlayer;
+
 	float m_fSpeed;
 	float m_fTimer = 0;
 
@@ -30,6 +33,7 @@ public:
 	void Update() override;
 	void Render() override;
 	void Release() override;
+	void SetPlayer(CPlayer* player);
 
 	void UpdateAnimation();
 
