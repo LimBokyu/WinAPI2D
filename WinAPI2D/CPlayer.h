@@ -85,6 +85,8 @@ private:
 	bool m_bAttacking;
 	bool m_bTriggerOnce;
 
+	bool m_bStop;
+
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
@@ -138,4 +140,6 @@ public:
 	void SwitchItem();
 	void DropItem();
 
+	void SetStop(bool stop);
+	void SwitchStop();
 };

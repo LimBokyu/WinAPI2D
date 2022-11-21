@@ -96,6 +96,8 @@ CPlayer::CPlayer()
 	m_bCommandBlock = false;
 	m_bAttacking = false;
 	m_bTriggerOnce = false;
+
+	m_bStop = false;
 }
 
 CPlayer::~CPlayer()
@@ -187,220 +189,223 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	m_bIsMove = false;
-	m_bLookup = false;
-
-	if (!m_bAttacking)
+	if (!m_bStop)
 	{
-		m_bDuck = false;
-	}
+		m_bIsMove = false;
+		m_bLookup = false;
 
-	if (m_Heart == 0)
-	{
-		Logger::Debug(L"하트를 다씀");
-	}
-
-	if (BUTTONDOWN('W'))
-	{
-		m_Credit += 100;
-	}
-
-	if (BUTTONDOWN('P'))
-	{
-		CreateItem();
-	}
-
-	if (BUTTONDOWN('O'))
-	{
-		CBigHeart* bHeart = new CBigHeart();
-		bHeart->SetPos(m_vecPos.x + 200, m_vecPos.y - 100);
-		ADDOBJECT(bHeart);
-	}
-
-	if (!m_bCommandBlock)
-	{
-
-		if (BUTTONDOWN('Q'))
+		if (!m_bAttacking)
 		{
-			pItem = PlayerITEM::Dagger;
+			m_bDuck = false;
 		}
 
-		if (BUTTONDOWN('Z'))		// 공격
+		if (m_Heart == 0)
 		{
-			if (!m_bAttack)
+			Logger::Debug(L"하트를 다씀");
+		}
+
+		if (BUTTONDOWN('W'))
+		{
+			m_Credit += 100;
+		}
+
+		if (BUTTONDOWN('P'))
+		{
+			CreateItem();
+		}
+
+		if (BUTTONDOWN('O'))
+		{
+			CBigHeart* bHeart = new CBigHeart();
+			bHeart->SetPos(m_vecPos.x + 200, m_vecPos.y - 100);
+			ADDOBJECT(bHeart);
+		}
+
+		if (!m_bCommandBlock)
+		{
+
+			if (BUTTONDOWN('Q'))
 			{
-				m_bTriggerOnce = true;
-				m_bAttack = true;
-				m_Score += 10;
+				pItem = PlayerITEM::Dagger;
 			}
-		}
 
-		if (BUTTONDOWN('X'))		// 점프
-		{
-			m_bJump = true;
-		}
-
-		if (BUTTONSTAY(VK_UP))
-		{
-			m_bLookup = true;
-			if (BUTTONDOWN('Z'))
+			if (BUTTONDOWN('Z'))		// 공격
 			{
-				SetHeart(GetHeart() - 1);
+				if (!m_bAttack)
+				{
+					m_bTriggerOnce = true;
+					m_bAttack = true;
+					m_Score += 10;
+				}
 			}
-		}
-		else if (BUTTONSTAY(VK_DOWN))
-		{
-			if (!m_bJump)
+
+			if (BUTTONDOWN('X'))		// 점프
 			{
-				m_fDuckTime += DT;
-				m_bDuck = true;
+				m_bJump = true;
+			}
+
+			if (BUTTONSTAY(VK_UP))
+			{
+				m_bLookup = true;
+				if (BUTTONDOWN('Z'))
+				{
+					SetHeart(GetHeart() - 1);
+				}
+			}
+			else if (BUTTONSTAY(VK_DOWN))
+			{
+				if (!m_bJump)
+				{
+					m_fDuckTime += DT;
+					m_bDuck = true;
+					if (BUTTONSTAY(VK_LEFT))
+					{
+						m_bReverse = true;
+					}
+					else if (BUTTONSTAY(VK_RIGHT))
+					{
+						m_bReverse = false;
+					}
+				}
+			}
+			else
+			{
+				m_vecMoveDir.y = 0;
+			}
+
+			if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
+			{
 				if (BUTTONSTAY(VK_LEFT))
 				{
+					if (m_vecPos.x > 30)
+					{
+						m_vecPos.x -= m_fSpeed * DT;
+					}
 					m_bReverse = true;
+					m_bIsMove = true;
+					if (!m_bAttack)
+					{
+						m_vecMoveDir.x = -1;
+					}
 				}
 				else if (BUTTONSTAY(VK_RIGHT))
 				{
+
+					if (m_vecPos.x < (1024 * 2) - 30)
+					{
+						m_vecPos.x += m_fSpeed * DT;
+					}
+					m_bIsMove = true;
+					m_bReverse = false;
+					if (!m_bAttack)
+					{
+						m_vecMoveDir.x = +1;
+					}
+				}
+				else
+				{
+					m_vecMoveDir.x = 0;
+				}
+			}
+
+			if (BUTTONUP(VK_DOWN))
+			{
+				m_fDuckTime = 0;
+			}
+		}
+
+		if (m_bIsMove)
+		{
+			if (m_bJump)
+			{
+				if (m_bReverse)
+				{
+					if (m_vecPos.x > 30)
+					{
+						m_vecPos.x -= m_fSpeed * DT;
+					}
+					m_vecMoveDir.x = -1;
+					m_bReverse = true;
+				}
+				else
+				{
+					if (m_vecPos.x < (1024 * 2) - 30)
+					{
+						m_vecPos.x += m_fSpeed * DT;
+					}
+					m_vecMoveDir.x = +1;
 					m_bReverse = false;
 				}
 			}
 		}
-		else
-		{
-			m_vecMoveDir.y = 0;
-		}
 
-		if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
-		{
-			if (BUTTONSTAY(VK_LEFT))
-			{
-				if (m_vecPos.x > 30)
-				{
-					m_vecPos.x -= m_fSpeed * DT;
-				}
-				m_bReverse = true;
-				m_bIsMove = true;
-				if (!m_bAttack)
-				{
-					m_vecMoveDir.x = -1;
-				}
-			}
-			else if (BUTTONSTAY(VK_RIGHT))
-			{
-
-				if (m_vecPos.x < (1024 * 2) - 30)
-				{
-					m_vecPos.x += m_fSpeed * DT;
-				}
-				m_bIsMove = true;
-				m_bReverse = false;
-				if (!m_bAttack)
-				{
-					m_vecMoveDir.x = +1;
-				}
-			}
-			else
-			{
-				m_vecMoveDir.x = 0;
-			}
-		}
-
-		if (BUTTONUP(VK_DOWN))
-		{
-			m_fDuckTime = 0;
-		}
-	}
-
-	if (m_bIsMove)
-	{
 		if (m_bJump)
 		{
-			if (m_bReverse)
+			m_fJumpTime += DT;
+
+			if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
 			{
-				if (m_vecPos.x > 30)
+				m_bBackFlip = true;
+			}
+
+			if (m_fJumpTime <= 0.4)
+			{
+				m_vecPos.y -= m_fSpeed * DT * 2;
+			}
+			else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
+			{
+				m_vecPos.y += m_fSpeed * DT * 2;
+				if (m_bBackFlip)
 				{
-					m_vecPos.x -= m_fSpeed * DT;
+					if (m_bReverse)
+					{
+						m_vecPos.x += DT * 370;
+					}
+					else
+					{
+						m_vecPos.x -= DT * 370;
+					}
 				}
-				m_vecMoveDir.x = -1;
-				m_bReverse = true;
 			}
 			else
 			{
-				if (m_vecPos.x < (1024 * 2) - 30)
-				{
-					m_vecPos.x += m_fSpeed * DT;
-				}
-				m_vecMoveDir.x = +1;
-				m_bReverse = false;
+				m_fJumpTime = 0;
+				m_bJump = false;
+				m_bBackFlip = false;
+				m_bAttackinBackFlip = false;
 			}
 		}
-	}
 
-	if (m_bJump)
-	{
-		m_fJumpTime += DT;
 
-		if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
+		if (m_bLookup && m_bAttack)
 		{
-			m_bBackFlip = true;
-		}
-
-		if (m_fJumpTime <= 0.4)
-		{
-			m_vecPos.y -= m_fSpeed * DT*2;
-		}
-		else if(m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
-		{
-			m_vecPos.y += m_fSpeed * DT*2;
-			if (m_bBackFlip)
+			m_fAttackTime += DT;
+			if (m_fAttackTime > 0.2f)
 			{
-				if (m_bReverse)
-				{
-					m_vecPos.x += DT * 370;
-				}
-				else
-				{
-					m_vecPos.x -= DT * 370;
-				}
+				m_bAttack = false;
+				m_bCommandBlock = false;
+				m_fAttackTime = 0;
 			}
 		}
-		else
+		else if (m_bAttack)
 		{
-			m_fJumpTime = 0;
-			m_bJump = false;
-			m_bBackFlip = false;
-			m_bAttackinBackFlip = false;
+			m_fAttackTime += DT;
+			if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
+			{
+				WhipAttack();
+				m_bAttacking = true;
+				m_bCommandBlock = true;
+			}
+			if (m_fAttackTime >= 0.3)
+			{
+				m_bAttacking = false;
+				m_bAttack = false;
+				m_bCommandBlock = false;
+				m_fAttackTime = 0;
+			}
 		}
 	}
-
-
-	if (m_bLookup && m_bAttack)
-	{
-		m_fAttackTime += DT;
-		if(m_fAttackTime > 0.2f)
-		{
-			m_bAttack = false;
-			m_bCommandBlock = false;
-			m_fAttackTime = 0;
-		}
-	}
-	else if (m_bAttack)
-	{
-		m_fAttackTime += DT;
-		if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
-		{
-			WhipAttack();
-			m_bAttacking = true;
-			m_bCommandBlock = true;
-		}
-		if (m_fAttackTime >= 0.3)
-		{
-			m_bAttacking = false;
-			m_bAttack = false;
-			m_bCommandBlock = false;
-			m_fAttackTime = 0;
-		}
-	}
-
+	
 	AnimatorUpdate();
 }
 
@@ -656,3 +661,21 @@ void CPlayer::SwitchItem()
 void CPlayer::DropItem()
 {
 }
+
+void CPlayer::SetStop(bool stop)
+{
+	m_bStop = stop;
+}
+
+void CPlayer::SwitchStop()
+{
+	if (m_bStop)
+	{
+		m_bStop = false;
+	}
+	else
+	{
+		m_bStop = true;
+	}
+}
+

@@ -15,6 +15,7 @@ CAnimation::CAnimation()
 	m_iCurFrame = 0;
 	m_fAccTime = 0;
 	m_bRepeat = true;
+	m_bStopDT = true;
 }
 
 CAnimation::~CAnimation()
@@ -66,7 +67,14 @@ void CAnimation::Init()
 void CAnimation::Update()
 {
 	// 현재 플레이중인 프레임의 누적시간
-	m_fAccTime += DT;
+	if (m_bStopDT)
+	{
+		m_fAccTime += DT;
+	}
+	else
+	{
+		m_fAccTime += UDT;
+	}
 
 	// 누적시간이 현재 플레이중인 프레임의 지속시간보다 커졌을 경우
 	// -> 다음 프레임을 보여줘야 하는 경우
@@ -106,4 +114,9 @@ void CAnimation::Render()
 
 void CAnimation::Release()
 {
+}
+
+void CAnimation::SetStop(bool stop)
+{
+	m_bStopDT = stop;
 }

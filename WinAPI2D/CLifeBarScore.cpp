@@ -48,11 +48,11 @@ void CLifeBarScore::Init()
 	m_pScoreToRest = RESOURCE->LoadImg(L"ScoreToRest",	L"Image\\Interface\\ChangeBoardSR.png");
 	m_pRestToScore = RESOURCE->LoadImg(L"RestToScore",	L"Image\\Interface\\ChangeBoardRS.png");
 
-	m_pAnimator->CreateAnimation(L"ScoreBoardIdle", m_pScoreBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"RestBoard",		 m_pRestBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"ScoreBoardIdle", m_pScoreBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"RestBoard",		 m_pRestBoard, Vector(0, 0), Vector(64, 16), Vector(0, 16), 1, 1, false, false);
 
-	m_pAnimator->CreateAnimation(L"ScoreToRest", m_pScoreToRest, Vector(0, 0), Vector(64, 16), Vector(0, 16), 0.044f, 11, false);
-	m_pAnimator->CreateAnimation(L"RestToScore", m_pRestToScore, Vector(0, 0), Vector(64, 16), Vector(0, 16), 0.044f, 11, false);
+	m_pAnimator->CreateAnimation(L"ScoreToRest", m_pScoreToRest, Vector(0, 0), Vector(64, 16), Vector(0, 16), 0.044f, 11, false, false);
+	m_pAnimator->CreateAnimation(L"RestToScore", m_pRestToScore, Vector(0, 0), Vector(64, 16), Vector(0, 16), 0.044f, 11, false, false);
 
 	m_pAnimator->Play(L"ScoreBoardIdle");
 	AddComponent(m_pAnimator);
@@ -66,12 +66,13 @@ void CLifeBarScore::Update()
 	if (BUTTONDOWN('R'))
 	{
 		m_bChangeOrder = true;
+		pPlayer->SetStop(true);
+		STOPTIME;
 	}
 
 	if (m_bChangeOrder)
 	{
-		m_fTimer += DT;
-
+		m_fTimer += UDT;
 		if (m_fTimer > 0.44f)
 		{
 			m_bChangeOrder = false;
@@ -81,10 +82,13 @@ void CLifeBarScore::Update()
 			}
 			else
 			{
+				GOTIME;
+				pPlayer->SetStop(false);
 				m_bScoreBoard = true;
 			}
 			m_fTimer = 0;
 		}
+		
 	}
 
 	AnimationUpdate();

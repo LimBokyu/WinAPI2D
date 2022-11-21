@@ -26,6 +26,7 @@ private:
 	UINT				m_iCurFrame;	// 현재 플레이중인 프레임의 인덱스
 	float				m_fAccTime;		// 현재 플레이중인 프레임의 축적시간
 	bool				m_bRepeat;		// 애니메이션의 반복 여부
+	bool				m_bStopDT;
 
 public:
 	const wstring& GetName();
@@ -41,4 +42,8 @@ private:
 	void Update();
 	void Render();
 	void Release();
+
+public:
+
+	void SetStop(bool stop);
 };

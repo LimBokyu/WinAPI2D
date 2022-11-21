@@ -56,40 +56,40 @@ void CScoreBoardNum::Init()
 	m_pNumIn   = RESOURCE->LoadImg(L"NumIn",   L"Image\\Interface\\ScoreNumChange2.png");
 	m_pNumNone = RESOURCE->LoadImg(L"NumNone", L"Image\\Interface\\NumNone.png");
 
-	m_pAnimator->CreateAnimation(L"Idle:Zero",	 m_pNumIdle, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:One",	 m_pNumIdle, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Two",	 m_pNumIdle, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Three",	 m_pNumIdle, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Four",	 m_pNumIdle, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Five",	 m_pNumIdle, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Six",	 m_pNumIdle, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Seven",	 m_pNumIdle, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Eight",	 m_pNumIdle, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
-	m_pAnimator->CreateAnimation(L"Idle:Nine",	 m_pNumIdle, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"Idle:Zero",	 m_pNumIdle, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:One",	 m_pNumIdle, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Two",	 m_pNumIdle, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Three",	 m_pNumIdle, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Four",	 m_pNumIdle, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Five",	 m_pNumIdle, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Six",	 m_pNumIdle, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Seven",	 m_pNumIdle, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Eight",	 m_pNumIdle, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
+	m_pAnimator->CreateAnimation(L"Idle:Nine",	 m_pNumIdle, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
 
-	m_pAnimator->CreateAnimation(L"In:Zero",    m_pNumIn, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:One",     m_pNumIn, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Two",     m_pNumIn, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Three",   m_pNumIn, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Four",    m_pNumIn, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Five",    m_pNumIn, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Six",     m_pNumIn, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Seven",   m_pNumIn, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Eight",   m_pNumIn, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"In:Nine",    m_pNumIn, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
+	m_pAnimator->CreateAnimation(L"In:Zero",    m_pNumIn, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:One",     m_pNumIn, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Two",     m_pNumIn, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Three",   m_pNumIn, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Four",    m_pNumIn, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Five",    m_pNumIn, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Six",     m_pNumIn, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Seven",   m_pNumIn, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Eight",   m_pNumIn, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"In:Nine",    m_pNumIn, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
 																													   
-	m_pAnimator->CreateAnimation(L"Out:Zero",  m_pNumOut, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:One",   m_pNumOut, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Two",   m_pNumOut, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Three", m_pNumOut, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Four",  m_pNumOut, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Five",  m_pNumOut, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Six",   m_pNumOut, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Seven", m_pNumOut, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Eight", m_pNumOut, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
-	m_pAnimator->CreateAnimation(L"Out:Nine",  m_pNumOut, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false);
+	m_pAnimator->CreateAnimation(L"Out:Zero",  m_pNumOut, Vector(NUMX * 0, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:One",   m_pNumOut, Vector(NUMX * 1, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Two",   m_pNumOut, Vector(NUMX * 2, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Three", m_pNumOut, Vector(NUMX * 3, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Four",  m_pNumOut, Vector(NUMX * 4, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Five",  m_pNumOut, Vector(NUMX * 5, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Six",   m_pNumOut, Vector(NUMX * 6, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Seven", m_pNumOut, Vector(NUMX * 7, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Eight", m_pNumOut, Vector(NUMX * 8, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
+	m_pAnimator->CreateAnimation(L"Out:Nine",  m_pNumOut, Vector(NUMX * 9, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 0.04f, 4, false, false);
 
-	m_pAnimator->CreateAnimation(L"NumNone", m_pNumNone, Vector(NUMX, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false);
+	m_pAnimator->CreateAnimation(L"NumNone", m_pNumNone, Vector(NUMX, 0), Vector(NUMX, NUMY), Vector(0, NUMY), 1, 1, false, false);
 
 	m_pAnimator->Play(L"Idle:Zero", false);
 	AddComponent(m_pAnimator);
@@ -112,7 +112,7 @@ void CScoreBoardNum::Update()
 
 	if (m_bChangeBoard)
 	{
-		m_fTimer += DT;
+		m_fTimer += UDT;
 
 		if (m_fTimer > 0.16f && m_fTimer < 0.28)
 		{
