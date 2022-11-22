@@ -10,6 +10,7 @@ CObstacle::CObstacle()
 	dir = CollisionDir::None;
 	offset = 0.25f;
 	m_bOnlyTop = false;
+	m_strName = L"Obstacle";
 }
 
 CObstacle::~CObstacle()
@@ -97,6 +98,7 @@ void CObstacle::Release()
 
 void CObstacle::OnCollisionEnter(CCollider* pOther)
 {
+
 }
 
 void CObstacle::OnCollisionStay(CCollider* pOther)
@@ -224,8 +226,16 @@ typename CObstacle::CollisionDir CObstacle::GetCollisionDir(CCollider* pOther)
 	}
 	else
 	{
-		if (obj.pos.y > other.pos.y && obj.up < other.down - offset)
-			return CollisionDir::Up;
+		if (!m_bOnlyTop)
+		{
+			if (obj.pos.y > other.pos.y && obj.up < other.down - offset)
+				return CollisionDir::Up;
+		}
+		else
+		{
+			if (obj.pos.y + obj.scale.y > other.pos.y +100)
+				return CollisionDir::Up;
+		}
 		if (obj.pos.y < other.pos.y && obj.down > other.up + offset)
 			return CollisionDir::Down;
 	}
@@ -240,5 +250,5 @@ void CObstacle::SetScale(Vector vec)
 
 void CObstacle::SetTop(bool top)
 {
-	m_bOnlyTop;
+	m_bOnlyTop = top;
 }

@@ -200,14 +200,20 @@ void CSceneStage01::Init()
 	AddGameObject(pCamController);
 
 	CObstacle* ob = new CObstacle;
-	ob->SetPos(160, 430);
-	ob->SetScale(Vector(320, 32));
+	ob->SetPos(1024, 430);
+	ob->SetScale(Vector(1024*2, 32));
 	AddGameObject(ob);
 
 	CObstacle* ob2 = new CObstacle;
 	ob2->SetPos(343, 400);
 	ob2->SetScale(Vector(178, 32));
 	AddGameObject(ob2);
+
+	CObstacle* ob3 = new CObstacle;
+	ob3->SetPos(783, 255);
+	ob3->SetScale(Vector(352, 32));
+	ob3->SetTop(true);
+	AddGameObject(ob3);
 
 #pragma region 맵 이펙트 및 애니메이션
 

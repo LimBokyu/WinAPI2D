@@ -113,8 +113,11 @@ private:
 	float m_fDuckTime = 0;
 	float m_fTimer = 0;
 
+	float m_fVelTimer = 0;
+
 	float m_fSpeed = 150.0f;
-	float m_fVelocity = 150.0f;
+	float m_fVelocity = 300.0f;
+	float m_fJumpVel =0;
 
 	int m_Score;
 	int m_Life;
@@ -166,6 +169,8 @@ public:
 
 	void SetStop(bool stop);
 	void SwitchStop();
+
+	void PlayerOnGround();
 
 	void SetStairCollider(bool index);
 };

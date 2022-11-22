@@ -25,8 +25,6 @@ CPlayer::CPlayer()
 	pItem = PlayerITEM::None;
 	m_strName = L"Player";
 
-	m_fVelocity = 100;
-
 	m_Life = 94;
 	// ㄴ 체력 : 최초 94 이렇게 애매한 점수인 이유는
 	//          체력바 이미지의 길이가 94여서....
@@ -217,65 +215,24 @@ void CPlayer::Init()
 	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
 }
 
-//void CPlayer::Update()
-//{
-//	if (!m_bStop)
-//	{
-//		m_vecPos.y += m_fVelocity * DT;
-//		m_bIsMove = false;
-//		m_bLookup = false;
-//
-//		if (!m_bDuck)
-//		{
-//			if(BUTTONSTAY(VK_RIGHT))
-//			{
-//				m_bIsMove = true;
-//				m_vecPos.x += m_fSpeed * DT;
-//				m_bReverse = false;
-//			}
-//			else if (BUTTONSTAY(VK_LEFT))
-//			{
-//				m_bIsMove = true;
-//				m_vecPos.x -= m_fSpeed * DT;
-//				m_bReverse = true;
-//			}
-//		}
-//		else
-//		{
-//			m_fDuckTime += DT;
-//			if (BUTTONSTAY(VK_RIGHT))
-//			{
-//				m_bReverse = false;
-//			}
-//			else if (BUTTONSTAY(VK_LEFT))
-//			{
-//				m_bReverse = true;
-//			}
-//		}
-//
-//		if (BUTTONUP(VK_DOWN))
-//		{
-//			m_bDuck = false;
-//			m_fDuckTime = 0;
-//		}
-//
-//		if (BUTTONSTAY(VK_DOWN))
-//		{
-//			m_bDuck = true;
-//		}
-//	
-//	}
-//	
-//	AnimatorUpdate();
-//}
 
 void CPlayer::Update()
 {
 	if (!m_bStop)
 	{
-		m_vecPos.y += m_fVelocity * DT;
+		m_vecPos.y += (m_fVelocity - m_fJumpVel) * DT;
 		m_bIsMove = false;
 		m_bLookup = false;
+
+		if (m_bJump)
+		{
+			m_fVelTimer += DT;
+			if (m_fVelTimer >= 0.03f && m_fJumpVel > 0)
+			{
+				m_fJumpVel -= 30;
+				m_fVelTimer = 0;
+			}
+		}
 
 		if (!m_bAttacking)
 		{
@@ -325,6 +282,7 @@ void CPlayer::Update()
 			if (BUTTONDOWN('X'))		// 점프
 			{
 				m_bJump = true;
+				m_fJumpVel = 800;
 			}
 
 			if (BUTTONSTAY(VK_UP))
@@ -431,13 +389,8 @@ void CPlayer::Update()
 				m_bBackFlip = true;
 			}
 
-			if (m_fJumpTime <= 0.4)
-			{
-				m_vecPos.y -= m_fSpeed * DT * 2;
-			}
 			else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
 			{
-				m_vecPos.y += m_fSpeed * DT * 2;
 				if (m_bBackFlip)
 				{
 					if (m_bReverse)
@@ -449,13 +402,6 @@ void CPlayer::Update()
 						m_vecPos.x -= DT * 370;
 					}
 				}
-			}
-			else
-			{
-				m_fJumpTime = 0;
-				m_bJump = false;
-				m_bBackFlip = false;
-				m_bAttackinBackFlip = false;
 			}
 		}
 
@@ -644,10 +590,19 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 			m_Heart += 5;
 		}
 	}
+	else if (pOtherCollider->GetObjName() == L"Obstacle")
+	{
+		if (m_fJumpVel <= 0)
+		{
+			PlayerOnGround();
+		}
+	}
+	
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
+	
 }
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
@@ -750,6 +705,14 @@ void CPlayer::SwitchStop()
 	{
 		m_bStop = true;
 	}
+}
+
+void CPlayer::PlayerOnGround()
+{
+	m_bJump = false;
+	m_bBackFlip = false;
+	m_bAttackinBackFlip = false;
+	m_fJumpTime = 0;
 }
 
 void CPlayer::SetStairCollider(bool index)
