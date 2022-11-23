@@ -279,6 +279,9 @@
     <ClCompile Include="CTitle.cpp">
       <Filter>GameObject\Title</Filter>
     </ClCompile>
+    <ClCompile Include="CSubWeapon.cpp">
+      <Filter>GameObject\SubWeapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="CTitle.h">
       <Filter>GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="CSubWeapon.h">
+      <Filter>GameObject\SubWeapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

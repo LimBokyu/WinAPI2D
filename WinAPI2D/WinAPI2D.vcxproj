@@ -180,6 +180,7 @@
     <ClCompile Include="CStage01EndObject.cpp" />
     <ClCompile Include="CStage01Map.cpp" />
     <ClCompile Include="CStair.cpp" />
+    <ClCompile Include="CSubWeapon.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileButton.cpp" />
     <ClCompile Include="CTilePanel.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="CStage01EndObject.h" />
     <ClInclude Include="CStage01Map.h" />
     <ClInclude Include="CStair.h" />
+    <ClInclude Include="CSubWeapon.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileButton.h" />
     <ClInclude Include="CTilePanel.h" />

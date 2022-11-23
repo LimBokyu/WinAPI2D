@@ -252,11 +252,6 @@ void CPlayer::Update()
 			m_bDuck = false;
 		}
 
-		if (m_Heart == 0)
-		{
-			Logger::Debug(L"ÇÏÆ®¸¦ ´Ù¾¸");
-		}
-
 		if (BUTTONDOWN('W'))
 		{
 			m_Credit += 100;
@@ -748,4 +743,12 @@ void CPlayer::PlayerOnGround()
 	m_bBackFlip = false;
 	m_bAttackinBackFlip = false;
 	m_fJumpTime = 0;
+}
+
+void CPlayer::SubWeapon()
+{
+	if (pItem == PlayerITEM::Dagger)
+	{
+		
+	}
 }
