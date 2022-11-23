@@ -36,10 +36,7 @@ void CPlayerStiarCollider::Release()
 
 void CPlayerStiarCollider::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Stair")
-	{
-		pPlayer->SetStairCollider(true);
-	}
+
 }
 
 void CPlayerStiarCollider::OnCollisionStay(CCollider* pOtherCollider)
@@ -48,8 +45,5 @@ void CPlayerStiarCollider::OnCollisionStay(CCollider* pOtherCollider)
 
 void CPlayerStiarCollider::OnCollisionExit(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Stair")
-	{
-		pPlayer->SetStairCollider(false);
-	}
+
 }

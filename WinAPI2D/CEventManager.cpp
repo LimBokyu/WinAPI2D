@@ -13,6 +13,7 @@ CEventManager::CEventManager()
 
 CEventManager::~CEventManager()
 {
+
 }
 
 void CEventManager::Init()

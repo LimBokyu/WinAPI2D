@@ -724,6 +724,7 @@ void CPlayer::SwitchItem()
 		CDagger* dagger = new CDagger();
 		dagger->Changed();
 		dagger->SetPos(m_vecPos);
+		dagger->SetReverse(m_bReverse);
 		ADDOBJECT(dagger);
 	}
 	else if (pItem == PlayerITEM::Axe)
@@ -736,25 +737,9 @@ void CPlayer::SwitchItem()
 	}
 }
 
-void CPlayer::DropItem()
-{
-}
-
 void CPlayer::SetStop(bool stop)
 {
 	m_bStop = stop;
-}
-
-void CPlayer::SwitchStop()
-{
-	if (m_bStop)
-	{
-		m_bStop = false;
-	}
-	else
-	{
-		m_bStop = true;
-	}
 }
 
 void CPlayer::PlayerOnGround()
@@ -764,9 +749,3 @@ void CPlayer::PlayerOnGround()
 	m_bAttackinBackFlip = false;
 	m_fJumpTime = 0;
 }
-
-void CPlayer::SetStairCollider(bool index)
-{
-	m_bStairCollider = index;
-}
-

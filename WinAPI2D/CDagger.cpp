@@ -25,6 +25,7 @@ CDagger::CDagger()
 	m_bDelete = false;
 	m_bTouchAble = true;
 	m_bCollisionTrigger = false;
+	m_bReverse = false;
 }
 
 CDagger::~CDagger()
@@ -117,6 +118,11 @@ void CDagger::UpdateAnimation()
 	}
 
 	m_pAnimator->Play(str, false);
+}
+
+void CDagger::SetReverse(bool reverse)
+{
+	m_bReverse = reverse;
 }
 
 void CDagger::OnCollisionEnter(CCollider* pOtherCollider)

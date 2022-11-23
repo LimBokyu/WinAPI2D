@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 
 class CWhip;
+class CSound;
 
 class CAttackCollider : public CGameObject
 {
@@ -11,6 +12,7 @@ public:
 
 private:
 	CWhip* m_pWhip;
+	CSound* m_pSoundEffect;
 
 public:
 	void Init() override;

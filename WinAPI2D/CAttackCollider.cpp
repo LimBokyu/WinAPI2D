@@ -11,6 +11,7 @@
 CAttackCollider::CAttackCollider()
 {
 	m_pWhip = nullptr;
+	m_pSoundEffect = nullptr;
 	m_layer = Layer::PlayerAttack;
 	m_strName = L"PlayerAttack";
 }
@@ -22,6 +23,8 @@ CAttackCollider::~CAttackCollider()
 void CAttackCollider::Init()
 {
 	AddCollider(ColliderType::Rect, Vector(100, 20), Vector(10, 0));
+	m_pSoundEffect = RESOURCE->LoadSound(L"AttackSound", L"Sound\\SE\\Attack.wav");
+	SOUND->Play(m_pSoundEffect, 0.05f);
 }
 
 void CAttackCollider::Update()

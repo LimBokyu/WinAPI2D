@@ -23,6 +23,7 @@ private:
 	bool m_bDelete;
 	bool m_bTouchAble;
 	bool m_bCollisionTrigger;
+	bool m_bReverse;
 
 public:
 
@@ -33,6 +34,7 @@ public:
 
 	void Changed(bool trigger = true);
 	void UpdateAnimation();
+	void SetReverse(bool reverse);
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 };

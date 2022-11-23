@@ -4,16 +4,6 @@
 class CImage;
 class CAnimator;
 
-enum struct State
-{
-	Default,
-
-	Idle,
-	Move,
-
-	size
-};
-
 enum struct PlayerITEM
 {
 	Default,
@@ -145,7 +135,6 @@ private:
 
 public:
 	PlayerITEM pItem;
-	PlayerITEM prevItem;
 
 	PlayerITEM GetItem();
 	void SetItem(PlayerITEM item);
@@ -167,12 +156,8 @@ public:
 	bool GetDuck();
 
 	void SwitchItem();
-	void DropItem();
-
 	void SetStop(bool stop);
-	void SwitchStop();
-
 	void PlayerOnGround();
 
-	void SetStairCollider(bool index);
+	void SubWeapon();
 };

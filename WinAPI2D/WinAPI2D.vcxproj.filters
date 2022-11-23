@@ -79,6 +79,12 @@
     <Filter Include="GameObject\Stage01-1">
       <UniqueIdentifier>{7883daec-e6f9-4937-a20d-bf4bdc6619ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\SubWeapon">
+      <UniqueIdentifier>{7622aef9-f3cd-4b3a-b94a-30bb38c4919b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Title">
+      <UniqueIdentifier>{dd0814fe-ad12-41c3-b056-25b9a8b7359e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -269,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="CStage01EndObject.cpp">
       <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CTitle.cpp">
+      <Filter>GameObject\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="CStage01EndObject.h">
       <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CTitle.h">
+      <Filter>GameObject\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@
 CStage01_1::CStage01_1()
 {
 	pPlayer = nullptr;
+	m_pMap = nullptr;
 }
 
 CStage01_1::~CStage01_1()
@@ -22,10 +23,12 @@ CStage01_1::~CStage01_1()
 
 void CStage01_1::Init()
 {
+	
 }
 
 void CStage01_1::Update()
 {
+
 }
 
 void CStage01_1::Render()

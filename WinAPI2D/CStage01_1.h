@@ -2,6 +2,7 @@
 #include "CScene.h"
 
 class CPlayer;
+class CImage;
 
 class CStage01_1 : public CScene
 {
@@ -11,7 +12,7 @@ public:
 
 private:
 	CPlayer* pPlayer;
-
+	CImage* m_pMap;
 
 public:
 	void Init() override;
