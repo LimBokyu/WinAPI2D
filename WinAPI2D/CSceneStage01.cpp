@@ -26,6 +26,7 @@
 #include "CSkeltonApe.h"
 #include "CStair.h"
 #include "CBGM.h"
+#include "CObstacle.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -197,6 +198,16 @@ void CSceneStage01::Init()
 	
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
+
+	CObstacle* ob = new CObstacle;
+	ob->SetPos(160, 430);
+	ob->SetScale(Vector(320, 32));
+	AddGameObject(ob);
+
+	CObstacle* ob2 = new CObstacle;
+	ob2->SetPos(343, 400);
+	ob2->SetScale(Vector(178, 32));
+	AddGameObject(ob2);
 
 #pragma region 맵 이펙트 및 애니메이션
 

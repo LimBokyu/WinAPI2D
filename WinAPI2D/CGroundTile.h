@@ -1,8 +1,14 @@
 #pragma once
 #include "CTile.h"
+
+class CPlayer;
+
+
 class CGroundTile : public CTile
 {
+
 public:
+
 	CGroundTile();
 	virtual ~CGroundTile();
 

@@ -217,6 +217,58 @@ void CPlayer::Init()
 	AddCollider(ColliderType::Rect, Vector(46, 91), Vector(0, -5));
 }
 
+//void CPlayer::Update()
+//{
+//	if (!m_bStop)
+//	{
+//		m_vecPos.y += m_fVelocity * DT;
+//		m_bIsMove = false;
+//		m_bLookup = false;
+//
+//		if (!m_bDuck)
+//		{
+//			if(BUTTONSTAY(VK_RIGHT))
+//			{
+//				m_bIsMove = true;
+//				m_vecPos.x += m_fSpeed * DT;
+//				m_bReverse = false;
+//			}
+//			else if (BUTTONSTAY(VK_LEFT))
+//			{
+//				m_bIsMove = true;
+//				m_vecPos.x -= m_fSpeed * DT;
+//				m_bReverse = true;
+//			}
+//		}
+//		else
+//		{
+//			m_fDuckTime += DT;
+//			if (BUTTONSTAY(VK_RIGHT))
+//			{
+//				m_bReverse = false;
+//			}
+//			else if (BUTTONSTAY(VK_LEFT))
+//			{
+//				m_bReverse = true;
+//			}
+//		}
+//
+//		if (BUTTONUP(VK_DOWN))
+//		{
+//			m_bDuck = false;
+//			m_fDuckTime = 0;
+//		}
+//
+//		if (BUTTONSTAY(VK_DOWN))
+//		{
+//			m_bDuck = true;
+//		}
+//	
+//	}
+//	
+//	AnimatorUpdate();
+//}
+
 void CPlayer::Update()
 {
 	if (!m_bStop)
@@ -224,7 +276,6 @@ void CPlayer::Update()
 		m_vecPos.y += m_fVelocity * DT;
 		m_bIsMove = false;
 		m_bLookup = false;
-
 
 		if (!m_bAttacking)
 		{
@@ -234,14 +285,6 @@ void CPlayer::Update()
 		if (m_Heart == 0)
 		{
 			Logger::Debug(L"하트를 다씀");
-		}
-
-		if (m_bFalling)
-		{
-			if (BUTTONDOWN(VK_UP) || m_bStairCollider)
-			{
-				m_bOnStair = true;
-			}
 		}
 
 		if (BUTTONDOWN('W'))
@@ -269,202 +312,186 @@ void CPlayer::Update()
 				pItem = PlayerITEM::Dagger;
 			}
 
-			if (!m_bOnStair)
+			if (BUTTONDOWN('Z'))		// 공격
 			{
-
-
-
-				if (BUTTONDOWN('Z'))		// 공격
+				if (!m_bAttack)
 				{
-					if (!m_bAttack)
-					{
-						m_bTriggerOnce = true;
-						m_bAttack = true;
-						m_Score += 10;
-					}
-				}
-
-				if (BUTTONDOWN('X'))		// 점프
-				{
-					m_bJump = true;
-				}
-
-				if (BUTTONSTAY(VK_UP))
-				{
-					m_bLookup = true;
-					if (BUTTONDOWN('Z'))
-					{
-						SetHeart(GetHeart() - 1);
-					}
-				}
-				else if (BUTTONSTAY(VK_DOWN))
-				{
-					if (!m_bJump)
-					{
-						m_fDuckTime += DT;
-						m_bDuck = true;
-						if (BUTTONSTAY(VK_LEFT))
-						{
-							m_bReverse = true;
-						}
-						else if (BUTTONSTAY(VK_RIGHT))
-						{
-							m_bReverse = false;
-						}
-					}
-				}
-				else
-				{
-					m_vecMoveDir.y = 0;
-				}
-
-				if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
-				{
-					if (BUTTONSTAY(VK_LEFT))
-					{
-						if (m_vecPos.x > 30)
-						{
-							m_vecPos.x -= m_fSpeed * DT;
-						}
-						m_bReverse = true;
-						m_bIsMove = true;
-						if (!m_bAttack)
-						{
-							m_vecMoveDir.x = -1;
-						}
-					}
-					else if (BUTTONSTAY(VK_RIGHT))
-					{
-
-						if (m_vecPos.x < (1024 * 2) - 30)
-						{
-							m_vecPos.x += m_fSpeed * DT;
-						}
-						m_bIsMove = true;
-						m_bReverse = false;
-						if (!m_bAttack)
-						{
-							m_vecMoveDir.x = +1;
-						}
-					}
-					else
-					{
-						m_vecMoveDir.x = 0;
-					}
-				}
-
-				if (BUTTONUP(VK_DOWN))
-				{
-					m_fDuckTime = 0;
+					m_bTriggerOnce = true;
+					m_bAttack = true;
+					m_Score += 10;
 				}
 			}
 
-			if (m_bIsMove)
+			if (BUTTONDOWN('X'))		// 점프
 			{
-				if (m_bJump)
+				m_bJump = true;
+			}
+
+			if (BUTTONSTAY(VK_UP))
+			{
+				m_bLookup = true;
+				if (BUTTONDOWN('Z'))
 				{
-					if (m_bReverse)
+					SetHeart(GetHeart() - 1);
+				}
+			}
+			else if (BUTTONSTAY(VK_DOWN))
+			{
+				if (!m_bJump)
+				{
+					m_fDuckTime += DT;
+					m_bDuck = true;
+					if (BUTTONSTAY(VK_LEFT))
 					{
-						if (m_vecPos.x > 30)
-						{
-							m_vecPos.x -= m_fSpeed * DT;
-						}
-						m_vecMoveDir.x = -1;
 						m_bReverse = true;
 					}
-					else
+					else if (BUTTONSTAY(VK_RIGHT))
 					{
-						if (m_vecPos.x < (1024 * 2) - 30)
-						{
-							m_vecPos.x += m_fSpeed * DT;
-						}
-						m_vecMoveDir.x = +1;
 						m_bReverse = false;
 					}
 				}
 			}
 			else
 			{
-				if(BUTTONSTAY(VK_RIGHT))
-				{
-					m_bIsMove = true;
-				}
-				else if (BUTTONSTAY(VK_LEFT))
-				{
-					m_bIsMove = true;
-				}
+				m_vecMoveDir.y = 0;
 			}
 
-			if (m_bJump)
+			if ((!m_bDuck && !m_bAttack) || (m_bAttack && m_bJump))
 			{
-				m_fJumpTime += DT;
-
-				if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
+				if (BUTTONSTAY(VK_LEFT))
 				{
-					m_bBackFlip = true;
-				}
-
-				if (m_fJumpTime <= 0.4)
-				{
-					m_vecPos.y -= m_fVelocity * DT * 2;
-				}
-				else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
-				{
-					m_vecPos.y += m_fVelocity * DT * 2;
-					if (m_bBackFlip)
+					if (m_vecPos.x > 30)
 					{
-						if (m_bReverse)
-						{
-							m_vecPos.x += DT * 370;
-						}
-						else
-						{
-							m_vecPos.x -= DT * 370;
-						}
+						m_vecPos.x -= m_fSpeed * DT;
+					}
+					m_bReverse = true;
+					m_bIsMove = true;
+					if (!m_bAttack)
+					{
+						m_vecMoveDir.x = -1;
+					}
+				}
+				else if (BUTTONSTAY(VK_RIGHT))
+				{
+
+					if (m_vecPos.x < (1024 * 2) - 30)
+					{
+						m_vecPos.x += m_fSpeed * DT;
+					}
+					m_bIsMove = true;
+					m_bReverse = false;
+					if (!m_bAttack)
+					{
+						m_vecMoveDir.x = +1;
 					}
 				}
 				else
 				{
-					m_fJumpTime = 0;
-					m_bJump = false;
-					m_bBackFlip = false;
-					m_bAttackinBackFlip = false;
+					m_vecMoveDir.x = 0;
 				}
 			}
 
-
-			if (m_bLookup && m_bAttack)
+			if (BUTTONUP(VK_DOWN))
 			{
-				m_fAttackTime += DT;
-				if (m_fAttackTime > 0.2f)
-				{
-					m_bAttack = false;
-					m_bCommandBlock = false;
-					m_fAttackTime = 0;
-				}
+				m_fDuckTime = 0;
 			}
-			else if (m_bAttack)
+		}
+
+		if (m_bIsMove)
+		{
+			if (m_bJump)
 			{
-				m_fAttackTime += DT;
-				if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
+				if (m_bReverse)
 				{
-					WhipAttack();
-					m_bAttacking = true;
-					m_bCommandBlock = true;
+					if (m_vecPos.x > 30)
+					{
+						m_vecPos.x -= m_fSpeed * DT;
+					}
+					m_vecMoveDir.x = -1;
+					m_bReverse = true;
 				}
-				if (m_fAttackTime >= 0.3)
+				else
 				{
-					m_bAttacking = false;
-					m_bAttack = false;
-					m_bCommandBlock = false;
-					m_fAttackTime = 0;
+					if (m_vecPos.x < (1024 * 2) - 30)
+					{
+						m_vecPos.x += m_fSpeed * DT;
+					}
+					m_vecMoveDir.x = +1;
+					m_bReverse = false;
 				}
 			}
 		}
+
+		if (m_bJump)
+		{
+			m_fJumpTime += DT;
+
+			if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
+			{
+				m_bBackFlip = true;
+			}
+
+			if (m_fJumpTime <= 0.4)
+			{
+				m_vecPos.y -= m_fSpeed * DT * 2;
+			}
+			else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
+			{
+				m_vecPos.y += m_fSpeed * DT * 2;
+				if (m_bBackFlip)
+				{
+					if (m_bReverse)
+					{
+						m_vecPos.x += DT * 370;
+					}
+					else
+					{
+						m_vecPos.x -= DT * 370;
+					}
+				}
+			}
+			else
+			{
+				m_fJumpTime = 0;
+				m_bJump = false;
+				m_bBackFlip = false;
+				m_bAttackinBackFlip = false;
+			}
+		}
+
+
+		if (m_bLookup && m_bAttack)
+		{
+			m_fAttackTime += DT;
+			if (m_fAttackTime > 0.2f)
+			{
+				m_bAttack = false;
+				m_bCommandBlock = false;
+				m_fAttackTime = 0;
+			}
+		}
+		else if (m_bAttack)
+		{
+			m_fAttackTime += DT;
+			if (m_fAttackTime > 0.15f && m_fAttackTime < 0.3)
+			{
+				WhipAttack();
+				m_bAttacking = true;
+				m_bCommandBlock = true;
+			}
+			if (m_fAttackTime >= 0.3)
+			{
+				m_bAttacking = false;
+				m_bAttack = false;
+				m_bCommandBlock = false;
+				m_fAttackTime = 0;
+			}
+		}
 	}
-	
+
 	AnimatorUpdate();
 }
+
 
 void CPlayer::Render()
 {
@@ -621,10 +648,6 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Tile")
-	{
-		m_fVelocity = 0;
-	}
 }
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)

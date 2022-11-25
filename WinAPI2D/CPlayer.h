@@ -4,6 +4,16 @@
 class CImage;
 class CAnimator;
 
+enum struct State
+{
+	Default,
+
+	Idle,
+	Move,
+
+	size
+};
+
 enum struct PlayerITEM
 {
 	Default,
