@@ -195,9 +195,10 @@ void CSceneStage01::Init()
 	Map = new CStage01Map();
 	AddGameObject(Map);
 
-	
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
+
+#pragma region 바닥 충돌체 구현
 
 	CObstacle* ob = new CObstacle;
 	ob->SetPos(1024, 430);
@@ -215,6 +216,9 @@ void CSceneStage01::Init()
 	ob3->SetTop(true);
 	AddGameObject(ob3);
 
+#pragma endregion
+
+
 #pragma region 맵 이펙트 및 애니메이션
 
 	CStage01Effect* pEffect = new CStage01Effect();
@@ -230,6 +234,8 @@ void CSceneStage01::Init()
 	AddGameObject(pEffect3);
 
 #pragma endregion
+
+
 
 
 }

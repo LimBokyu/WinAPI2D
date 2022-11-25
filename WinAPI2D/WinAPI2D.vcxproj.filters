@@ -267,6 +267,9 @@
     <ClCompile Include="CObstacle.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
+    <ClCompile Include="CStage01EndObject.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinAPI.h">
@@ -472,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="CObstacle.h">
       <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01EndObject.h">
+      <Filter>GameObject\Stage01</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

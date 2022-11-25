@@ -397,11 +397,10 @@ void CPlayer::Update()
 		{
 			m_fJumpTime += DT;
 
-			if (BUTTONDOWN('X') && m_fJumpTime > 0.15)
+			if (BUTTONDOWN('X') && m_fJumpTime > 0.15 && m_fJumpTime <0.4)
 			{
 				m_bBackFlip = true;
 			}
-
 			else if (m_fJumpTime > 0.4 && m_fJumpTime <= 0.8)
 			{
 				if (m_bBackFlip)

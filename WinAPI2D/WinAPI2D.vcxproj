@@ -177,6 +177,7 @@
     <ClCompile Include="CStage01Effect.cpp" />
     <ClCompile Include="CStage01Effect2.cpp" />
     <ClCompile Include="CStage01Effect3.cpp" />
+    <ClCompile Include="CStage01EndObject.cpp" />
     <ClCompile Include="CStage01Map.cpp" />
     <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CTile.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="CStage01Effect.h" />
     <ClInclude Include="CStage01Effect2.h" />
     <ClInclude Include="CStage01Effect3.h" />
+    <ClInclude Include="CStage01EndObject.h" />
     <ClInclude Include="CStage01Map.h" />
     <ClInclude Include="CStair.h" />
     <ClInclude Include="CTile.h" />
