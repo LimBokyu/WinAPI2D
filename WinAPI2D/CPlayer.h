@@ -107,11 +107,13 @@ private:
 	bool m_bStairCollider;
 
 	bool m_bStop;
+	bool m_bChangedItem;
 
 	float m_fAttackTime = 0;
 	float m_fJumpTime = 0;
 	float m_fDuckTime = 0;
 	float m_fTimer = 0;
+	float m_fItemTimer = 0;
 
 	float m_fVelTimer = 0;
 

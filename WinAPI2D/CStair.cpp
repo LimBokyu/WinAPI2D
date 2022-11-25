@@ -25,6 +25,11 @@ CStair::~CStair()
 void CStair::Init()
 {
 	AddCollider(ColliderType::Rect, Vector(SIZE, SIZE), Vector(0, 0));
+
+	if (!m_bReverse)
+	{
+		m_strName = L"RightStair";
+	}
 }
 
 void CStair::Update()

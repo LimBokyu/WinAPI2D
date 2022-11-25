@@ -15,13 +15,17 @@
 CAxe::CAxe()
 {
 	m_layer = Layer::Item;
+	
+	m_strName = L"Axe";
 
 	m_pAnimator = nullptr;
 	m_pAxe = nullptr;
-	pPlayer = nullptr;
 
 	m_bChanged = false;
 	m_bDelete = false;
+	m_bCollisionTrigger = false;
+
+	m_bReverse = false;
 
 	m_fTimer = 0;
 	m_fSpeed = 300;
@@ -53,10 +57,30 @@ void CAxe::Update()
 
 	if (m_bChanged)
 	{
-		m_vecPos.x -= m_fThrow * DT;
+		m_bCollisionTrigger = true;
+		if (m_bReverse)
+		{
+			m_vecPos.x += m_fThrow * DT;
+		}
+		else
+		{
+			m_vecPos.x -= m_fThrow * DT;
+		}
+		
 		if (m_fTimer > 0.1f && !m_fThrow == 0)
 		{
-			m_fThrow -= 2;
+				 m_fThrow -= 2;
+
+		}
+	}
+
+	if (m_bCollisionTrigger)
+	{
+		m_fTriggerTimer += DT;
+		if (m_fTriggerTimer > 1)
+		{
+			m_bCollisionTrigger = false;
+			m_fTriggerTimer = 0;
 		}
 	}
 
@@ -87,9 +111,15 @@ void CAxe::Release()
 {
 }
 
+void CAxe::SetReverse(bool reverse)
+{
+	m_bReverse = reverse;
+}
+
 void CAxe::Changed(bool trigger)
 {
 	m_bChanged = trigger;
+	m_bCollisionTrigger = true;
 }
 
 void CAxe::UpdateAnimation()
@@ -108,11 +138,6 @@ void CAxe::UpdateAnimation()
 	m_pAnimator->Play(str, false);
 }
 
-void CAxe::SetPlayer(CPlayer* player)
-{
-	pPlayer = player;
-}
-
 void CAxe::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Tile")
@@ -121,13 +146,8 @@ void CAxe::OnCollisionEnter(CCollider* pOtherCollider)
 		m_fSpeed = 0;
 		m_fTimer = 0;
 	}
-	else if ((pOtherCollider->GetObjName() == L"Player"))
+	else if ((pOtherCollider->GetObjName() == L"Player") && !m_bCollisionTrigger)
 	{
-		if (pPlayer->GetItem() != PlayerITEM::Axe)
-		{
-			pPlayer->DropItem();
-			pPlayer->SetItem(PlayerITEM::Axe);
-		}
 		DELETEOBJECT(this);
 	}
 }

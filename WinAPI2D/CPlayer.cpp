@@ -14,6 +14,8 @@
 #include "CWhip.h"
 #include "CHeart.h"
 #include "CBigHeart.h"
+#include "CDagger.h"
+#include "CAxe.h"
 
 #define MAXREST 99
 
@@ -109,6 +111,7 @@ CPlayer::CPlayer()
 	m_bStairCollider = false;
 
 	m_bStop = false;
+	m_bChangedItem = false;
 }
 
 CPlayer::~CPlayer()
@@ -223,6 +226,16 @@ void CPlayer::Update()
 		m_vecPos.y += (m_fVelocity - m_fJumpVel) * DT;
 		m_bIsMove = false;
 		m_bLookup = false;
+
+		if (m_bChangedItem)
+		{
+			m_fItemTimer += DT;
+			if (m_fItemTimer > 1)
+			{
+				m_bChangedItem = false;
+				m_fItemTimer = 0;
+			}
+		}
 
 		if (m_bJump)
 		{
@@ -598,6 +611,37 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		}
 	}
 	
+	if (!m_bChangedItem)
+	{
+		if (pOtherCollider->GetObjName() == L"Dagger")
+		{
+			if (pItem == PlayerITEM::None)
+			{
+				pItem = PlayerITEM::Dagger;
+			}
+			else
+			{
+				SwitchItem();
+				m_bChangedItem = true;
+				pItem = PlayerITEM::Dagger;
+			}
+		}
+		else if (pOtherCollider->GetObjName() == L"Axe")
+		{
+			if (pItem == PlayerITEM::None)
+			{
+				pItem = PlayerITEM::Axe;
+			}
+			else
+			{
+				SwitchItem();
+				m_bChangedItem = true;
+				pItem = PlayerITEM::Axe;
+			}
+		}
+	}
+
+
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
@@ -678,11 +722,18 @@ void CPlayer::SwitchItem()
 {
 	if (pItem == PlayerITEM::Dagger)
 	{
-		
+		CDagger* dagger = new CDagger();
+		dagger->Changed();
+		dagger->SetPos(m_vecPos);
+		ADDOBJECT(dagger);
 	}
 	else if (pItem == PlayerITEM::Axe)
 	{
-
+		CAxe* axe = new CAxe();
+		axe->Changed();
+		axe->SetPos(m_vecPos);
+		axe->SetReverse(m_bReverse);
+		ADDOBJECT(axe);
 	}
 }
 

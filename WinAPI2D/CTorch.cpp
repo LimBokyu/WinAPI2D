@@ -93,7 +93,6 @@ void CTorch::CreateAxe()
 {
 	CAxe* axe = new CAxe();
 	axe->SetPos(m_vecPos);
-	axe->SetPlayer(pPlayer);
 	ADDOBJECT(axe);
 }
 
@@ -101,7 +100,6 @@ void CTorch::CreateDagger()
 {
 	CDagger* dagger = new CDagger();
 	dagger->SetPos(m_vecPos);
-	dagger->SetPlayer(pPlayer);
 	ADDOBJECT(dagger);
 }
 

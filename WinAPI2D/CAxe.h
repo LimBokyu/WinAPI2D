@@ -14,14 +14,16 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pAxe;
-	CPlayer* pPlayer;
 
 	float m_fTimer;
 	float m_fSpeed;
 	float m_fThrow = 30;
+	float m_fTriggerTimer = 0;
 
 	bool m_bChanged;
 	bool m_bDelete;
+	bool m_bCollisionTrigger;
+	bool m_bReverse;
 
 public:
 
@@ -30,9 +32,10 @@ public:
 	void Render() override;
 	void Release() override;
 
+	void SetReverse(bool reverse);
+
 	void Changed(bool trigger = true);
 	void UpdateAnimation();
-	void SetPlayer(CPlayer* player);
 
 	void OnCollisionEnter(CCollider* pOtherCollider);
 };

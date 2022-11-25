@@ -16,13 +16,15 @@ CDagger::CDagger()
 {
 	m_layer = Layer::Item;
 
+	m_strName = L"Dagger";
+
 	m_pAnimator = nullptr;
 	m_pDagger = nullptr;
-	pPlayer = nullptr;
 
 	m_bChanged = false;
 	m_bDelete = false;
 	m_bTouchAble = true;
+	m_bCollisionTrigger = false;
 }
 
 CDagger::~CDagger()
@@ -49,18 +51,22 @@ void CDagger::Update()
 
 	if (m_bChanged)
 	{
-		if (!pPlayer->GetReverse())
-		{
-			m_vecPos.x -= m_fThrow * DT;
-		}
-		else
-		{
-			m_vecPos.x += m_fThrow * DT;
-		}
-		
+		m_bCollisionTrigger = true;
+		m_vecPos.x -= m_fThrow * DT;
+
 		if (m_fTimer > 0.1f && !m_fThrow == 0)
 		{
 			m_fThrow -= 2;
+		}
+	}
+
+	if (m_bCollisionTrigger)
+	{
+		m_fTriggerTimer += DT;
+		if (m_fTriggerTimer > 1)
+		{
+			m_bCollisionTrigger = false;
+			m_fTriggerTimer = 0;
 		}
 	}
 
@@ -94,7 +100,7 @@ void CDagger::Release()
 void CDagger::Changed(bool trigger)
 {
 	m_bChanged = trigger;
-	m_bTouchAble = false;
+	m_bCollisionTrigger = true;
 }
 
 void CDagger::UpdateAnimation()
@@ -113,11 +119,6 @@ void CDagger::UpdateAnimation()
 	m_pAnimator->Play(str, false);
 }
 
-void CDagger::SetPlayer(CPlayer* player)
-{
-	pPlayer = player;
-}
-
 void CDagger::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Tile")
@@ -126,14 +127,13 @@ void CDagger::OnCollisionEnter(CCollider* pOtherCollider)
 		m_fSpeed = 0;
 		m_fTimer = 0;
 	}
-	else if ((pOtherCollider->GetObjName() == L"Player"))
+	
+	if (m_fTriggerTimer == 0)
 	{
-		if (pPlayer->GetItem() != PlayerITEM::Dagger)
+		if ((pOtherCollider->GetObjName() == L"Player") && !m_bCollisionTrigger)
 		{
-			pPlayer->DropItem();
-			pPlayer->SetItem(PlayerITEM::Dagger);
+			DELETEOBJECT(this);
 		}
-		DELETEOBJECT(this);
 	}
 }
 
