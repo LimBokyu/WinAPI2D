@@ -22,9 +22,9 @@ CAttackCollider::~CAttackCollider()
 
 void CAttackCollider::Init()
 {
-	AddCollider(ColliderType::Rect, Vector(100, 20), Vector(10, 0));
 	m_pSoundEffect = RESOURCE->LoadSound(L"AttackSound", L"Sound\\SE\\Attack.wav");
 	SOUND->Play(m_pSoundEffect, 0.05f);
+	AddCollider(ColliderType::Rect, Vector(100, 20), Vector(10, 0));
 }
 
 void CAttackCollider::Update()

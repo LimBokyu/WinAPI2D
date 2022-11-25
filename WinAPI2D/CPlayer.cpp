@@ -604,6 +604,10 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 			PlayerOnGround();
 		}
 	}
+	else if (pOtherCollider->GetObjName() == L"Monster")
+	{
+		m_Life - 10;
+	}
 	
 	if (!m_bChangedItem)
 	{

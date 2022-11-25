@@ -30,6 +30,10 @@ void CStair::Init()
 	{
 		m_strName = L"RightStair";
 	}
+	else
+	{
+		m_strName = L"LeftStair";
+	}
 }
 
 void CStair::Update()

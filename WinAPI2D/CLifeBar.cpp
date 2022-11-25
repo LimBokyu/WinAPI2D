@@ -61,20 +61,28 @@ void CLifeBar::Update()
 
 void CLifeBar::Render()
 {
+
+	// 라이프 바 -> 체력바의 기본 틀
+
 	RENDER->Image(m_pLifeBar,
 		curLookAt.x - FirstLookAt.x + 10,
-		curLookAt.y - FirstLookAt.y + 20   ,
+		curLookAt.y - FirstLookAt.y + 20 ,
 		curLookAt.x - FirstLookAt.x + m_pLifeBar->GetWidth()*2 + 10,
-		curLookAt.y - FirstLookAt.y + m_pLifeBar->GetHeight()*2 + 20);
+		curLookAt.y - FirstLookAt.y + m_pLifeBar->GetHeight()*2 + 20 );
+
+	// 라이프 게이지 -> 체력바의 체력 게이지
 
 	RENDER->FrameImage(m_pLifeBarGauge,
 		curLookAt.x - FirstLookAt.x + 17,
-		curLookAt.y - FirstLookAt.y + 24 ,
-		curLookAt.x - FirstLookAt.x + m_pLifeBarGauge->GetWidth()*2 + 17,
+		curLookAt.y - FirstLookAt.y + 24,
+		curLookAt.x - FirstLookAt.x + m_pLifeBarGauge->GetWidth() * 2 + 17,
 		curLookAt.y - FirstLookAt.y + m_pLifeBarGauge->GetHeight() * 2 + 24,
+
+
 		0,0,
 		4,93
 		);
+
 	ItemUpdate();
 }
 void CLifeBar::Release()
@@ -141,9 +149,9 @@ void CLifeBar::ItemUpdate()
 	case PlayerITEM::Bible:
 		RENDER->Image(m_pItemBible,
 			curLookAt.x - FirstLookAt.x + 36,
-			curLookAt.y - FirstLookAt.y + 42,
+			curLookAt.y - FirstLookAt.y + 42 ,
 			curLookAt.x - FirstLookAt.x + m_pItemBible->GetWidth() * 2 + 36,
-			curLookAt.y - FirstLookAt.y + m_pItemBible->GetHeight() * 2 + 42);
+			curLookAt.y - FirstLookAt.y + m_pItemBible->GetHeight() * 2 + 42 );
 		break;
 	}
 }
@@ -151,10 +159,7 @@ void CLifeBar::ItemUpdate()
 int CLifeBar::LifeCal()
 {
 	int OUTLIFE = 94;
-	if (m_maxLife > pPlayer->GetLife())
-	{
-		m_maxLife--;
-	}
-	OUTLIFE - m_maxLife;
+	OUTLIFE - pPlayer->GetLife();
+	int abc = pPlayer->GetLife();
 	return OUTLIFE;
 }

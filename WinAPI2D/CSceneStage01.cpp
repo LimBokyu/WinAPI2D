@@ -181,13 +181,13 @@ void CSceneStage01::Init()
 
 	CStair* stair = new CStair();
 	stair->SetCount(11);
-	stair->SetPos(520,423);
+	stair->SetPos(520,424);
 	AddGameObject(stair);
 
 	CStair* stair1 = new CStair();
 	stair1->SetCount(11);
 	stair1->SetReverse(true);
-	stair1->SetPos(1080, 423);
+	stair1->SetPos(1080, 424);
 	AddGameObject(stair1);
 
 #pragma endregion
@@ -201,13 +201,13 @@ void CSceneStage01::Init()
 #pragma region 바닥 충돌체 구현
 
 	CObstacle* ob = new CObstacle;
-	ob->SetPos(1024, 430);
+	ob->SetPos(1024, 432);
 	ob->SetScale(Vector(1024*2, 32));
 	AddGameObject(ob);
 
 	CObstacle* ob2 = new CObstacle;
-	ob2->SetPos(343, 400);
-	ob2->SetScale(Vector(178, 32));
+	ob2->SetPos(344, 400);
+	ob2->SetScale(Vector(176, 32));
 	AddGameObject(ob2);
 
 	CObstacle* ob3 = new CObstacle;
